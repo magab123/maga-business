@@ -1,3 +1,15 @@
+/* === GRID LAYOUT === */
+.t-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    align-items: start;
+}
+
+.t-col {
+    min-width: 0;
+}
+
 /* === HERO === */
 .t-hero {
     width: 100%;
@@ -326,7 +338,7 @@
     overflow: hidden;
     border-radius: 8px;
     border: 1px solid #ddd;
-    aspect-ratio: 1;
+    aspect-ratio: 3/4;
     user-select: none;
 }
 

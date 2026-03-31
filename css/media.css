@@ -31,6 +31,9 @@
     .t-bar-chart {
         height: 150px;
     }
+    .t-row {
+        grid-template-columns: 1fr;
+    }
 }
 
 @media screen and (max-width: 600px) {
