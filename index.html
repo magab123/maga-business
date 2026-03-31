@@ -3,77 +3,727 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>magahenderson</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <title>INTERPOL — Red Notice</title>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;600;700;900&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
-      font-family: 'Montserrat', sans-serif;
-      background: #0d0f17;
-      color: #e1e4ed;
-      min-height: 100vh;
+      font-family: 'Source Sans 3', 'Segoe UI', Arial, sans-serif;
+      background: #f4f4f4;
+      color: #333;
+      line-height: 1.5;
+    }
+
+    /* === TOP BAR === */
+    .top-bar {
+      background: #002855;
+      padding: 0.4rem 0;
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.6);
+    }
+    .top-bar .wrap {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex;
+      justify-content: flex-end;
+      gap: 1.5rem;
+    }
+    .top-bar a {
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      font-weight: 400;
+    }
+    .top-bar a:hover { color: #fff; }
+
+    /* === HEADER === */
+    .header {
+      background: #003366;
+      padding: 0;
+      border-bottom: 3px solid #c8102e;
+    }
+    .header .wrap {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+    }
+    .header-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+    .logo-icon {
+      width: 48px;
+      height: 48px;
+      background: #fff;
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
+      font-weight: 900;
+      color: #003366;
+      font-size: 0.55rem;
+      letter-spacing: 0.5px;
+      line-height: 1.1;
       text-align: center;
-      padding: 2rem;
+      flex-shrink: 0;
     }
-    .wrap {
-      max-width: 520px;
-    }
-    .icon {
-      font-size: 3.5rem;
-      margin-bottom: 1.5rem;
-      opacity: 0.6;
-    }
-    h1 {
-      font-size: 1.75rem;
+    .logo-text {
+      color: #fff;
+      font-size: 1.6rem;
       font-weight: 700;
-      margin-bottom: 0.75rem;
-      letter-spacing: -0.5px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
     }
-    p {
-      font-size: 0.95rem;
-      color: #5a5e72;
-      line-height: 1.7;
-      margin-bottom: 0.5rem;
+    .header-nav {
+      display: flex;
+      gap: 1.75rem;
     }
-    .line {
-      width: 60px;
-      height: 3px;
-      background: #f0c059;
-      border-radius: 2px;
-      margin: 1.5rem auto;
+    .header-nav a {
+      color: rgba(255,255,255,0.8);
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: color 0.15s;
     }
-    .contact {
-      font-size: 0.8rem;
-      color: #3a3d4a;
-      margin-top: 1rem;
+    .header-nav a:hover { color: #fff; }
+
+    /* === RED BANNER === */
+    .red-banner {
+      background: #c8102e;
+      padding: 1rem 0;
     }
-    .contact a {
-      color: #7582ff;
+    .red-banner .wrap {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .red-banner-title {
+      color: #fff;
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    .red-banner-badge {
+      background: rgba(0,0,0,0.2);
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.35rem 1rem;
+      border-radius: 4px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* === BREADCRUMB === */
+    .breadcrumb {
+      background: #fff;
+      border-bottom: 1px solid #e0e0e0;
+      padding: 0.6rem 0;
+    }
+    .breadcrumb .wrap {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      font-size: 0.75rem;
+      color: #888;
+    }
+    .breadcrumb a {
+      color: #003366;
       text-decoration: none;
     }
-    .dot1, .dot2, .dot3 {
-      animation: blink 1.4s infinite both;
+    .breadcrumb a:hover { text-decoration: underline; }
+    .breadcrumb span { color: #aaa; margin: 0 0.35rem; }
+
+    /* === MAIN CONTENT === */
+    .main {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 3rem;
     }
-    .dot2 { animation-delay: 0.2s; }
-    .dot3 { animation-delay: 0.4s; }
-    @keyframes blink {
-      0%, 80%, 100% { opacity: 0.2; }
-      40% { opacity: 1; }
+
+    /* === NOTICE CARD === */
+    .notice-card {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    }
+
+    .notice-header {
+      background: #c8102e;
+      padding: 1.25rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .notice-header-left {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .notice-type {
+      color: #fff;
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+    .notice-id {
+      color: rgba(255,255,255,0.7);
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+    .notice-status {
+      background: rgba(0,0,0,0.25);
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 0.3rem 0.85rem;
+      border-radius: 3px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .notice-body {
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 2.5rem;
+    }
+
+    /* Photos */
+    .notice-photos {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .notice-photo-main {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      border: 3px solid #c8102e;
+      border-radius: 4px;
+    }
+    .notice-photo-sm {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      border: 2px solid #ddd;
+      border-radius: 4px;
+    }
+    .photo-caption {
+      font-size: 0.68rem;
+      color: #888;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Details */
+    .notice-details { }
+
+    .notice-name {
+      font-size: 2rem;
+      font-weight: 900;
+      color: #1a1a1a;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.25rem;
+    }
+    .notice-alias {
+      font-size: 0.85rem;
+      color: #888;
+      margin-bottom: 1.5rem;
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+    .detail-item {
+      padding: 0.7rem 0;
+      border-bottom: 1px solid #eee;
+    }
+    .detail-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 0.15rem;
+    }
+    .detail-value {
+      font-size: 0.95rem;
+      color: #222;
+      font-weight: 500;
+    }
+
+    /* Charges */
+    .charges-section {
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 2px solid #c8102e;
+    }
+    .charges-title {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #c8102e;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 0.75rem;
+    }
+    .charges-text {
+      font-size: 0.92rem;
+      color: #333;
+      line-height: 1.7;
+    }
+    .charges-list {
+      list-style: none;
+      margin-top: 0.5rem;
+    }
+    .charges-list li {
+      padding: 0.4rem 0;
+      padding-left: 1.25rem;
+      position: relative;
+      font-size: 0.88rem;
+      color: #333;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .charges-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.7rem;
+      width: 6px;
+      height: 6px;
+      background: #c8102e;
+      border-radius: 50%;
+    }
+
+    /* Warning box */
+    .warning-box {
+      background: #fff8e5;
+      border: 1px solid #f0c059;
+      border-left: 4px solid #f0c059;
+      border-radius: 4px;
+      padding: 1rem 1.25rem;
+      margin-top: 1.5rem;
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+    }
+    .warning-icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+    }
+    .warning-text {
+      font-size: 0.82rem;
+      color: #6b5900;
+      line-height: 1.6;
+    }
+    .warning-text strong {
+      color: #4a3d00;
+    }
+
+    /* Danger box */
+    .danger-box {
+      background: #fef2f2;
+      border: 1px solid #c8102e;
+      border-left: 4px solid #c8102e;
+      border-radius: 4px;
+      padding: 1rem 1.25rem;
+      margin-top: 1rem;
+    }
+    .danger-title {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #c8102e;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.35rem;
+    }
+    .danger-text {
+      font-size: 0.82rem;
+      color: #7f1d1d;
+      line-height: 1.6;
+    }
+
+    /* Additional info */
+    .additional-section {
+      margin-top: 2rem;
+    }
+    .add-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #003366;
+      margin-bottom: 0.75rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid #003366;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .add-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0.75rem;
+    }
+    .add-card {
+      background: #f9f9f9;
+      border: 1px solid #e8e8e8;
+      border-radius: 4px;
+      padding: 1rem;
+      text-align: center;
+    }
+    .add-card-value {
+      font-size: 1.75rem;
+      font-weight: 900;
+      color: #c8102e;
+    }
+    .add-card-label {
+      font-size: 0.72rem;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 0.2rem;
+    }
+
+    /* Report section */
+    .report-section {
+      margin-top: 2rem;
+      background: #003366;
+      border-radius: 6px;
+      padding: 1.5rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .report-text {
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+    .report-text span {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 400;
+      color: rgba(255,255,255,0.6);
+      margin-top: 0.2rem;
+    }
+    .report-btn {
+      background: #c8102e;
+      color: #fff;
+      border: none;
+      padding: 0.65rem 2rem;
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .report-btn:hover { background: #a00d24; }
+
+    /* === FOOTER === */
+    .footer {
+      background: #002244;
+      padding: 2rem 0;
+      margin-top: 3rem;
+    }
+    .footer .wrap {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .footer-logo {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 2px;
+    }
+    .footer-copy {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.4);
+    }
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+    .footer-links a {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+    }
+    .footer-links a:hover { color: #fff; }
+
+    /* === RESPONSIVE === */
+    @media (max-width: 768px) {
+      .notice-body {
+        grid-template-columns: 1fr;
+      }
+      .notice-photos {
+        max-width: 300px;
+      }
+      .detail-grid {
+        grid-template-columns: 1fr;
+      }
+      .add-grid {
+        grid-template-columns: 1fr;
+      }
+      .header .wrap {
+        flex-direction: column;
+        height: auto;
+        padding: 0.75rem 1.5rem;
+        gap: 0.5rem;
+      }
+      .header-nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.75rem;
+      }
+      .report-section {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+      }
+      .red-banner .wrap {
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: center;
+      }
+      .footer .wrap {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="icon">
-      <span class="dot1">.</span><span class="dot2">.</span><span class="dot3">.</span>
+
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <div class="wrap">
+      <a href="#">English</a>
+      <a href="#">Français</a>
+      <a href="#">Español</a>
+      <a href="#">العربية</a>
     </div>
-    <h1>Сайт на техническом обслуживании</h1>
-    <p>Мы проводим плановые технические работы для улучшения сервиса. Скоро всё заработает.</p>
-    <div class="line"></div>
-    <div class="contact">По вопросам: <a href="mailto:maga@business.com">maga@business.com</a></div>
   </div>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="wrap">
+      <div class="header-logo">
+        <div class="logo-icon">ICPO<br>INTERPOL</div>
+        <div class="logo-text">INTERPOL</div>
+      </div>
+      <nav class="header-nav">
+        <a href="#">Who we are</a>
+        <a href="#">Crimes</a>
+        <a href="#">How we work</a>
+        <a href="#">Notices</a>
+        <a href="#">Wanted persons</a>
+        <a href="#">News</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- RED BANNER -->
+  <div class="red-banner">
+    <div class="wrap">
+      <div class="red-banner-title">Red Notice</div>
+      <div class="red-banner-badge">Active — High Priority</div>
+    </div>
+  </div>
+
+  <!-- BREADCRUMB -->
+  <div class="breadcrumb">
+    <div class="wrap">
+      <a href="#">Home</a><span>›</span>
+      <a href="#">How we work</a><span>›</span>
+      <a href="#">Notices</a><span>›</span>
+      <a href="#">Red Notices</a><span>›</span>
+      HENDERSON, Maga
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <div class="main">
+    <div class="notice-card">
+
+      <!-- Notice Header -->
+      <div class="notice-header">
+        <div class="notice-header-left">
+          <div class="notice-type">Red Notice</div>
+          <div class="notice-id">A-4847/03-2026</div>
+        </div>
+        <div class="notice-status">Active</div>
+      </div>
+
+      <!-- Notice Body -->
+      <div class="notice-body">
+
+        <!-- Photos -->
+        <div class="notice-photos">
+          <img src="img/photo_2026-03-31_22-18-03.jpg" alt="Subject" class="notice-photo-main"/>
+          <span class="photo-caption">Photograph 1 of 2</span>
+          <img src="img/photo_2026-01-16_12-14-01.jpg" alt="Subject" class="notice-photo-sm"/>
+          <span class="photo-caption">Photograph 2 of 2</span>
+        </div>
+
+        <!-- Details -->
+        <div class="notice-details">
+          <div class="notice-name">HENDERSON, Maga</div>
+          <div class="notice-alias">Aliases: magahenderson, Maga H., CryptoMaga</div>
+
+          <div class="detail-grid">
+            <div class="detail-item">
+              <div class="detail-label">Date of birth</div>
+              <div class="detail-value">2003</div>
+            </div>
+            <div class="detail-item">
+              <div class="detail-label">Nationality</div>
+              <div class="detail-value">Russian Federation</div>
+            </div>
+            <div class="detail-item">
+              <div class="detail-label">Sex</div>
+              <div class="detail-value">Male</div>
+            </div>
+            <div class="detail-item">
+              <div class="detail-label">Height</div>
+              <div class="detail-value">182 cm</div>
+            </div>
+            <div class="detail-item">
+              <div class="detail-label">Eyes</div>
+              <div class="detail-value">Brown</div>
+            </div>
+            <div class="detail-item">
+              <div class="detail-label">Hair</div>
+              <div class="detail-value">Brown</div>
+            </div>
+            <div class="detail-item">
+              <div class="detail-label">Language spoken</div>
+              <div class="detail-value">Russian, English</div>
+            </div>
+            <div class="detail-item">
+              <div class="detail-label">Place of birth</div>
+              <div class="detail-value">Russian Federation</div>
+            </div>
+          </div>
+
+          <!-- Charges -->
+          <div class="charges-section">
+            <div class="charges-title">Charges</div>
+            <div class="charges-text">Wanted by the judicial authorities of multiple jurisdictions for the following offences:</div>
+            <ul class="charges-list">
+              <li>Systematic market manipulation resulting in unlawful profit exceeding $1,847,293 USD</li>
+              <li>Unauthorized deployment of leveraged financial instruments (x125) without regulatory approval</li>
+              <li>Operating an unregistered crypto-asset portfolio with returns exceeding 1,247% ROI</li>
+              <li>Premeditated liquidation of opposing market positions in especially large amounts</li>
+              <li>Illegal enrichment through strategic acquisition of undervalued digital assets</li>
+              <li>Willful concealment of profitable trading signals from associates</li>
+              <li>Possession of luxury vehicles acquired before the age of 25 (Article 312 — "Public Envy")</li>
+            </ul>
+          </div>
+
+          <!-- Warning -->
+          <div class="warning-box">
+            <div class="warning-icon">⚠️</div>
+            <div class="warning-text">
+              <strong>CAUTION:</strong> Subject is considered armed with 125x leverage and extremely profitable. Do NOT attempt to trade against this individual. Last person who attempted a counter-position received an immediate margin call. Subject has been observed smiling during market crashes.
+            </div>
+          </div>
+
+          <div class="danger-box">
+            <div class="danger-title">Threat Assessment — Maximum</div>
+            <div class="danger-text">
+              Subject demonstrates abnormally high win rate (79%) which exceeds statistical norms. Investigation into possible use of unauthorized analytical methods is ongoing. Subject's Profit Factor of 3.42 has been classified as "suspiciously competent" by the Financial Crimes Division.
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Additional Info -->
+    <div class="additional-section">
+      <div class="add-title">Subject Financial Profile</div>
+      <div class="add-grid">
+        <div class="add-card">
+          <div class="add-card-value">$2,134,510</div>
+          <div class="add-card-label">Estimated Portfolio Value</div>
+        </div>
+        <div class="add-card">
+          <div class="add-card-value">4,847</div>
+          <div class="add-card-label">Known Transactions</div>
+        </div>
+        <div class="add-card">
+          <div class="add-card-value">79%</div>
+          <div class="add-card-label">Success Rate (Abnormal)</div>
+        </div>
+        <div class="add-card">
+          <div class="add-card-value">+1,247%</div>
+          <div class="add-card-label">Total Return on Investment</div>
+        </div>
+        <div class="add-card">
+          <div class="add-card-value">3.42</div>
+          <div class="add-card-label">Profit Factor (Suspicious)</div>
+        </div>
+        <div class="add-card">
+          <div class="add-card-value">$124,500</div>
+          <div class="add-card-label">Largest Single Transaction</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Report -->
+    <div class="report-section">
+      <div class="report-text">
+        If you have any information about this individual, please contact INTERPOL
+        <span>All information will be treated as strictly confidential</span>
+      </div>
+      <button class="report-btn">Report Information</button>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer-left">
+        <div class="footer-logo">INTERPOL</div>
+        <div class="footer-copy">&copy; INTERPOL 2026. All rights reserved.</div>
+      </div>
+      <div class="footer-links">
+        <a href="#">Legal</a>
+        <a href="#">Privacy</a>
+        <a href="#">Contact</a>
+        <a href="#">Careers</a>
+      </div>
+    </div>
+  </footer>
+
 </body>
 </html>
