@@ -46,10 +46,129 @@
         <a href="https://instagram.com/">Instagram</a>
       </div>
     </div>
+
+    <!-- BEFORE/AFTER SLIDER -->
+    <div class="t-paragraph">
+      <div class="t-full-divider">
+        <span class="t-font-cond">Трансформация</span>
+        <hr/>
+      </div>
+      <div class="t-slider-container">
+        <div class="t-slider-wrapper" id="ba-slider">
+          <img src="img/after.jpg" alt="Сейчас" class="t-slider-img"/>
+          <div class="t-slider-overlay" id="ba-overlay">
+            <img src="img/before.jpg" alt="Раньше" class="t-slider-img"/>
+          </div>
+          <div class="t-slider-handle" id="ba-handle">
+            <div class="t-slider-line"></div>
+            <div class="t-slider-circle">
+              <span>&lsaquo;</span>
+              <span>&rsaquo;</span>
+            </div>
+            <div class="t-slider-line"></div>
+          </div>
+          <input type="range" min="0" max="100" value="50" class="t-slider-range" id="ba-range"/>
+          <div class="t-slider-label t-slider-label-left t-font-mono">2022</div>
+          <div class="t-slider-label t-slider-label-right t-font-mono">2025</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PORTFOLIO GROWTH CHART -->
+    <div class="t-paragraph">
+      <div class="t-full-divider">
+        <span class="t-font-cond">Рост портфеля</span>
+        <hr/>
+      </div>
+      <div class="t-chart-container">
+        <div class="t-chart-title t-font-mono">Капитал ($) — 2022–2025</div>
+        <svg class="t-chart-svg" viewBox="0 0 600 200" preserveAspectRatio="xMidYMid meet">
+          <line x1="40" y1="20" x2="40" y2="180" stroke="#eee" stroke-width="1"/>
+          <line x1="40" y1="180" x2="580" y2="180" stroke="#ddd" stroke-width="1"/>
+          <line x1="40" y1="140" x2="580" y2="140" stroke="#f5f5f5" stroke-width="1"/>
+          <line x1="40" y1="100" x2="580" y2="100" stroke="#f5f5f5" stroke-width="1"/>
+          <line x1="40" y1="60" x2="580" y2="60" stroke="#f5f5f5" stroke-width="1"/>
+          <line x1="40" y1="20" x2="580" y2="20" stroke="#f5f5f5" stroke-width="1"/>
+          <text x="35" y="184" text-anchor="end" font-size="9" fill="#aaa" font-family="Roboto Mono">$0</text>
+          <text x="35" y="144" text-anchor="end" font-size="9" fill="#aaa" font-family="Roboto Mono">$300K</text>
+          <text x="35" y="104" text-anchor="end" font-size="9" fill="#aaa" font-family="Roboto Mono">$600K</text>
+          <text x="35" y="64" text-anchor="end" font-size="9" fill="#aaa" font-family="Roboto Mono">$900K</text>
+          <text x="35" y="24" text-anchor="end" font-size="9" fill="#aaa" font-family="Roboto Mono">$1.2M</text>
+          <text x="60" y="195" font-size="9" fill="#aaa" font-family="Roboto Mono">Q1'22</text>
+          <text x="150" y="195" font-size="9" fill="#aaa" font-family="Roboto Mono">Q3'22</text>
+          <text x="240" y="195" font-size="9" fill="#aaa" font-family="Roboto Mono">Q1'23</text>
+          <text x="330" y="195" font-size="9" fill="#aaa" font-family="Roboto Mono">Q3'23</text>
+          <text x="420" y="195" font-size="9" fill="#aaa" font-family="Roboto Mono">Q1'24</text>
+          <text x="510" y="195" font-size="9" fill="#aaa" font-family="Roboto Mono">Q1'25</text>
+          <path d="M60,178 L105,176 L150,172 L195,168 L240,158 L285,145 L330,120 L375,100 L420,75 L465,55 L510,38 L555,25 L555,180 L60,180 Z"
+                fill="rgba(0,170,0,0.08)"/>
+          <polyline class="t-chart-line"
+                    points="60,178 105,176 150,172 195,168 240,158 285,145 330,120 375,100 420,75 465,55 510,38 555,25"
+                    fill="none" stroke="#0a0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="60" cy="178" r="3" fill="#0a0"/>
+          <circle cx="240" cy="158" r="3" fill="#0a0"/>
+          <circle cx="420" cy="75" r="3" fill="#0a0"/>
+          <circle cx="555" cy="25" r="4" fill="#0a0"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- MONTHLY PNL BAR CHART -->
+    <div class="t-paragraph">
+      <div class="t-full-divider">
+        <span class="t-font-cond">Месячная прибыль 2024</span>
+        <hr/>
+      </div>
+      <div class="t-chart-container">
+        <div class="t-chart-title t-font-mono">P&L по месяцам (% от депозита)</div>
+        <div class="t-bar-chart" style="margin-bottom: 2rem;">
+          <div class="t-bar" data-height="45" style="height: 0;"><span class="t-bar-label">Янв</span></div>
+          <div class="t-bar" data-height="62" style="height: 0;"><span class="t-bar-label">Фев</span></div>
+          <div class="t-bar t-bar-negative" data-height="15" style="height: 0;"><span class="t-bar-label">Мар</span></div>
+          <div class="t-bar" data-height="78" style="height: 0;"><span class="t-bar-label">Апр</span></div>
+          <div class="t-bar" data-height="55" style="height: 0;"><span class="t-bar-label">Май</span></div>
+          <div class="t-bar" data-height="40" style="height: 0;"><span class="t-bar-label">Июн</span></div>
+          <div class="t-bar t-bar-negative" data-height="10" style="height: 0;"><span class="t-bar-label">Июл</span></div>
+          <div class="t-bar" data-height="85" style="height: 0;"><span class="t-bar-label">Авг</span></div>
+          <div class="t-bar" data-height="70" style="height: 0;"><span class="t-bar-label">Сен</span></div>
+          <div class="t-bar" data-height="90" style="height: 0;"><span class="t-bar-label">Окт</span></div>
+          <div class="t-bar" data-height="65" style="height: 0;"><span class="t-bar-label">Ноя</span></div>
+          <div class="t-bar" data-height="95" style="height: 0;"><span class="t-bar-label">Дек</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STATS -->
+    <div class="t-paragraph">
+      <div class="t-full-divider">
+        <span class="t-font-cond">В цифрах</span>
+        <hr/>
+      </div>
+      <div class="t-stat-grid">
+        <div class="t-stat-card">
+          <span class="t-stat-number t-font-mono" style="color: #0a0;">+987%</span>
+          <span class="t-stat-label t-font-cond">ROI за 3 года</span>
+        </div>
+        <div class="t-stat-card">
+          <span class="t-stat-number t-font-mono">2,400+</span>
+          <span class="t-stat-label t-font-cond">закрытых сделок</span>
+        </div>
+        <div class="t-stat-card">
+          <span class="t-stat-number t-font-mono">3+</span>
+          <span class="t-stat-label t-font-cond">года на рынке</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="t-footer t-font-serif">
+      <span>&copy; Maga 2025</span>
+    </div>
   </main>
 </body>
 
 <script src="js/typewriter.js"></script>
 <script src="js/counter.js"></script>
+<script src="js/charts.js"></script>
+<script src="js/slider.js"></script>
 
 </html>
