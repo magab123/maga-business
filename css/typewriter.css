@@ -1,8 +1,7 @@
 #index-hero-typewriter {
-    border-right: 3px solid var(--primary);
+    border-right: 2px solid black;
     padding-right: 2px;
     animation: blink 1s step-end infinite;
-    color: var(--primary);
 }
 
 @keyframes blink {
@@ -10,6 +9,6 @@
         border-color: transparent;
     }
     50% {
-        border-color: var(--primary);
+        border-color: black;
     }
 }

@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-    const words = ["Бизнесмен", "Лидер", "Визионер", "Предприниматель"];
+    const words = ["Трейдер", "Инвестор", "Предприниматель", "Визионер"];
     const typingSpeed = 70;
     const deletingSpeed = 40;
     const pauseBeforeDelete = 1500;

@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>Maga — Businessman</title>
+  <title>Maga — Trader & Investor</title>
   <script
     src="https://code.jquery.com/jquery-3.7.1.slim.min.js"
     integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8="
@@ -14,80 +14,42 @@
 
 <body>
   <main>
-    <nav class="t-navbar">
-      <a href="index.html" class="t-navbar-logo">maga.business</a>
+    <div class="t-navbar">
+      <a href="index.html">maga.business</a>
       <div class="t-navbar-links">
-        <a href="about.html">Обо мне</a>
-        <a href="projects.html">Проекты</a>
-        <a href="articles.html">Философия</a>
-        <a href="https://t.me/" class="t-navbar-cta">Связаться</a>
+        <a href="about.html">обо мне</a>
+        <a href="projects.html">результаты</a>
+        <a href="articles.html">философия</a>
       </div>
-    </nav>
+    </div>
 
     <div class="t-hero">
-      <div class="t-hero-title">
-        Мага — <span class="t-hero-accent"><span id="index-hero-typewriter"></span></span>
+      <span style="font-size: 3.75rem;" class="t-font-serif">Мага</span>
+      <span style="font-size: 3rem;" class="t-font-serif">
+        <span id="index-hero-typewriter"></span>
+      </span>
+      <span class="t-font-sans" style="color: #555; max-width: 500px;">
+        трейдер, инвестор, человек действия
+      </span>
+
+      <div class="t-balance-box">
+        <div class="t-balance-label t-font-mono">Портфель</div>
+        <div class="t-balance-amount" id="balance-counter">$127</div>
+        <div class="t-balance-sub t-font-mono">от $127 до $1,247,853</div>
       </div>
-      <div class="t-hero-subtitle">
-        Предприниматель, визионер, человек действия.
-        Превращаю идеи в успешный бизнес.
-      </div>
-      <div class="t-hero-links">
-        <a href="about.html" class="btn btn-primary">Узнать больше</a>
-        <a href="projects.html" class="btn btn-outline">Мои проекты</a>
+
+      <div class="t-hero-links t-font-cond">
+        <a href="https://t.me/">Telegram</a>
+        &bull;
+        <a href="mailto:maga@business.com">maga@business.com</a>
+        &bull;
+        <a href="https://instagram.com/">Instagram</a>
       </div>
     </div>
-
-    <div class="section">
-      <div class="container">
-        <div class="section-title">Чем я занимаюсь</div>
-        <div class="section-subtitle">Бизнес, инвестиции и развитие предпринимательского сообщества</div>
-        <div class="t-stat-grid">
-          <div class="t-stat-card">
-            <span class="t-stat-number">5+</span>
-            <span class="t-stat-label">лет в бизнесе</span>
-          </div>
-          <div class="t-stat-card">
-            <span class="t-stat-number">10+</span>
-            <span class="t-stat-label">успешных проектов</span>
-          </div>
-          <div class="t-stat-card">
-            <span class="t-stat-number">50+</span>
-            <span class="t-stat-label">партнёров</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="section section-alt">
-      <div class="container" style="text-align: center;">
-        <div class="section-title">Контакты</div>
-        <div class="section-subtitle">Свяжитесь со мной любым удобным способом</div>
-        <div class="t-hero-links">
-          <a href="https://t.me/" class="btn btn-primary">Telegram</a>
-          <a href="mailto:maga@business.com" class="btn btn-outline">maga@business.com</a>
-          <a href="https://instagram.com/" class="btn btn-outline">Instagram</a>
-        </div>
-      </div>
-    </div>
-
-    <footer class="t-footer">
-      <div class="t-footer-inner">
-        <div class="t-footer-links">
-          <a href="about.html">Обо мне</a>
-          <a href="projects.html">Проекты</a>
-          <a href="articles.html">Философия</a>
-        </div>
-        <div class="t-footer-social">
-          <a href="https://t.me/">Telegram</a>
-          <a href="https://instagram.com/">Instagram</a>
-        </div>
-        <div class="t-footer-copy">&copy; Maga 2025. Все права защищены.</div>
-      </div>
-    </footer>
   </main>
 </body>
 
 <script src="js/typewriter.js"></script>
+<script src="js/counter.js"></script>
 
 </html>

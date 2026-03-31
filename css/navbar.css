@@ -2,55 +2,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 2rem;
-    background: var(--bg);
-    border-bottom: 1px solid var(--border);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    max-width: 100%;
-}
-
-.t-navbar-logo {
-    font-size: 1.35rem;
-    font-weight: 700;
-    color: var(--dark);
-    letter-spacing: -0.5px;
-}
-
-.t-navbar-logo:hover {
-    color: var(--primary);
+    font-family: "Roboto Mono", monospace;
+    padding: 1.25rem 0;
+    font-size: 1.25rem;
 }
 
 .t-navbar-links {
     display: flex;
-    align-items: center;
-    gap: 2rem;
-}
-
-.t-navbar-links a {
-    color: var(--text-muted);
-    font-size: 0.95rem;
-    font-weight: 500;
-    transition: color 0.2s;
-}
-
-.t-navbar-links a:hover {
-    color: var(--primary);
-}
-
-.t-navbar-cta {
-    padding: 8px 20px;
-    background: var(--primary);
-    color: white !important;
-    border-radius: var(--radius-sm);
-    font-weight: 600;
-    font-size: 0.9rem;
-    transition: all 0.2s;
-}
-
-.t-navbar-cta:hover {
-    background: var(--primary-dark);
-    color: white !important;
-    transform: translateY(-1px);
+    justify-content: right;
+    gap: 1.5rem;
 }
