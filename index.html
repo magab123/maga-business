@@ -2,156 +2,422 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>Maga — Trader & Investor</title>
-  <script
-    src="https://code.jquery.com/jquery-3.7.1.slim.min.js"
-    integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8="
-    crossorigin="anonymous"></script>
-  <script src="js/script.js"></script>
-  <link rel="stylesheet" href="css/style.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>magahenderson — Публичный профиль трейдера</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/tmm.css">
 </head>
-
 <body>
-  <main>
-    <div class="t-navbar">
-      <a href="index.html">maga.business</a>
-      <div class="t-navbar-links">
-        <a href="about.html">обо мне</a>
-        <a href="projects.html">результаты</a>
-        <a href="articles.html">философия</a>
-      </div>
-    </div>
 
-    <!-- HERO: compact -->
-    <div class="t-hero" style="margin-bottom: 2rem; gap: 0.5rem;">
-      <span style="font-size: 3.75rem;" class="t-font-serif">Мага</span>
-      <span style="font-size: 2.5rem;" class="t-font-serif">
-        <span id="index-hero-typewriter"></span>
-      </span>
-      <span class="t-font-sans" style="color: #555;">
-        трейдер, инвестор, человек действия
-      </span>
-      <div class="t-balance-box" style="margin: 1rem 0; padding: 1.25rem;">
-        <div class="t-balance-label t-font-mono">Портфель</div>
-        <div class="t-balance-amount" id="balance-counter">$127</div>
-        <div class="t-balance-sub t-font-mono">от $127 до $1,247,853</div>
-      </div>
-      <div class="t-hero-links t-font-cond">
-        <a href="https://t.me/">Telegram</a>
-        &bull;
-        <a href="mailto:maga@business.com">maga@business.com</a>
-        &bull;
-        <a href="https://instagram.com/">Instagram</a>
-      </div>
+  <!-- HEADER -->
+  <header class="header">
+    <div class="container header-inner">
+      <a href="#" class="logo">TraderMake<span>.money</span></a>
+      <nav class="nav-links">
+        <a href="#stats">Статистика</a>
+        <a href="#chart">График</a>
+        <a href="#trades">Сделки</a>
+      </nav>
     </div>
+  </header>
 
-    <!-- ROW: Slider + Stats side by side -->
-    <div class="t-row">
-      <div class="t-col">
-        <div class="t-mini-divider">
-          <hr/><span class="t-font-cond">Трансформация</span><hr/>
-        </div>
-        <div class="t-slider-container">
-          <div class="t-slider-wrapper" id="ba-slider">
-            <img src="img/after.jpg" alt="Сейчас" class="t-slider-img"/>
-            <div class="t-slider-overlay" id="ba-overlay">
-              <img src="img/before.jpg" alt="Раньше" class="t-slider-img"/>
+  <!-- PROFILE -->
+  <section class="profile-section">
+    <div class="container">
+      <div class="profile-card">
+        <div class="profile-top">
+          <div class="profile-avatar">MH</div>
+          <div class="profile-info">
+            <h1 class="profile-name">magahenderson</h1>
+            <div class="profile-badges">
+              <span class="badge badge-green">Верифицирован</span>
+              <span class="badge badge-blue">Pro Trader</span>
+              <span class="badge badge-purple">Top 5%</span>
             </div>
-            <div class="t-slider-handle" id="ba-handle">
-              <div class="t-slider-line"></div>
-              <div class="t-slider-circle">
-                <span>&lsaquo;</span>
-                <span>&rsaquo;</span>
-              </div>
-              <div class="t-slider-line"></div>
-            </div>
-            <input type="range" min="0" max="100" value="50" class="t-slider-range" id="ba-range"/>
-            <div class="t-slider-label t-slider-label-left t-font-mono">2022</div>
-            <div class="t-slider-label t-slider-label-right t-font-mono">2025</div>
-          </div>
-        </div>
-      </div>
-      <div class="t-col">
-        <div class="t-mini-divider">
-          <hr/><span class="t-font-cond">В цифрах</span><hr/>
-        </div>
-        <div class="t-stat-grid" style="grid-template-columns: 1fr;">
-          <div class="t-stat-card">
-            <span class="t-stat-number t-font-mono" style="color: #0a0;">+987%</span>
-            <span class="t-stat-label t-font-cond">ROI за 3 года</span>
-          </div>
-          <div class="t-stat-card">
-            <span class="t-stat-number t-font-mono">2,400+</span>
-            <span class="t-stat-label t-font-cond">закрытых сделок</span>
-          </div>
-          <div class="t-stat-card">
-            <span class="t-stat-number t-font-mono">3+</span>
-            <span class="t-stat-label t-font-cond">года на рынке</span>
+            <p class="profile-desc">Криптотрейдер &bull; Фьючерсы &bull; Спот &bull; С 2022 года на рынке</p>
           </div>
         </div>
       </div>
     </div>
+  </section>
 
-    <!-- ROW: Two charts side by side -->
-    <div class="t-row" style="margin-top: 1.5rem;">
-      <div class="t-col">
-        <div class="t-chart-container" style="margin: 0;">
-          <div class="t-chart-title t-font-mono">Рост портфеля — 2022–2025</div>
-          <svg class="t-chart-svg" viewBox="0 0 600 200" preserveAspectRatio="xMidYMid meet">
-            <line x1="40" y1="20" x2="40" y2="180" stroke="#eee" stroke-width="1"/>
-            <line x1="40" y1="180" x2="580" y2="180" stroke="#ddd" stroke-width="1"/>
-            <line x1="40" y1="140" x2="580" y2="140" stroke="#f5f5f5" stroke-width="1"/>
-            <line x1="40" y1="100" x2="580" y2="100" stroke="#f5f5f5" stroke-width="1"/>
-            <line x1="40" y1="60" x2="580" y2="60" stroke="#f5f5f5" stroke-width="1"/>
-            <text x="35" y="184" text-anchor="end" font-size="9" fill="#aaa" font-family="Roboto Mono">$0</text>
-            <text x="35" y="144" text-anchor="end" font-size="9" fill="#aaa" font-family="Roboto Mono">$300K</text>
-            <text x="35" y="104" text-anchor="end" font-size="9" fill="#aaa" font-family="Roboto Mono">$600K</text>
-            <text x="35" y="64" text-anchor="end" font-size="9" fill="#aaa" font-family="Roboto Mono">$900K</text>
-            <text x="60" y="195" font-size="8" fill="#aaa" font-family="Roboto Mono">Q1'22</text>
-            <text x="195" y="195" font-size="8" fill="#aaa" font-family="Roboto Mono">Q1'23</text>
-            <text x="375" y="195" font-size="8" fill="#aaa" font-family="Roboto Mono">Q1'24</text>
-            <text x="510" y="195" font-size="8" fill="#aaa" font-family="Roboto Mono">Q1'25</text>
-            <path d="M60,178 L105,176 L150,172 L195,168 L240,158 L285,145 L330,120 L375,100 L420,75 L465,55 L510,38 L555,25 L555,180 L60,180 Z"
-                  fill="rgba(0,170,0,0.08)"/>
-            <polyline class="t-chart-line"
-                      points="60,178 105,176 150,172 195,168 240,158 285,145 330,120 375,100 420,75 465,55 510,38 555,25"
-                      fill="none" stroke="#0a0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-            <circle cx="60" cy="178" r="3" fill="#0a0"/>
-            <circle cx="555" cy="25" r="4" fill="#0a0"/>
+  <!-- MAIN STATS -->
+  <section class="stats-section" id="stats">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-card stat-highlight">
+          <span class="stat-label">Общая прибыль</span>
+          <span class="stat-value green">+$1,847,293</span>
+          <span class="stat-sub">за всё время</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Баланс</span>
+          <span class="stat-value">$2,134,510</span>
+          <span class="stat-sub">текущий</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">ROI</span>
+          <span class="stat-value green">+1,247%</span>
+          <span class="stat-sub">с начала торговли</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Win Rate</span>
+          <span class="stat-value">78.4%</span>
+          <span class="stat-sub">процент прибыльных</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Всего сделок</span>
+          <span class="stat-value">3,847</span>
+          <span class="stat-sub">закрыто</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Лучшая сделка</span>
+          <span class="stat-value green">+$124,500</span>
+          <span class="stat-sub">BTC/USDT Long</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Средняя прибыль</span>
+          <span class="stat-value green">+$687</span>
+          <span class="stat-sub">на сделку</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Profit Factor</span>
+          <span class="stat-value">3.42</span>
+          <span class="stat-sub">прибыль/убыток</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MONTHLY STATS -->
+  <section class="monthly-section">
+    <div class="container">
+      <h2 class="section-title">Результаты по месяцам</h2>
+      <div class="monthly-grid">
+        <div class="month-card green-bg">
+          <span class="month-name">Янв 2025</span>
+          <span class="month-pnl green">+$89,340</span>
+          <span class="month-trades">312 сделок</span>
+        </div>
+        <div class="month-card green-bg">
+          <span class="month-name">Фев 2025</span>
+          <span class="month-pnl green">+$134,200</span>
+          <span class="month-trades">287 сделок</span>
+        </div>
+        <div class="month-card green-bg">
+          <span class="month-name">Мар 2025</span>
+          <span class="month-pnl green">+$178,450</span>
+          <span class="month-trades">345 сделок</span>
+        </div>
+        <div class="month-card green-bg">
+          <span class="month-name">Дек 2024</span>
+          <span class="month-pnl green">+$156,800</span>
+          <span class="month-trades">298 сделок</span>
+        </div>
+        <div class="month-card green-bg">
+          <span class="month-name">Ноя 2024</span>
+          <span class="month-pnl green">+$98,750</span>
+          <span class="month-trades">276 сделок</span>
+        </div>
+        <div class="month-card red-bg">
+          <span class="month-name">Окт 2024</span>
+          <span class="month-pnl red">-$12,400</span>
+          <span class="month-trades">189 сделок</span>
+        </div>
+        <div class="month-card green-bg">
+          <span class="month-name">Сен 2024</span>
+          <span class="month-pnl green">+$67,300</span>
+          <span class="month-trades">245 сделок</span>
+        </div>
+        <div class="month-card green-bg">
+          <span class="month-name">Авг 2024</span>
+          <span class="month-pnl green">+$203,100</span>
+          <span class="month-trades">367 сделок</span>
+        </div>
+        <div class="month-card green-bg">
+          <span class="month-name">Июл 2024</span>
+          <span class="month-pnl green">+$145,600</span>
+          <span class="month-trades">312 сделок</span>
+        </div>
+        <div class="month-card green-bg">
+          <span class="month-name">Июн 2024</span>
+          <span class="month-pnl green">+$78,900</span>
+          <span class="month-trades">234 сделок</span>
+        </div>
+        <div class="month-card green-bg">
+          <span class="month-name">Май 2024</span>
+          <span class="month-pnl green">+$112,450</span>
+          <span class="month-trades">289 сделок</span>
+        </div>
+        <div class="month-card red-bg">
+          <span class="month-name">Апр 2024</span>
+          <span class="month-pnl red">-$8,200</span>
+          <span class="month-trades">156 сделок</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EQUITY CHART -->
+  <section class="chart-section" id="chart">
+    <div class="container">
+      <h2 class="section-title">Кривая доходности</h2>
+      <div class="chart-card">
+        <div class="chart-header">
+          <div class="chart-tabs">
+            <button class="chart-tab active">Всё время</button>
+            <button class="chart-tab">2025</button>
+            <button class="chart-tab">2024</button>
+          </div>
+          <div class="chart-value green">+$1,847,293</div>
+        </div>
+        <div class="chart-body">
+          <svg viewBox="0 0 800 300" class="equity-chart">
+            <!-- Grid -->
+            <line x1="50" y1="20" x2="50" y2="260" stroke="#2a2d3a" stroke-width="1"/>
+            <line x1="50" y1="260" x2="770" y2="260" stroke="#2a2d3a" stroke-width="1"/>
+            <line x1="50" y1="200" x2="770" y2="200" stroke="#1e2130" stroke-width="1" stroke-dasharray="4"/>
+            <line x1="50" y1="140" x2="770" y2="140" stroke="#1e2130" stroke-width="1" stroke-dasharray="4"/>
+            <line x1="50" y1="80" x2="770" y2="80" stroke="#1e2130" stroke-width="1" stroke-dasharray="4"/>
+            <!-- Y labels -->
+            <text x="45" y="265" text-anchor="end" fill="#5a5e72" font-size="11">$0</text>
+            <text x="45" y="205" text-anchor="end" fill="#5a5e72" font-size="11">$500K</text>
+            <text x="45" y="145" text-anchor="end" fill="#5a5e72" font-size="11">$1M</text>
+            <text x="45" y="85" text-anchor="end" fill="#5a5e72" font-size="11">$1.5M</text>
+            <text x="45" y="35" text-anchor="end" fill="#5a5e72" font-size="11">$2M</text>
+            <!-- X labels -->
+            <text x="100" y="280" fill="#5a5e72" font-size="10" text-anchor="middle">Q1'22</text>
+            <text x="220" y="280" fill="#5a5e72" font-size="10" text-anchor="middle">Q3'22</text>
+            <text x="340" y="280" fill="#5a5e72" font-size="10" text-anchor="middle">Q1'23</text>
+            <text x="460" y="280" fill="#5a5e72" font-size="10" text-anchor="middle">Q3'23</text>
+            <text x="560" y="280" fill="#5a5e72" font-size="10" text-anchor="middle">Q1'24</text>
+            <text x="660" y="280" fill="#5a5e72" font-size="10" text-anchor="middle">Q3'24</text>
+            <text x="750" y="280" fill="#5a5e72" font-size="10" text-anchor="middle">Q1'25</text>
+            <!-- Area -->
+            <defs>
+              <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#00ca92" stop-opacity="0.3"/>
+                <stop offset="100%" stop-color="#00ca92" stop-opacity="0.02"/>
+              </linearGradient>
+            </defs>
+            <path d="M80,255 L130,252 L180,248 L230,244 L280,238 L330,225 L380,210 L430,185 L480,155 L530,120 L580,95 L630,65 L680,48 L730,35 L750,30 L750,260 L80,260 Z"
+                  fill="url(#areaGrad)"/>
+            <!-- Line -->
+            <polyline
+              points="80,255 130,252 180,248 230,244 280,238 330,225 380,210 430,185 480,155 530,120 580,95 630,65 680,48 730,35 750,30"
+              fill="none" stroke="#00ca92" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- Dots -->
+            <circle cx="80" cy="255" r="3" fill="#00ca92"/>
+            <circle cx="330" cy="225" r="3" fill="#00ca92"/>
+            <circle cx="530" cy="120" r="3" fill="#00ca92"/>
+            <circle cx="750" cy="30" r="4" fill="#00ca92" stroke="#212431" stroke-width="2"/>
           </svg>
         </div>
       </div>
-      <div class="t-col">
-        <div class="t-chart-container" style="margin: 0;">
-          <div class="t-chart-title t-font-mono">P&L 2024 (% от депозита)</div>
-          <div class="t-bar-chart" style="margin-bottom: 2rem; height: 160px;">
-            <div class="t-bar" data-height="45" style="height: 0;"><span class="t-bar-label">Я</span></div>
-            <div class="t-bar" data-height="62" style="height: 0;"><span class="t-bar-label">Ф</span></div>
-            <div class="t-bar t-bar-negative" data-height="15" style="height: 0;"><span class="t-bar-label">М</span></div>
-            <div class="t-bar" data-height="78" style="height: 0;"><span class="t-bar-label">А</span></div>
-            <div class="t-bar" data-height="55" style="height: 0;"><span class="t-bar-label">М</span></div>
-            <div class="t-bar" data-height="40" style="height: 0;"><span class="t-bar-label">И</span></div>
-            <div class="t-bar t-bar-negative" data-height="10" style="height: 0;"><span class="t-bar-label">И</span></div>
-            <div class="t-bar" data-height="85" style="height: 0;"><span class="t-bar-label">А</span></div>
-            <div class="t-bar" data-height="70" style="height: 0;"><span class="t-bar-label">С</span></div>
-            <div class="t-bar" data-height="90" style="height: 0;"><span class="t-bar-label">О</span></div>
-            <div class="t-bar" data-height="65" style="height: 0;"><span class="t-bar-label">Н</span></div>
-            <div class="t-bar" data-height="95" style="height: 0;"><span class="t-bar-label">Д</span></div>
+    </div>
+  </section>
+
+  <!-- TRADES TABLE -->
+  <section class="trades-section" id="trades">
+    <div class="container">
+      <h2 class="section-title">Последние сделки</h2>
+      <div class="trades-card">
+        <table class="trades-table">
+          <thead>
+            <tr>
+              <th>Дата</th>
+              <th>Пара</th>
+              <th>Тип</th>
+              <th>Вход</th>
+              <th>Выход</th>
+              <th>P&L</th>
+              <th>ROI</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>31.03.2025</td>
+              <td><span class="pair">BTC/USDT</span></td>
+              <td><span class="type-long">Long</span></td>
+              <td>$82,450</td>
+              <td>$87,120</td>
+              <td class="green">+$14,010</td>
+              <td class="green">+5.66%</td>
+            </tr>
+            <tr>
+              <td>30.03.2025</td>
+              <td><span class="pair">ETH/USDT</span></td>
+              <td><span class="type-long">Long</span></td>
+              <td>$3,340</td>
+              <td>$3,512</td>
+              <td class="green">+$8,600</td>
+              <td class="green">+5.15%</td>
+            </tr>
+            <tr>
+              <td>29.03.2025</td>
+              <td><span class="pair">SOL/USDT</span></td>
+              <td><span class="type-short">Short</span></td>
+              <td>$187.40</td>
+              <td>$178.20</td>
+              <td class="green">+$4,600</td>
+              <td class="green">+4.91%</td>
+            </tr>
+            <tr>
+              <td>28.03.2025</td>
+              <td><span class="pair">BTC/USDT</span></td>
+              <td><span class="type-long">Long</span></td>
+              <td>$79,800</td>
+              <td>$83,450</td>
+              <td class="green">+$18,250</td>
+              <td class="green">+4.57%</td>
+            </tr>
+            <tr>
+              <td>27.03.2025</td>
+              <td><span class="pair">DOGE/USDT</span></td>
+              <td><span class="type-long">Long</span></td>
+              <td>$0.1823</td>
+              <td>$0.1967</td>
+              <td class="green">+$3,240</td>
+              <td class="green">+7.90%</td>
+            </tr>
+            <tr>
+              <td>26.03.2025</td>
+              <td><span class="pair">ETH/USDT</span></td>
+              <td><span class="type-short">Short</span></td>
+              <td>$3,580</td>
+              <td>$3,490</td>
+              <td class="green">+$4,500</td>
+              <td class="green">+2.51%</td>
+            </tr>
+            <tr>
+              <td>25.03.2025</td>
+              <td><span class="pair">BNB/USDT</span></td>
+              <td><span class="type-long">Long</span></td>
+              <td>$598</td>
+              <td>$627</td>
+              <td class="green">+$5,800</td>
+              <td class="green">+4.85%</td>
+            </tr>
+            <tr>
+              <td>24.03.2025</td>
+              <td><span class="pair">BTC/USDT</span></td>
+              <td><span class="type-short">Short</span></td>
+              <td>$85,200</td>
+              <td>$86,100</td>
+              <td class="red">-$2,700</td>
+              <td class="red">-1.06%</td>
+            </tr>
+            <tr>
+              <td>23.03.2025</td>
+              <td><span class="pair">XRP/USDT</span></td>
+              <td><span class="type-long">Long</span></td>
+              <td>$2.34</td>
+              <td>$2.51</td>
+              <td class="green">+$6,800</td>
+              <td class="green">+7.26%</td>
+            </tr>
+            <tr>
+              <td>22.03.2025</td>
+              <td><span class="pair">SOL/USDT</span></td>
+              <td><span class="type-long">Long</span></td>
+              <td>$172.80</td>
+              <td>$184.50</td>
+              <td class="green">+$11,700</td>
+              <td class="green">+6.77%</td>
+            </tr>
+            <tr>
+              <td>21.03.2025</td>
+              <td><span class="pair">AVAX/USDT</span></td>
+              <td><span class="type-long">Long</span></td>
+              <td>$38.40</td>
+              <td>$41.20</td>
+              <td class="green">+$5,600</td>
+              <td class="green">+7.29%</td>
+            </tr>
+            <tr>
+              <td>20.03.2025</td>
+              <td><span class="pair">BTC/USDT</span></td>
+              <td><span class="type-long">Long</span></td>
+              <td>$81,300</td>
+              <td>$84,750</td>
+              <td class="green">+$17,250</td>
+              <td class="green">+4.24%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- DISTRIBUTION -->
+  <section class="dist-section">
+    <div class="container">
+      <div class="dist-grid">
+        <div class="dist-card">
+          <h3 class="dist-title">Распределение по парам</h3>
+          <div class="dist-bars">
+            <div class="dist-row">
+              <span class="dist-label">BTC/USDT</span>
+              <div class="dist-bar-bg"><div class="dist-bar-fill" style="width: 42%;"></div></div>
+              <span class="dist-pct">42%</span>
+            </div>
+            <div class="dist-row">
+              <span class="dist-label">ETH/USDT</span>
+              <div class="dist-bar-bg"><div class="dist-bar-fill" style="width: 28%;"></div></div>
+              <span class="dist-pct">28%</span>
+            </div>
+            <div class="dist-row">
+              <span class="dist-label">SOL/USDT</span>
+              <div class="dist-bar-bg"><div class="dist-bar-fill" style="width: 15%;"></div></div>
+              <span class="dist-pct">15%</span>
+            </div>
+            <div class="dist-row">
+              <span class="dist-label">Другие</span>
+              <div class="dist-bar-bg"><div class="dist-bar-fill" style="width: 15%;"></div></div>
+              <span class="dist-pct">15%</span>
+            </div>
+          </div>
+        </div>
+        <div class="dist-card">
+          <h3 class="dist-title">Long vs Short</h3>
+          <div class="dist-bars">
+            <div class="dist-row">
+              <span class="dist-label">Long</span>
+              <div class="dist-bar-bg"><div class="dist-bar-fill bar-green" style="width: 68%;"></div></div>
+              <span class="dist-pct">68%</span>
+            </div>
+            <div class="dist-row">
+              <span class="dist-label">Short</span>
+              <div class="dist-bar-bg"><div class="dist-bar-fill bar-red" style="width: 32%;"></div></div>
+              <span class="dist-pct">32%</span>
+            </div>
+          </div>
+          <div class="dist-extra">
+            <div class="dist-mini">
+              <span class="dist-mini-label">Ср. время в сделке</span>
+              <span class="dist-mini-value">4ч 23м</span>
+            </div>
+            <div class="dist-mini">
+              <span class="dist-mini-label">Макс. просадка</span>
+              <span class="dist-mini-value red">-8.7%</span>
+            </div>
+            <div class="dist-mini">
+              <span class="dist-mini-label">Sharpe Ratio</span>
+              <span class="dist-mini-value">2.84</span>
+            </div>
           </div>
         </div>
       </div>
     </div>
+  </section>
 
-    <div class="t-footer t-font-serif">
-      <span>&copy; Maga 2025</span>
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span>magahenderson &copy; 2025</span>
+      <span class="footer-link">Powered by TraderMake.money</span>
     </div>
-  </main>
+  </footer>
+
 </body>
-
-<script src="js/typewriter.js"></script>
-<script src="js/counter.js"></script>
-<script src="js/charts.js"></script>
-<script src="js/slider.js"></script>
-
 </html>
