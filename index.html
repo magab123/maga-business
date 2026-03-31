@@ -3,399 +3,77 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>magahenderson — Публичный профиль трейдера</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/tmm.css">
+  <title>magahenderson</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: #0d0f17;
+      color: #e1e4ed;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+    }
+    .wrap {
+      max-width: 520px;
+    }
+    .icon {
+      font-size: 3.5rem;
+      margin-bottom: 1.5rem;
+      opacity: 0.6;
+    }
+    h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.5px;
+    }
+    p {
+      font-size: 0.95rem;
+      color: #5a5e72;
+      line-height: 1.7;
+      margin-bottom: 0.5rem;
+    }
+    .line {
+      width: 60px;
+      height: 3px;
+      background: #f0c059;
+      border-radius: 2px;
+      margin: 1.5rem auto;
+    }
+    .contact {
+      font-size: 0.8rem;
+      color: #3a3d4a;
+      margin-top: 1rem;
+    }
+    .contact a {
+      color: #7582ff;
+      text-decoration: none;
+    }
+    .dot1, .dot2, .dot3 {
+      animation: blink 1.4s infinite both;
+    }
+    .dot2 { animation-delay: 0.2s; }
+    .dot3 { animation-delay: 0.4s; }
+    @keyframes blink {
+      0%, 80%, 100% { opacity: 0.2; }
+      40% { opacity: 1; }
+    }
+  </style>
 </head>
 <body>
-
-  <!-- HEADER NAV -->
-  <header class="tmm-header">
-    <div class="tmm-container tmm-header-inner">
-      <div class="tmm-logo">
-        <svg width="40" height="32" viewBox="0 0 40 32" fill="none">
-          <text x="0" y="24" font-family="Montserrat" font-weight="800" font-size="22" fill="#e1e4ed">T</text>
-          <text x="12" y="28" font-family="Montserrat" font-weight="800" font-size="16" fill="#f0c059">M</text>
-          <text x="26" y="24" font-family="Montserrat" font-weight="800" font-size="22" fill="#e1e4ed">M</text>
-        </svg>
-        <div class="tmm-logo-text">
-          <span>TRADER</span>
-          <span>MAKE</span>
-          <span>MONEY</span>
-        </div>
-      </div>
-      <nav class="tmm-nav">
-        <a href="#">ГЛАВНАЯ</a>
-        <a href="#">АНАЛИТИКА</a>
-        <a href="#">ЦЕНЫ</a>
-        <a href="#">ОТЗЫВЫ</a>
-        <a href="#">FAQ</a>
-        <a href="#">БЛОГ</a>
-        <a href="#">ТОП</a>
-      </nav>
-      <div class="tmm-nav-right">
-        <span class="tmm-lang">RU <span style="font-size:0.6rem;">▼</span></span>
-        <a href="#" class="tmm-login">ВОЙТИ <span class="tmm-login-icon">→</span></a>
-      </div>
+  <div class="wrap">
+    <div class="icon">
+      <span class="dot1">.</span><span class="dot2">.</span><span class="dot3">.</span>
     </div>
-  </header>
-
-  <!-- BANNER / PROFILE HERO -->
-  <section class="tmm-banner">
-    <div class="tmm-banner-white">
-      <div class="tmm-banner-title">Crypto magahenderson <span class="tmm-tg-icon">
-        <svg width="40" height="40" viewBox="0 0 48 48" fill="#000">
-          <circle cx="24" cy="24" r="24" fill="#000"/>
-          <path d="M33.2 15.7l-3.7 17.5c-.3 1.2-.9 1.5-1.9 1l-5.2-3.8-2.5 2.4c-.3.3-.5.5-1 .5l.4-5.3 9.6-8.7c.4-.4-.1-.6-.6-.2l-11.9 7.5-5.1-1.6c-1.1-.3-1.1-1.1.2-1.7l20-7.7c.9-.3 1.7.2 1.4 1.7z" fill="#fff"/>
-        </svg>
-      </span></div>
-    </div>
-  </section>
-
-  <!-- PROFILE INFO -->
-  <section class="tmm-profile">
-    <div class="tmm-container">
-      <div class="tmm-profile-row">
-        <div class="tmm-avatar">
-          <div class="tmm-avatar-inner">MH</div>
-        </div>
-        <h1 class="tmm-username">magahenderson</h1>
-      </div>
-      <div class="tmm-profile-stats">
-        <div class="tmm-pstat">
-          <span class="tmm-pstat-value">3,42</span>
-          <span class="tmm-pstat-label">ПРОФИТ ФАКТОР <span class="tmm-info">ⓘ</span></span>
-        </div>
-        <div class="tmm-pstat">
-          <span class="tmm-pstat-value">14м, 22с</span>
-          <span class="tmm-pstat-label">СР. ВРЕМЯ В СДЕЛКЕ <span class="tmm-info">ⓘ</span></span>
-        </div>
-        <div class="tmm-pstat">
-          <span class="tmm-pstat-value">78,4%</span>
-          <span class="tmm-pstat-label">ЛОНГ/ШОРТ <span class="tmm-info">ⓘ</span></span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- STATISTICS -->
-  <section class="tmm-stats-section">
-    <div class="tmm-container">
-      <h2 class="tmm-section-title">Статистика</h2>
-
-      <!-- Period tabs -->
-      <div class="tmm-tabs-row">
-        <div class="tmm-api-badge">АПИ КЛЮЧЕЙ: 1</div>
-        <div class="tmm-period-tabs">
-          <button class="tmm-tab">Сегодня</button>
-          <button class="tmm-tab">Текущая неделя</button>
-          <button class="tmm-tab">30 дней</button>
-          <button class="tmm-tab">90 дней</button>
-          <button class="tmm-tab tmm-tab-active">Весь период</button>
-        </div>
-      </div>
-
-      <p class="tmm-disclaimer">Трейдер не может изменять сделки или корректировать историю своей торговли.</p>
-
-      <!-- Charts row -->
-      <div class="tmm-charts-row">
-        <div class="tmm-chart-box">
-          <div class="tmm-chart-label">Кумулятивная Комиссия ($)</div>
-          <svg viewBox="0 0 400 180" class="tmm-chart-svg">
-            <line x1="30" y1="160" x2="380" y2="160" stroke="#2a2d3a" stroke-width="0.5"/>
-            <line x1="30" y1="120" x2="380" y2="120" stroke="#1e2130" stroke-width="0.5" stroke-dasharray="3"/>
-            <line x1="30" y1="80" x2="380" y2="80" stroke="#1e2130" stroke-width="0.5" stroke-dasharray="3"/>
-            <line x1="30" y1="40" x2="380" y2="40" stroke="#1e2130" stroke-width="0.5" stroke-dasharray="3"/>
-            <text x="25" y="164" text-anchor="end" fill="#5a5e72" font-size="8">0</text>
-            <text x="25" y="124" text-anchor="end" fill="#5a5e72" font-size="8">500</text>
-            <text x="25" y="84" text-anchor="end" fill="#5a5e72" font-size="8">1K</text>
-            <text x="25" y="44" text-anchor="end" fill="#5a5e72" font-size="8">1.5K</text>
-            <text x="80" y="175" fill="#5a5e72" font-size="7" text-anchor="middle">Sep</text>
-            <text x="140" y="175" fill="#5a5e72" font-size="7" text-anchor="middle">Nov</text>
-            <text x="210" y="175" fill="#5a5e72" font-size="7" text-anchor="middle">2025</text>
-            <text x="280" y="175" fill="#5a5e72" font-size="7" text-anchor="middle">Mar</text>
-            <text x="350" y="175" fill="#5a5e72" font-size="7" text-anchor="middle">May</text>
-            <polyline points="40,155 70,152 100,148 130,140 160,130 190,118 220,105 250,90 280,75 310,62 340,50 370,38"
-              fill="none" stroke="#f0c059" stroke-width="1.5"/>
-          </svg>
-        </div>
-        <div class="tmm-chart-box">
-          <div class="tmm-chart-label">Кумулятивная прибыль ($)</div>
-          <svg viewBox="0 0 400 180" class="tmm-chart-svg">
-            <line x1="30" y1="160" x2="380" y2="160" stroke="#2a2d3a" stroke-width="0.5"/>
-            <line x1="30" y1="120" x2="380" y2="120" stroke="#1e2130" stroke-width="0.5" stroke-dasharray="3"/>
-            <line x1="30" y1="80" x2="380" y2="80" stroke="#1e2130" stroke-width="0.5" stroke-dasharray="3"/>
-            <line x1="30" y1="40" x2="380" y2="40" stroke="#1e2130" stroke-width="0.5" stroke-dasharray="3"/>
-            <text x="25" y="164" text-anchor="end" fill="#5a5e72" font-size="8">-100</text>
-            <text x="25" y="124" text-anchor="end" fill="#5a5e72" font-size="8">5K</text>
-            <text x="25" y="84" text-anchor="end" fill="#5a5e72" font-size="8">15K</text>
-            <text x="25" y="44" text-anchor="end" fill="#5a5e72" font-size="8">25K</text>
-            <text x="80" y="175" fill="#5a5e72" font-size="7" text-anchor="middle">Sep</text>
-            <text x="140" y="175" fill="#5a5e72" font-size="7" text-anchor="middle">Nov</text>
-            <text x="210" y="175" fill="#5a5e72" font-size="7" text-anchor="middle">2025</text>
-            <text x="280" y="175" fill="#5a5e72" font-size="7" text-anchor="middle">Mar</text>
-            <text x="350" y="175" fill="#5a5e72" font-size="7" text-anchor="middle">May</text>
-            <polyline points="40,158 55,160 70,155 85,148 100,142 115,135 130,120 145,95 160,85 175,78 190,72 205,68 220,62 235,58 250,55 265,52 280,50 295,48 310,45 325,43 340,42 355,40 370,38"
-              fill="none" stroke="#f0c059" stroke-width="1.5"/>
-          </svg>
-        </div>
-      </div>
-
-      <!-- Bottom charts row -->
-      <div class="tmm-charts-row">
-        <div class="tmm-chart-box tmm-chart-gauge">
-          <div class="tmm-chart-label">Процент плюсовых сделок</div>
-          <div class="tmm-gauge">
-            <svg viewBox="0 0 200 120" class="tmm-gauge-svg">
-              <defs>
-                <linearGradient id="gaugeGrad" x1="0" y1="0" x2="1" y2="0">
-                  <stop offset="0%" stop-color="#ff4444"/>
-                  <stop offset="40%" stop-color="#ff8800"/>
-                  <stop offset="60%" stop-color="#f0c059"/>
-                  <stop offset="100%" stop-color="#00ca92"/>
-                </linearGradient>
-              </defs>
-              <path d="M20,110 A80,80 0 0,1 180,110" fill="none" stroke="#2a2d3a" stroke-width="14" stroke-linecap="round"/>
-              <path d="M20,110 A80,80 0 0,1 180,110" fill="none" stroke="url(#gaugeGrad)" stroke-width="14" stroke-linecap="round"
-                stroke-dasharray="251" stroke-dashoffset="50"/>
-              <!-- Needle -->
-              <line x1="100" y1="110" x2="138" y2="55" stroke="#e1e4ed" stroke-width="2" stroke-linecap="round"/>
-              <circle cx="100" cy="110" r="5" fill="#e1e4ed"/>
-            </svg>
-            <div class="tmm-gauge-value">79%</div>
-          </div>
-        </div>
-        <div class="tmm-chart-box">
-          <div class="tmm-chart-label">Прибыль по монете ($)</div>
-          <div class="tmm-treemap">
-            <div class="tmm-tree-row">
-              <div class="tmm-tree-cell tmm-tree-green tmm-tree-lg">BTCUSDT<br><span>8,420</span></div>
-              <div class="tmm-tree-cell tmm-tree-green tmm-tree-md">ETHUSDT<br><span>4,230</span></div>
-              <div class="tmm-tree-cell tmm-tree-green tmm-tree-sm">SOLUSDT<br><span>2,180</span></div>
-              <div class="tmm-tree-cell tmm-tree-green tmm-tree-xs">BNBUSDT<br><span>987</span></div>
-              <div class="tmm-tree-cell tmm-tree-green tmm-tree-xs">DOGEUSDT<br><span>654</span></div>
-            </div>
-            <div class="tmm-tree-row">
-              <div class="tmm-tree-cell tmm-tree-green tmm-tree-md">XRPUSDT<br><span>3,120</span></div>
-              <div class="tmm-tree-cell tmm-tree-green tmm-tree-md">AVAXUSDT<br><span>1,870</span></div>
-              <div class="tmm-tree-cell tmm-tree-green tmm-tree-sm">ADAUSDT<br><span>1,240</span></div>
-              <div class="tmm-tree-cell tmm-tree-red tmm-tree-xs">ARBUSDT<br><span>-342</span></div>
-              <div class="tmm-tree-cell tmm-tree-red tmm-tree-xs">APTUSDT<br><span>-187</span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- TRADES LIST -->
-  <section class="tmm-trades-section">
-    <div class="tmm-container">
-      <h2 class="tmm-section-title">Список сделок</h2>
-      <p class="tmm-disclaimer">Трейдер включил отображение только закрытых на бирже позиций.</p>
-
-      <table class="tmm-trades-table">
-        <thead>
-          <tr>
-            <th></th>
-            <th>Процент <span class="tmm-info">ⓘ</span></th>
-            <th>Прибыль <span class="tmm-info">ⓘ</span></th>
-            <th>Ср. вход/выход</th>
-            <th>Продолжительность</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="tmm-trade-pair">LONG BTCUSDT</td>
-            <td class="green">4,82%</td>
-            <td class="green">1 247,50 $</td>
-            <td>82 340,00 $ / 86 310,12 $</td>
-            <td>2ч, 14м / <span class="tmm-trade-date">23:14:22 - 01:28:45<br>(31 мар. 2026 г.)</span></td>
-          </tr>
-          <tr>
-            <td class="tmm-trade-pair">LONG ETHUSDT</td>
-            <td class="green">3,67%</td>
-            <td class="green">892,30 $</td>
-            <td>3 412,50 $ / 3 537,70 $</td>
-            <td>1ч, 48м / <span class="tmm-trade-date">20:05:11 - 21:53:30<br>(31 мар. 2026 г.)</span></td>
-          </tr>
-          <tr>
-            <td class="tmm-trade-pair">SHORT SOLUSDT</td>
-            <td class="green">2,94%</td>
-            <td class="green">534,80 $</td>
-            <td>187,40 $ / 181,89 $</td>
-            <td>45м, 12с / <span class="tmm-trade-date">18:30:00 - 19:15:12<br>(31 мар. 2026 г.)</span></td>
-          </tr>
-          <tr>
-            <td class="tmm-trade-pair">LONG BTCUSDT</td>
-            <td class="green">5,21%</td>
-            <td class="green">1 890,40 $</td>
-            <td>79 800,00 $ / 83 958,00 $</td>
-            <td>3ч, 05м / <span class="tmm-trade-date">14:20:33 - 17:25:18<br>(30 мар. 2026 г.)</span></td>
-          </tr>
-          <tr>
-            <td class="tmm-trade-pair">LONG DOGEUSDT</td>
-            <td class="green">7,12%</td>
-            <td class="green">423,60 $</td>
-            <td>0,1823 $ / 0,1953 $</td>
-            <td>1ч, 32м / <span class="tmm-trade-date">11:42:18 - 13:14:50<br>(30 мар. 2026 г.)</span></td>
-          </tr>
-          <tr>
-            <td class="tmm-trade-pair">LONG XRPUSDT</td>
-            <td class="green">4,28%</td>
-            <td class="green">678,90 $</td>
-            <td>2,3400 $ / 2,4402 $</td>
-            <td>2ч, 10м / <span class="tmm-trade-date">08:15:40 - 10:25:22<br>(30 мар. 2026 г.)</span></td>
-          </tr>
-          <tr>
-            <td class="tmm-trade-pair">SHORT ETHUSDT</td>
-            <td class="green">1,87%</td>
-            <td class="green">312,40 $</td>
-            <td>3 580,00 $ / 3 513,05 $</td>
-            <td>58м, 30с / <span class="tmm-trade-date">04:10:15 - 05:08:45<br>(30 мар. 2026 г.)</span></td>
-          </tr>
-          <tr>
-            <td class="tmm-trade-pair">LONG BNBUSDT</td>
-            <td class="green">3,45%</td>
-            <td class="green">567,20 $</td>
-            <td>598,00 $ / 618,63 $</td>
-            <td>1ч, 22м / <span class="tmm-trade-date">22:30:10 - 23:52:44<br>(29 мар. 2026 г.)</span></td>
-          </tr>
-          <tr>
-            <td class="tmm-trade-pair">SHORT BTCUSDT</td>
-            <td class="red">-0,842%</td>
-            <td class="red">-245,30 $</td>
-            <td>85 200,00 $ / 85 917,04 $</td>
-            <td>28м, 14с / <span class="tmm-trade-date">19:14:30 - 19:42:44<br>(29 мар. 2026 г.)</span></td>
-          </tr>
-          <tr>
-            <td class="tmm-trade-pair">LONG AVAXUSDT</td>
-            <td class="green">5,67%</td>
-            <td class="green">456,80 $</td>
-            <td>38,40 $ / 40,58 $</td>
-            <td>1ч, 55м / <span class="tmm-trade-date">15:08:22 - 17:03:10<br>(29 мар. 2026 г.)</span></td>
-          </tr>
-          <tr>
-            <td class="tmm-trade-pair">LONG BTCUSDT</td>
-            <td class="green">3,92%</td>
-            <td class="green">1 534,70 $</td>
-            <td>81 300,00 $ / 84 486,96 $</td>
-            <td>2ч, 40м / <span class="tmm-trade-date">10:22:05 - 13:02:18<br>(29 мар. 2026 г.)</span></td>
-          </tr>
-          <tr>
-            <td class="tmm-trade-pair">LONG SOLUSDT</td>
-            <td class="green">6,43%</td>
-            <td class="green">789,50 $</td>
-            <td>172,80 $ / 183,91 $</td>
-            <td>1ч, 18м / <span class="tmm-trade-date">07:45:30 - 09:03:48<br>(29 мар. 2026 г.)</span></td>
-          </tr>
-          <tr>
-            <td class="tmm-trade-pair">LONG ADAUSDT</td>
-            <td class="green">4,15%</td>
-            <td class="green">345,20 $</td>
-            <td>0,7820 $ / 0,8145 $</td>
-            <td>2ч, 05м / <span class="tmm-trade-date">03:30:18 - 05:35:22<br>(28 мар. 2026 г.)</span></td>
-          </tr>
-          <tr>
-            <td class="tmm-trade-pair">SHORT XRPUSDT</td>
-            <td class="green">2,35%</td>
-            <td class="green">289,40 $</td>
-            <td>2,5100 $ / 2,4510 $</td>
-            <td>42м, 55с / <span class="tmm-trade-date">00:12:40 - 00:55:35<br>(28 мар. 2026 г.)</span></td>
-          </tr>
-          <tr>
-            <td class="tmm-trade-pair">LONG BTCUSDT</td>
-            <td class="green">4,56%</td>
-            <td class="green">1 678,90 $</td>
-            <td>80 500,00 $ / 84 170,80 $</td>
-            <td>3ч, 15м / <span class="tmm-trade-date">20:10:00 - 23:25:12<br>(27 мар. 2026 г.)</span></td>
-          </tr>
-          <tr>
-            <td class="tmm-trade-pair">LONG ETHUSDT</td>
-            <td class="red">-0,523%</td>
-            <td class="red">-87,40 $</td>
-            <td>3 490,00 $ / 3 471,74 $</td>
-            <td>15м, 40с / <span class="tmm-trade-date">18:42:10 - 18:57:50<br>(27 мар. 2026 г.)</span></td>
-          </tr>
-          <tr>
-            <td class="tmm-trade-pair">LONG DOGEUSDT</td>
-            <td class="green">8,24%</td>
-            <td class="green">512,30 $</td>
-            <td>0,1756 $ / 0,1901 $</td>
-            <td>2ч, 48м / <span class="tmm-trade-date">14:05:22 - 16:53:18<br>(27 мар. 2026 г.)</span></td>
-          </tr>
-          <tr>
-            <td class="tmm-trade-pair">LONG BTCUSDT</td>
-            <td class="green">2,78%</td>
-            <td class="green">987,60 $</td>
-            <td>83 100,00 $ / 85 410,18 $</td>
-            <td>1ч, 50м / <span class="tmm-trade-date">09:30:14 - 11:20:28<br>(27 мар. 2026 г.)</span></td>
-          </tr>
-          <tr>
-            <td class="tmm-trade-pair">SHORT SOLUSDT</td>
-            <td class="green">3,89%</td>
-            <td class="green">623,40 $</td>
-            <td>190,20 $ / 182,80 $</td>
-            <td>1ч, 12м / <span class="tmm-trade-date">05:18:40 - 06:30:55<br>(26 мар. 2026 г.)</span></td>
-          </tr>
-          <tr>
-            <td class="tmm-trade-pair">LONG AVAXUSDT</td>
-            <td class="green">6,12%</td>
-            <td class="green">378,90 $</td>
-            <td>39,80 $ / 42,24 $</td>
-            <td>2ч, 28м / <span class="tmm-trade-date">01:42:18 - 04:10:30<br>(26 мар. 2026 г.)</span></td>
-          </tr>
-        </tbody>
-      </table>
-
-      <!-- Pagination -->
-      <div class="tmm-pagination">
-        <button class="tmm-page-btn tmm-page-disabled">&lsaquo;</button>
-        <span class="tmm-page-info">1 - 20 / 4 847</span>
-        <button class="tmm-page-btn">&rsaquo;</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="tmm-footer">
-    <div class="tmm-container">
-      <div class="tmm-footer-grid">
-        <div class="tmm-footer-col">
-          <div class="tmm-footer-logo">
-            <span class="tmm-footer-brand">TRADER<br>MAKE<br>MONEY</span>
-          </div>
-          <div class="tmm-footer-lang">🌐 РУССКИЙ (RU) ▼</div>
-        </div>
-        <div class="tmm-footer-col">
-          <h4>МЕНЮ</h4>
-          <a href="#">Блог и новости</a>
-          <a href="#">Цены</a>
-          <a href="#">Отзывы</a>
-          <a href="#">Аналитика</a>
-          <a href="#">FAQ</a>
-          <a href="#">Топ трейдеров</a>
-          <a href="#">Топ монеты</a>
-        </div>
-        <div class="tmm-footer-col">
-          <h4>ДОКУМЕНТАЦИЯ</h4>
-          <a href="#">Пользовательское соглашение</a>
-          <a href="#">Политика конфиденциальности</a>
-          <a href="#">Политика возврата</a>
-          <a href="#">Контакты</a>
-          <a href="#">Карта сайта</a>
-          <a href="#">API документация</a>
-        </div>
-        <div class="tmm-footer-col">
-          <h4>КОНТАКТЫ</h4>
-          <a href="#">ВК  ГРУППА ВКОНТАКТЕ</a>
-          <a href="#">✈  НОВОСТИ В ТЕЛЕГРАМ</a>
-          <a href="#">✈  ЧАТ ТРЕЙДЕРОВ</a>
-          <a href="#">✉  INFO@TRADERMAKE.MONEY</a>
-        </div>
-      </div>
-    </div>
-  </footer>
-
+    <h1>Сайт на техническом обслуживании</h1>
+    <p>Мы проводим плановые технические работы для улучшения сервиса. Скоро всё заработает.</p>
+    <div class="line"></div>
+    <div class="contact">По вопросам: <a href="mailto:maga@business.com">maga@business.com</a></div>
+  </div>
 </body>
 </html>

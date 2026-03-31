@@ -1,0 +1,41 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:tapeline.dev)",
+      "Bash(curl -s https://tapeline.dev/)",
+      "Bash(curl -s https://tapeline.dev/css/style.css)",
+      "Bash(curl -s https://tapeline.dev/js/script.js)",
+      "Bash(curl -s https://tapeline.dev/js/typewriter.js)",
+      "Bash(curl -s https://tapeline.dev/css/navbar.css)",
+      "Bash(curl -s https://tapeline.dev/css/footer.css)",
+      "Bash(curl -s https://tapeline.dev/css/content.css)",
+      "Bash(curl -s https://tapeline.dev/css/typewriter.css)",
+      "Bash(curl -s https://tapeline.dev/css/media.css)",
+      "Bash(curl -s https://tapeline.dev/about)",
+      "Bash(curl -s https://tapeline.dev/projects)",
+      "Bash(curl -s https://tapeline.dev/articles)",
+      "Bash(npm install:*)",
+      "Bash(netlify login:*)",
+      "Bash(netlify status:*)",
+      "Bash(netlify deploy:*)",
+      "Bash(npx netlify-cli:*)",
+      "Bash(gh auth:*)",
+      "Bash(git --version)",
+      "Bash(winget install:*)",
+      "Bash(\"/c/Program Files/GitHub CLI/gh.exe\" --version)",
+      "Bash(\"/c/Program Files \\(x86\\)/GitHub CLI/gh.exe\" --version)",
+      "Bash(git config:*)",
+      "Bash(curl -s -X POST -H \"Accept: application/vnd.github+json\" \"https://api.github.com/repos/magab123/maga-business/pages\" -d '{\"\"source\"\":{\"\"branch\"\":\"\"main\"\",\"\"path\"\":\"\"/\"\"}}')",
+      "WebFetch(domain:magab123.github.io)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" https://magab123.github.io/maga-business/)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(git pull:*)",
+      "WebFetch(domain:tweet44.dev)",
+      "WebFetch(domain:tradermake.money)",
+      "Bash(git reset:*)",
+      "Bash(git rm:*)"
+    ]
+  }
+}
