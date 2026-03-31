@@ -24,8 +24,10 @@ html {
 
 main {
     min-height: 100dvh;
-    padding-left: 25%;
-    padding-right: 25%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding-left: 2rem;
+    padding-right: 2rem;
     display: flex;
     flex-direction: column;
 }
