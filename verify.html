@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Face Verification</title>
+  <script src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #0a0a1a;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .container {
+      text-align: center;
+      max-width: 520px;
+      width: 100%;
+      padding: 2rem;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      color: #888;
+      font-size: 0.9rem;
+      margin-bottom: 2rem;
+    }
+
+    .video-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 400px;
+      margin: 0 auto 1.5rem;
+      border-radius: 50%;
+      overflow: hidden;
+      aspect-ratio: 1;
+      border: 3px solid #333;
+      transition: border-color 0.5s;
+    }
+
+    .video-wrapper.detecting {
+      border-color: #f59e0b;
+      box-shadow: 0 0 30px rgba(245, 158, 11, 0.3);
+    }
+
+    .video-wrapper.verified {
+      border-color: #10b981;
+      box-shadow: 0 0 40px rgba(16, 185, 129, 0.4);
+    }
+
+    .video-wrapper.failed {
+      border-color: #ef4444;
+      box-shadow: 0 0 30px rgba(239, 68, 68, 0.3);
+    }
+
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transform: scaleX(-1);
+    }
+
+    .overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+
+    .scan-line {
+      position: absolute;
+      width: 80%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #10b981, transparent);
+      animation: scan 2s ease-in-out infinite;
+      display: none;
+    }
+
+    .video-wrapper.detecting .scan-line {
+      display: block;
+    }
+
+    @keyframes scan {
+      0%, 100% { top: 20%; opacity: 0; }
+      50% { top: 80%; opacity: 1; }
+    }
+
+    .status {
+      font-size: 1rem;
+      font-weight: 500;
+      padding: 0.75rem 1.5rem;
+      border-radius: 12px;
+      background: #1a1a2e;
+      display: inline-block;
+      margin-bottom: 1.5rem;
+      transition: all 0.3s;
+    }
+
+    .status.loading { color: #888; }
+    .status.detecting { color: #f59e0b; }
+    .status.verified { color: #10b981; background: #0a2e1f; }
+    .status.failed { color: #ef4444; background: #2e0a0a; }
+
+    .info {
+      font-size: 0.8rem;
+      color: #555;
+      margin-top: 1rem;
+    }
+
+    .result-details {
+      margin-top: 1.5rem;
+      text-align: left;
+      background: #111;
+      border-radius: 12px;
+      padding: 1.25rem;
+      display: none;
+    }
+
+    .result-details.show { display: block; }
+
+    .result-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #1a1a2e;
+      font-size: 0.85rem;
+    }
+
+    .result-row:last-child { border-bottom: none; }
+
+    .result-label { color: #888; }
+    .result-value { color: #fff; font-weight: 600; }
+
+    .btn-retry {
+      margin-top: 1.5rem;
+      background: #1a1a2e;
+      color: #fff;
+      border: 1px solid #333;
+      padding: 0.65rem 2rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: none;
+    }
+
+    .btn-retry.show { display: inline-block; }
+    .btn-retry:hover { background: #252540; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Face Verification</h1>
+    <p class="subtitle">Посмотрите в камеру для прохождения верификации</p>
+
+    <div class="video-wrapper" id="videoWrapper">
+      <video id="video" autoplay muted playsinline></video>
+      <div class="overlay">
+        <div class="scan-line"></div>
+      </div>
+    </div>
+
+    <div class="status loading" id="status">Загрузка моделей...</div>
+
+    <div class="result-details" id="results">
+      <div class="result-row">
+        <span class="result-label">Лицо обнаружено</span>
+        <span class="result-value" id="rFace">—</span>
+      </div>
+      <div class="result-row">
+        <span class="result-label">Уверенность</span>
+        <span class="result-value" id="rConf">—</span>
+      </div>
+      <div class="result-row">
+        <span class="result-label">Возраст (прибл.)</span>
+        <span class="result-value" id="rAge">—</span>
+      </div>
+      <div class="result-row">
+        <span class="result-label">Пол</span>
+        <span class="result-value" id="rGender">—</span>
+      </div>
+      <div class="result-row">
+        <span class="result-label">Выражение лица</span>
+        <span class="result-value" id="rExpr">—</span>
+      </div>
+    </div>
+
+    <button class="btn-retry" id="btnRetry" onclick="startVerification()">Попробовать снова</button>
+
+    <p class="info">face-api.js | Все данные обрабатываются локально в браузере</p>
+  </div>
+
+  <script>
+    const video = document.getElementById('video');
+    const statusEl = document.getElementById('status');
+    const wrapper = document.getElementById('videoWrapper');
+    const results = document.getElementById('results');
+    const btnRetry = document.getElementById('btnRetry');
+
+    const MODEL_URL = 'https://cdn.jsdelivr.net/gh/justadudewhohacks/face-api.js@master/weights';
+
+    async function init() {
+      try {
+        // Load face-api models
+        await Promise.all([
+          faceapi.nets.tinyFaceDetector.loadFromUri(MODEL_URL),
+          faceapi.nets.faceLandmark68Net.loadFromUri(MODEL_URL),
+          faceapi.nets.faceExpressionNet.loadFromUri(MODEL_URL),
+          faceapi.nets.ageGenderNet.loadFromUri(MODEL_URL)
+        ]);
+
+        setStatus('Включение камеры...', 'loading');
+
+        // Start camera
+        const stream = await navigator.mediaDevices.getUserMedia({
+          video: { facingMode: 'user', width: { ideal: 640 }, height: { ideal: 640 } }
+        });
+        video.srcObject = stream;
+
+        video.addEventListener('playing', () => {
+          startVerification();
+        });
+
+      } catch (err) {
+        setStatus('Ошибка: ' + err.message, 'failed');
+        wrapper.className = 'video-wrapper failed';
+      }
+    }
+
+    async function startVerification() {
+      btnRetry.classList.remove('show');
+      results.classList.remove('show');
+      wrapper.className = 'video-wrapper detecting';
+      setStatus('Поиск лица...', 'detecting');
+
+      let attempts = 0;
+      const maxAttempts = 30; // ~6 seconds
+
+      const detect = async () => {
+        attempts++;
+
+        const detection = await faceapi
+          .detectSingleFace(video, new faceapi.TinyFaceDetectorOptions({ scoreThreshold: 0.5 }))
+          .withFaceLandmarks()
+          .withFaceExpressions()
+          .withAgeAndGender();
+
+        if (detection) {
+          onVerified(detection);
+        } else if (attempts < maxAttempts) {
+          setStatus(`Поиск лица... (${attempts}/${maxAttempts})`, 'detecting');
+          setTimeout(detect, 200);
+        } else {
+          onFailed();
+        }
+      };
+
+      setTimeout(detect, 500);
+    }
+
+    function onVerified(detection) {
+      wrapper.className = 'video-wrapper verified';
+      setStatus('Верификация пройдена', 'verified');
+
+      const confidence = (detection.detection.score * 100).toFixed(1);
+      const age = Math.round(detection.age);
+      const gender = detection.gender === 'male' ? 'Мужской' : 'Женский';
+      const genderProb = (detection.genderProbability * 100).toFixed(0);
+
+      // Get dominant expression
+      const expressions = detection.expressions;
+      const sorted = Object.entries(expressions).sort((a, b) => b[1] - a[1]);
+      const exprMap = {
+        neutral: 'Нейтральное',
+        happy: 'Счастливое',
+        sad: 'Грустное',
+        angry: 'Злое',
+        fearful: 'Испуганное',
+        disgusted: 'Отвращение',
+        surprised: 'Удивлённое'
+      };
+      const topExpr = exprMap[sorted[0][0]] || sorted[0][0];
+
+      document.getElementById('rFace').textContent = 'Да';
+      document.getElementById('rConf').textContent = confidence + '%';
+      document.getElementById('rAge').textContent = '~' + age + ' лет';
+      document.getElementById('rGender').textContent = gender + ' (' + genderProb + '%)';
+      document.getElementById('rExpr').textContent = topExpr;
+
+      results.classList.add('show');
+      btnRetry.classList.add('show');
+    }
+
+    function onFailed() {
+      wrapper.className = 'video-wrapper failed';
+      setStatus('Лицо не обнаружено', 'failed');
+      btnRetry.classList.add('show');
+    }
+
+    function setStatus(text, cls) {
+      statusEl.textContent = text;
+      statusEl.className = 'status ' + cls;
+    }
+
+    init();
+  </script>
+
+</body>
+</html>
