@@ -227,8 +227,8 @@ textarea { min-height:80px; resize:vertical; }
     <p>Введите логин и пароль для входа</p>
     <div class="auth-error" id="authError"></div>
     <div class="form-group">
-      <label>Логин (email)</label>
-      <input type="text" id="loginEmail" placeholder="Логин">
+      <label>Логин</label>
+      <input type="text" id="loginUsername" placeholder="Введите логин" autocapitalize="off" autocorrect="off">
     </div>
     <div class="form-group">
       <label>Пароль</label>
@@ -424,7 +424,7 @@ textarea { min-height:80px; resize:vertical; }
         <div class="panel-body">
           <div style="overflow-x:auto;">
             <table>
-              <thead><tr><th>ФИО</th><th>Email</th><th>Роль</th><th>Цех</th><th>Действия</th></tr></thead>
+              <thead><tr><th>ФИО</th><th>Логин</th><th>Роль</th><th>Цех</th><th>Действия</th></tr></thead>
               <tbody id="usersTbody"></tbody>
             </table>
           </div>
@@ -469,8 +469,8 @@ textarea { min-height:80px; resize:vertical; }
     <div class="modal-body">
       <div class="auth-error" id="addUserError" style="display:none;"></div>
       <div class="form-group">
-        <label>Email (логин) <span class="req">*</span></label>
-        <input type="text" id="newUserEmail" placeholder="email@example.com">
+        <label>Логин <span class="req">*</span></label>
+        <input type="text" id="newUserLogin" placeholder="ivanov" autocapitalize="off" autocorrect="off">
       </div>
       <div class="form-group" id="newUserPasswordGroup">
         <label>Пароль <span class="req">*</span> <span style="font-weight:400;color:var(--gray);">(мин. 6 символов)</span></label>
@@ -533,6 +533,12 @@ function initSupabase(url, key) {
 // ============================================================
 // AUTH
 // ============================================================
+// Convert username to fake email for Supabase Auth
+function loginToEmail(login) {
+  if (login.includes('@')) return login; // already email
+  return login.toLowerCase().replace(/\s+/g, '') + '@quality.local';
+}
+
 function showAuthError(msg) {
   const el = document.getElementById('authError');
   el.textContent = msg; el.style.display = 'block';
@@ -541,10 +547,11 @@ function hideAuthError() { document.getElementById('authError').style.display = 
 
 async function doLogin() {
   hideAuthError();
-  const email = document.getElementById('loginEmail').value.trim();
+  const username = document.getElementById('loginUsername').value.trim();
   const password = document.getElementById('loginPassword').value;
-  if (!email || !password) { showAuthError('Заполните логин и пароль'); return; }
+  if (!username || !password) { showAuthError('Заполните логин и пароль'); return; }
   document.getElementById('btnLogin').disabled = true;
+  const email = loginToEmail(username);
   const { data, error } = await sb.auth.signInWithPassword({ email, password });
   document.getElementById('btnLogin').disabled = false;
   if (error) { showAuthError('Неверный логин или пароль'); return; }
@@ -1136,9 +1143,10 @@ async function loadUsers() {
   const tbody = document.getElementById('usersTbody');
   tbody.innerHTML = profiles.map(p => {
     const ws = p.workshop_id ? refById('workshops', p.workshop_id) : null;
+    const login = p.login || (p.email ? p.email.replace('@quality.local','') : '—');
     return `<tr style="cursor:default;">
       <td data-label="ФИО">${esc(p.full_name)}</td>
-      <td data-label="Email">${esc(p.email || '—')}</td>
+      <td data-label="Логин">${esc(login)}</td>
       <td data-label="Роль"><span class="badge ${p.role_code==='admin'?'badge-danger':'badge-info'}">${roleNames[p.role_code]||p.role_code}</span></td>
       <td data-label="Цех">${esc(ws?.name || 'Все')}</td>
       <td data-label=""><button class="btn btn-sm btn-outline" onclick="editUser('${p.id}')">Ред.</button>
@@ -1149,12 +1157,11 @@ async function loadUsers() {
 
 function showAddUserModal(editId) {
   document.getElementById('addUserError').style.display = 'none';
-  document.getElementById('newUserEmail').value = '';
+  document.getElementById('newUserLogin').value = '';
   document.getElementById('newUserPassword').value = '';
   document.getElementById('newUserName').value = '';
   document.getElementById('newUserRole').value = 'quality_spec';
 
-  // Populate workshop select
   const sel = document.getElementById('newUserWorkshop');
   sel.innerHTML = '<option value="">Все цеха</option>';
   REF.workshops.forEach(w => { sel.innerHTML += `<option value="${w.id}">${esc(w.name)}</option>`; });
@@ -1164,11 +1171,10 @@ function showAddUserModal(editId) {
     document.getElementById('btnSaveUser').textContent = 'Сохранить';
     document.getElementById('btnSaveUser').setAttribute('data-edit-id', editId);
     document.getElementById('newUserPasswordGroup').style.display = 'none';
-    document.getElementById('newUserEmail').readOnly = true;
-    // Load existing data
+    document.getElementById('newUserLogin').readOnly = true;
     sb.from('user_profiles').select('*').eq('id', editId).single().then(({data: p}) => {
       if (p) {
-        document.getElementById('newUserEmail').value = p.email || '';
+        document.getElementById('newUserLogin').value = p.login || (p.email ? p.email.replace('@quality.local','') : '');
         document.getElementById('newUserName').value = p.full_name;
         document.getElementById('newUserRole').value = p.role_code;
         document.getElementById('newUserWorkshop').value = p.workshop_id || '';
@@ -1179,7 +1185,7 @@ function showAddUserModal(editId) {
     document.getElementById('btnSaveUser').textContent = 'Создать';
     document.getElementById('btnSaveUser').removeAttribute('data-edit-id');
     document.getElementById('newUserPasswordGroup').style.display = '';
-    document.getElementById('newUserEmail').readOnly = false;
+    document.getElementById('newUserLogin').readOnly = false;
   }
   document.getElementById('addUserModal').classList.add('show');
 }
@@ -1194,7 +1200,7 @@ async function saveNewUser() {
   const errEl = document.getElementById('addUserError');
   errEl.style.display = 'none';
   const editId = document.getElementById('btnSaveUser').getAttribute('data-edit-id');
-  const email = document.getElementById('newUserEmail').value.trim();
+  const login = document.getElementById('newUserLogin').value.trim().toLowerCase().replace(/\s+/g, '');
   const password = document.getElementById('newUserPassword').value;
   const name = document.getElementById('newUserName').value.trim();
   const role = document.getElementById('newUserRole').value;
@@ -1203,17 +1209,18 @@ async function saveNewUser() {
   if (!name) { errEl.textContent = 'Заполните ФИО'; errEl.style.display = 'block'; return; }
 
   if (editId) {
-    // Update existing profile
     const upd = { full_name: name, role_code: role, workshop_id: wsId ? parseInt(wsId) : null };
     const { error } = await sb.from('user_profiles').update(upd).eq('id', editId);
     if (error) { errEl.textContent = error.message; errEl.style.display = 'block'; return; }
     toast('Пользователь обновлён');
   } else {
-    // Create new user
-    if (!email) { errEl.textContent = 'Заполните email'; errEl.style.display = 'block'; return; }
+    if (!login) { errEl.textContent = 'Заполните логин'; errEl.style.display = 'block'; return; }
+    if (/[^a-zа-яё0-9._-]/i.test(login)) { errEl.textContent = 'Логин: только буквы, цифры, точка, дефис'; errEl.style.display = 'block'; return; }
     if (!password || password.length < 6) { errEl.textContent = 'Пароль минимум 6 символов'; errEl.style.display = 'block'; return; }
 
-    // Save current session
+    const email = loginToEmail(login);
+
+    // Save current admin session
     const { data: { session: adminSession } } = await sb.auth.getSession();
 
     // Sign up new user
@@ -1223,10 +1230,11 @@ async function saveNewUser() {
     });
     if (error) { errEl.textContent = error.message; errEl.style.display = 'block'; return; }
 
-    // Update profile with workshop and email
+    // Update profile
     if (data.user) {
       await sb.from('user_profiles').update({
         workshop_id: wsId ? parseInt(wsId) : null,
+        login: login,
         email: email,
         role_code: role
       }).eq('id', data.user.id);
@@ -1239,7 +1247,7 @@ async function saveNewUser() {
         refresh_token: adminSession.refresh_token
       });
     }
-    toast('Пользователь создан: ' + email);
+    toast('Пользователь создан: ' + login);
   }
 
   closeAddUserModal();
