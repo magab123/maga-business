@@ -30,7 +30,6 @@
 body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:var(--bg); color:var(--gray-dark); font-size:14px; }
 a { color:var(--primary-light); text-decoration:none; }
 
-/* Layout */
 .app-header { background:var(--primary); color:#fff; padding:0 24px; display:flex; align-items:center; height:56px; position:fixed; top:0; left:0; right:0; z-index:100; }
 .app-header h1 { font-size:18px; font-weight:600; flex:1; }
 .app-header .user-info { font-size:13px; opacity:.85; }
@@ -41,7 +40,6 @@ a { color:var(--primary-light); text-decoration:none; }
 .sidebar a .icon { margin-right:10px; font-size:16px; width:20px; text-align:center; }
 .main { margin-left:220px; margin-top:56px; padding:24px; min-height:calc(100vh - 56px); }
 
-/* Cards */
 .stats-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:16px; margin-bottom:24px; }
 .stat-card { background:var(--white); border-radius:var(--radius); padding:20px; box-shadow:var(--shadow); border-left:4px solid var(--primary); }
 .stat-card.danger { border-left-color:var(--danger); }
@@ -50,33 +48,29 @@ a { color:var(--primary-light); text-decoration:none; }
 .stat-card .stat-value { font-size:32px; font-weight:700; color:var(--gray-dark); }
 .stat-card .stat-label { font-size:13px; color:var(--gray); margin-top:4px; }
 
-/* Panels */
 .panel { background:var(--white); border-radius:var(--radius); box-shadow:var(--shadow); margin-bottom:24px; }
 .panel-header { padding:16px 20px; border-bottom:1px solid var(--gray-light); display:flex; align-items:center; justify-content:space-between; }
 .panel-header h2 { font-size:16px; font-weight:600; }
 .panel-body { padding:20px; }
 
-/* Tables */
 table { width:100%; border-collapse:collapse; }
 th, td { padding:10px 12px; text-align:left; border-bottom:1px solid var(--gray-light); font-size:13px; }
 th { background:var(--bg); font-weight:600; color:var(--gray-dark); position:sticky; top:0; white-space:nowrap; }
 tr:hover { background:var(--primary-bg); }
 tr { cursor:pointer; }
 
-/* Forms */
 .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
 .form-group { margin-bottom:16px; }
 .form-group.full { grid-column:1 / -1; }
 .form-group label { display:block; font-size:13px; font-weight:600; color:var(--gray-dark); margin-bottom:4px; }
 .form-group label .req { color:var(--danger); }
-input[type="text"], input[type="date"], input[type="number"], select, textarea {
+input[type="text"], input[type="date"], input[type="email"], input[type="password"], input[type="number"], select, textarea {
   width:100%; padding:8px 12px; border:1px solid var(--border); border-radius:var(--radius);
   font-size:14px; font-family:inherit; background:var(--white); transition:border-color .15s;
 }
 input:focus, select:focus, textarea:focus { outline:none; border-color:var(--primary-light); box-shadow:0 0 0 3px rgba(41,128,185,.15); }
 textarea { min-height:80px; resize:vertical; }
 
-/* Buttons */
 .btn { display:inline-flex; align-items:center; padding:8px 16px; border-radius:var(--radius); font-size:14px;
   font-weight:500; border:none; cursor:pointer; transition:all .15s; font-family:inherit; }
 .btn-primary { background:var(--primary); color:#fff; }
@@ -89,8 +83,8 @@ textarea { min-height:80px; resize:vertical; }
 .btn-outline:hover { background:var(--gray-light); }
 .btn-sm { padding:5px 10px; font-size:12px; }
 .btn + .btn { margin-left:8px; }
+.btn:disabled { opacity:.5; cursor:not-allowed; }
 
-/* Badges */
 .badge { display:inline-block; padding:2px 8px; border-radius:12px; font-size:11px; font-weight:600; }
 .badge-danger { background:var(--danger-bg); color:var(--danger); }
 .badge-warning { background:var(--warning-bg); color:var(--warning); }
@@ -98,12 +92,10 @@ textarea { min-height:80px; resize:vertical; }
 .badge-info { background:var(--info-bg); color:var(--info); }
 .badge-gray { background:var(--gray-light); color:var(--gray); }
 
-/* Filters row */
 .filters { display:flex; flex-wrap:wrap; gap:12px; align-items:end; margin-bottom:16px; }
 .filters .form-group { margin-bottom:0; min-width:160px; }
 .filters input, .filters select { padding:6px 10px; font-size:13px; }
 
-/* Charts (simple CSS bars) */
 .bar-chart { display:flex; flex-direction:column; gap:8px; }
 .bar-row { display:flex; align-items:center; gap:8px; }
 .bar-label { width:200px; font-size:13px; text-align:right; flex-shrink:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
@@ -111,14 +103,12 @@ textarea { min-height:80px; resize:vertical; }
 .bar-fill { height:100%; border-radius:4px; background:var(--primary-light); transition:width .3s; display:flex; align-items:center; padding:0 8px; }
 .bar-fill span { font-size:11px; color:#fff; font-weight:600; white-space:nowrap; }
 
-/* Pagination */
 .pagination { display:flex; align-items:center; justify-content:space-between; padding:12px 0; font-size:13px; color:var(--gray); }
 .pagination .pages { display:flex; gap:4px; }
 .pagination .page-btn { padding:4px 10px; border:1px solid var(--border); border-radius:4px; cursor:pointer; background:var(--white); font-size:12px; }
 .pagination .page-btn.active { background:var(--primary); color:#fff; border-color:var(--primary); }
 .pagination .page-btn:hover:not(.active) { background:var(--gray-light); }
 
-/* Modal */
 .modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,.5); z-index:200; align-items:center; justify-content:center; }
 .modal-overlay.show { display:flex; }
 .modal { background:var(--white); border-radius:var(--radius); width:90%; max-width:900px; max-height:90vh; overflow-y:auto; box-shadow:0 8px 32px rgba(0,0,0,.2); }
@@ -128,20 +118,26 @@ textarea { min-height:80px; resize:vertical; }
 .modal-body { padding:20px; }
 .modal-footer { padding:12px 20px; border-top:1px solid var(--gray-light); display:flex; justify-content:flex-end; gap:8px; }
 
-/* Toast */
 .toast { position:fixed; bottom:24px; right:24px; background:var(--gray-dark); color:#fff; padding:12px 20px; border-radius:var(--radius); font-size:14px; z-index:300; opacity:0; transition:opacity .3s; pointer-events:none; }
 .toast.show { opacity:1; }
+.toast.error { background:var(--danger); }
 
-/* Login screen */
-.login-screen { display:flex; align-items:center; justify-content:center; min-height:100vh; background:var(--bg); }
-.login-box { background:var(--white); border-radius:var(--radius); box-shadow:var(--shadow); padding:40px; width:400px; max-width:90%; text-align:center; }
-.login-box h2 { color:var(--primary); margin-bottom:8px; }
-.login-box p { color:var(--gray); margin-bottom:24px; font-size:13px; }
+.auth-screen { display:flex; align-items:center; justify-content:center; min-height:100vh; background:var(--bg); }
+.auth-box { background:var(--white); border-radius:var(--radius); box-shadow:var(--shadow); padding:40px; width:440px; max-width:90%; }
+.auth-box h2 { color:var(--primary); margin-bottom:8px; text-align:center; }
+.auth-box p { color:var(--gray); margin-bottom:24px; font-size:13px; text-align:center; }
+.auth-tabs { display:flex; margin-bottom:24px; border-bottom:2px solid var(--gray-light); }
+.auth-tabs a { flex:1; text-align:center; padding:10px; cursor:pointer; font-weight:600; color:var(--gray); border-bottom:2px solid transparent; margin-bottom:-2px; }
+.auth-tabs a.active { color:var(--primary); border-bottom-color:var(--primary); }
+.auth-error { background:var(--danger-bg); color:var(--danger); padding:8px 12px; border-radius:var(--radius); font-size:13px; margin-bottom:16px; display:none; }
 
-/* Toolbar */
 .toolbar { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+.section { display:none; }
+.section.active { display:block; }
+.empty-state { text-align:center; padding:40px; color:var(--gray); }
+.realtime-indicator { display:inline-block; width:8px; height:8px; border-radius:50%; background:var(--success); margin-right:6px; animation:pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:.4;} }
 
-/* Responsive */
 @media (max-width: 768px) {
   .sidebar { display:none; }
   .main { margin-left:0; }
@@ -149,62 +145,89 @@ textarea { min-height:80px; resize:vertical; }
   .stats-grid { grid-template-columns:1fr 1fr; }
   .filters { flex-direction:column; }
 }
-
-/* Section visibility */
-.section { display:none; }
-.section.active { display:block; }
-
-/* Loading */
-.loading { text-align:center; padding:60px; color:var(--gray); }
-.loading .spinner { display:inline-block; width:40px; height:40px; border:3px solid var(--gray-light); border-top-color:var(--primary); border-radius:50%; animation:spin .8s linear infinite; margin-bottom:12px; }
-@keyframes spin { to { transform:rotate(360deg); } }
-
-/* Empty state */
-.empty-state { text-align:center; padding:40px; color:var(--gray); }
-.empty-state .icon { font-size:48px; margin-bottom:12px; }
 </style>
 </head>
 <body>
 
-<!-- LOGIN SCREEN -->
-<div id="loginScreen" class="login-screen">
-  <div class="login-box">
+<!-- ========== AUTH SCREEN ========== -->
+<div id="authScreen" class="auth-screen">
+  <div class="auth-box">
     <h2>Система учета проблем качества</h2>
-    <p>Выберите пользователя для входа</p>
-    <div class="form-group">
-      <label>Роль</label>
-      <select id="loginRole">
-        <option value="admin">Администратор системы</option>
-        <option value="quality_spec" selected>Специалист службы качества цеха</option>
-        <option value="manager">Руководитель цеха / руководитель качества</option>
-        <option value="viewer">Пользователь с правом просмотра</option>
-      </select>
+    <p>Регистрация и вход для работы с системой</p>
+    <div class="auth-tabs">
+      <a class="active" onclick="showAuthTab('login')">Вход</a>
+      <a onclick="showAuthTab('register')">Регистрация</a>
     </div>
-    <div class="form-group">
-      <label>ФИО</label>
-      <input type="text" id="loginName" placeholder="Введите ФИО" value="Иванов И.И.">
+    <div class="auth-error" id="authError"></div>
+
+    <!-- Login form -->
+    <div id="authLogin">
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="loginEmail" placeholder="email@example.com">
+      </div>
+      <div class="form-group">
+        <label>Пароль</label>
+        <input type="password" id="loginPassword" placeholder="Пароль">
+      </div>
+      <button class="btn btn-primary" onclick="doLogin()" style="width:100%;justify-content:center;" id="btnLogin">Войти</button>
     </div>
-    <div class="form-group" id="loginWorkshopGroup">
-      <label>Цех</label>
-      <select id="loginWorkshop"></select>
-    </div>
-    <button class="btn btn-primary" onclick="doLogin()" style="width:100%;justify-content:center;margin-top:8px;">Войти</button>
-    <div style="margin-top:16px;font-size:12px;color:var(--gray);">
-      Импортировать существующую БД:
-      <input type="file" id="importDbLogin" accept=".sqlite,.db" style="margin-top:4px;font-size:12px;">
+
+    <!-- Register form -->
+    <div id="authRegister" style="display:none;">
+      <div class="form-group">
+        <label>Email <span class="req">*</span></label>
+        <input type="email" id="regEmail" placeholder="email@example.com">
+      </div>
+      <div class="form-group">
+        <label>Пароль <span class="req">*</span> <span style="font-weight:400;color:var(--gray);">(мин. 6 символов)</span></label>
+        <input type="password" id="regPassword" placeholder="Пароль">
+      </div>
+      <div class="form-group">
+        <label>ФИО <span class="req">*</span></label>
+        <input type="text" id="regName" placeholder="Иванов Иван Иванович">
+      </div>
+      <div class="form-group">
+        <label>Роль</label>
+        <select id="regRole">
+          <option value="quality_spec">Специалист службы качества цеха</option>
+          <option value="manager">Руководитель цеха / руководитель качества</option>
+          <option value="viewer">Пользователь с правом просмотра</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Цех</label>
+        <select id="regWorkshop"><option value="">Все цеха</option></select>
+      </div>
+      <button class="btn btn-primary" onclick="doRegister()" style="width:100%;justify-content:center;" id="btnRegister">Зарегистрироваться</button>
     </div>
   </div>
 </div>
 
-<!-- APP SHELL -->
+<!-- ========== SETUP SCREEN (first time — enter Supabase credentials) ========== -->
+<div id="setupScreen" class="auth-screen" style="display:none;">
+  <div class="auth-box">
+    <h2>Настройка подключения</h2>
+    <p>Введите данные вашего Supabase проекта</p>
+    <div class="auth-error" id="setupError"></div>
+    <div class="form-group">
+      <label>Supabase URL</label>
+      <input type="text" id="setupUrl" placeholder="https://xxxxx.supabase.co">
+    </div>
+    <div class="form-group">
+      <label>Anon Key</label>
+      <input type="text" id="setupKey" placeholder="eyJhbGci...">
+    </div>
+    <button class="btn btn-primary" onclick="saveSetup()" style="width:100%;justify-content:center;">Подключиться</button>
+    <p style="margin-top:12px;font-size:11px;color:var(--gray);">Эти данные сохраняются в localStorage вашего браузера</p>
+  </div>
+</div>
+
+<!-- ========== APP SHELL ========== -->
 <div id="appShell" style="display:none;">
   <header class="app-header">
-    <h1>Учет проблем качества</h1>
+    <h1><span class="realtime-indicator" id="rtIndicator" title="Realtime подключен"></span>Учет проблем качества</h1>
     <div class="toolbar">
-      <button class="btn btn-sm btn-outline" style="color:#fff;border-color:rgba(255,255,255,.3);" onclick="exportDb()">Экспорт БД</button>
-      <label class="btn btn-sm btn-outline" style="color:#fff;border-color:rgba(255,255,255,.3);cursor:pointer;">
-        Импорт БД <input type="file" accept=".sqlite,.db" onchange="importDb(event)" style="display:none;">
-      </label>
       <span class="user-info" id="headerUserInfo"></span>
       <button class="btn btn-sm btn-outline" style="color:#fff;border-color:rgba(255,255,255,.3);" onclick="doLogout()">Выйти</button>
     </div>
@@ -229,7 +252,6 @@ textarea { min-height:80px; resize:vertical; }
   </nav>
 
   <div class="main">
-
     <!-- DASHBOARD -->
     <div id="sec-dashboard" class="section active">
       <h2 style="margin-bottom:16px;">Сводная панель</h2>
@@ -240,7 +262,7 @@ textarea { min-height:80px; resize:vertical; }
           <div class="panel-body" id="dashByType"></div>
         </div>
         <div class="panel">
-          <div class="panel-header"><h2>Топ-5 цехов по количеству проблем</h2></div>
+          <div class="panel-header"><h2>Топ-5 цехов</h2></div>
           <div class="panel-body" id="dashByWorkshop"></div>
         </div>
       </div>
@@ -254,56 +276,20 @@ textarea { min-height:80px; resize:vertical; }
           <button class="btn btn-primary btn-sm" onclick="showSection('newproblem')" id="btnNewProblem">+ Новая проблема</button>
         </div>
         <div class="panel-body">
-          <div class="filters" id="problemFilters">
-            <div class="form-group">
-              <label>Поиск</label>
-              <input type="text" id="fSearch" placeholder="По названию..." oninput="loadProblems()">
-            </div>
-            <div class="form-group">
-              <label>Цех</label>
-              <select id="fWorkshop" onchange="loadProblems()"><option value="">Все</option></select>
-            </div>
-            <div class="form-group">
-              <label>Тип</label>
-              <select id="fType" onchange="loadProblems()"><option value="">Все</option></select>
-            </div>
-            <div class="form-group">
-              <label>Критичность</label>
-              <select id="fSeverity" onchange="loadProblems()"><option value="">Все</option></select>
-            </div>
-            <div class="form-group">
-              <label>Статус</label>
-              <select id="fStatus" onchange="loadProblems()"><option value="">Все</option></select>
-            </div>
-            <div class="form-group">
-              <label>С даты</label>
-              <input type="date" id="fDateFrom" onchange="loadProblems()">
-            </div>
-            <div class="form-group">
-              <label>По дату</label>
-              <input type="date" id="fDateTo" onchange="loadProblems()">
-            </div>
-            <div class="form-group">
-              <label>&nbsp;</label>
-              <button class="btn btn-outline btn-sm" onclick="clearFilters()">Сбросить</button>
-            </div>
+          <div class="filters">
+            <div class="form-group"><label>Поиск</label><input type="text" id="fSearch" placeholder="По названию..." oninput="loadProblems()"></div>
+            <div class="form-group"><label>Цех</label><select id="fWorkshop" onchange="loadProblems()"><option value="">Все</option></select></div>
+            <div class="form-group"><label>Тип</label><select id="fType" onchange="loadProblems()"><option value="">Все</option></select></div>
+            <div class="form-group"><label>Критичность</label><select id="fSeverity" onchange="loadProblems()"><option value="">Все</option></select></div>
+            <div class="form-group"><label>Статус</label><select id="fStatus" onchange="loadProblems()"><option value="">Все</option></select></div>
+            <div class="form-group"><label>С даты</label><input type="date" id="fDateFrom" onchange="loadProblems()"></div>
+            <div class="form-group"><label>По дату</label><input type="date" id="fDateTo" onchange="loadProblems()"></div>
+            <div class="form-group"><label>&nbsp;</label><button class="btn btn-outline btn-sm" onclick="clearFilters()">Сбросить</button></div>
           </div>
           <div style="overflow-x:auto;">
-            <table id="problemsTable">
-              <thead>
-                <tr>
-                  <th>Номер</th>
-                  <th>Дата</th>
-                  <th>Цех</th>
-                  <th>Тип</th>
-                  <th>Критичность</th>
-                  <th>Краткое наименование</th>
-                  <th>Статус</th>
-                  <th>Ответственный</th>
-                </tr>
-              </thead>
-              <tbody id="problemsTbody"></tbody>
-            </table>
+            <table><thead><tr>
+              <th>Номер</th><th>Дата</th><th>Цех</th><th>Тип</th><th>Критичность</th><th>Наименование</th><th>Статус</th><th>Ответственный</th>
+            </tr></thead><tbody id="problemsTbody"></tbody></table>
           </div>
           <div class="pagination" id="problemsPagination"></div>
         </div>
@@ -315,125 +301,42 @@ textarea { min-height:80px; resize:vertical; }
       <div class="panel">
         <div class="panel-header">
           <h2 id="formTitle">Новая проблема</h2>
-          <div>
-            <button class="btn btn-outline btn-sm" onclick="showSection('problems')">Назад к списку</button>
-          </div>
+          <button class="btn btn-outline btn-sm" onclick="showSection('problems')">Назад к списку</button>
         </div>
         <div class="panel-body">
           <form id="problemForm" onsubmit="saveProblem(event)">
             <input type="hidden" id="pId">
             <div class="form-grid">
-              <div class="form-group">
-                <label>Номер записи</label>
-                <input type="text" id="pRegNum" readonly placeholder="Автоматически">
-              </div>
-              <div class="form-group">
-                <label>Дата регистрации <span class="req">*</span></label>
-                <input type="date" id="pRegDate" required>
-              </div>
-              <div class="form-group">
-                <label>Цех <span class="req">*</span></label>
-                <select id="pWorkshop" required></select>
-              </div>
-              <div class="form-group">
-                <label>Участок / подразделение</label>
-                <input type="text" id="pSection">
-              </div>
-              <div class="form-group">
-                <label>Тип проблемы <span class="req">*</span></label>
-                <select id="pType" required></select>
-              </div>
-              <div class="form-group">
-                <label>Этап жизненного цикла <span class="req">*</span></label>
-                <select id="pStage" required></select>
-              </div>
-              <div class="form-group">
-                <label>Источник выявления <span class="req">*</span></label>
-                <select id="pSource" required></select>
-              </div>
-              <div class="form-group">
-                <label>Критичность <span class="req">*</span></label>
-                <select id="pSeverity" required></select>
-              </div>
-              <div class="form-group">
-                <label>Объект учета</label>
-                <input type="text" id="pObjectType" placeholder="Изделие, узел, деталь...">
-              </div>
-              <div class="form-group">
-                <label>Изделие / узел / деталь</label>
-                <input type="text" id="pProductName">
-              </div>
-              <div class="form-group full">
-                <label>Краткое наименование проблемы <span class="req">*</span></label>
-                <input type="text" id="pTitle" required>
-              </div>
-              <div class="form-group full">
-                <label>Описание проблемы</label>
-                <textarea id="pDescription"></textarea>
-              </div>
-              <div class="form-group">
-                <label>Проявление дефекта</label>
-                <textarea id="pDefect" style="min-height:60px;"></textarea>
-              </div>
-              <div class="form-group">
-                <label>Место и условия выявления</label>
-                <textarea id="pDetectionLocation" style="min-height:60px;"></textarea>
-              </div>
-              <div class="form-group">
-                <label>Кем выявлено</label>
-                <input type="text" id="pDetectedBy">
-              </div>
-              <div class="form-group">
-                <label>Признак повторяемости</label>
-                <select id="pRecurring">
-                  <option value="0">Нет</option>
-                  <option value="1">Да — повторяющийся дефект</option>
-                </select>
-              </div>
-              <div class="form-group full">
-                <label>Причина возникновения</label>
-                <textarea id="pCause"></textarea>
-              </div>
-              <div class="form-group full">
-                <label>Корректирующие меры</label>
-                <textarea id="pCorrective"></textarea>
-              </div>
-              <div class="form-group full">
-                <label>Предупреждающие меры</label>
-                <textarea id="pPreventive"></textarea>
-              </div>
-              <div class="form-group">
-                <label>Ответственный</label>
-                <input type="text" id="pResponsible">
-              </div>
-              <div class="form-group">
-                <label>Срок исполнения</label>
-                <input type="date" id="pDueDate">
-              </div>
-              <div class="form-group">
-                <label>Статус <span class="req">*</span></label>
-                <select id="pStatus" required></select>
-              </div>
-              <div class="form-group">
-                <label>Эксплуатационная проблема</label>
-                <select id="pOperational">
-                  <option value="0">Нет</option>
-                  <option value="1">Да</option>
-                </select>
-              </div>
-              <div class="form-group full">
-                <label>Результат устранения</label>
-                <textarea id="pResolution" style="min-height:60px;"></textarea>
-              </div>
-              <div class="form-group full">
-                <label>Результат проверки эффективности</label>
-                <textarea id="pEffectiveness" style="min-height:60px;"></textarea>
-              </div>
+              <div class="form-group"><label>Номер записи</label><input type="text" id="pRegNum" readonly placeholder="Автоматически"></div>
+              <div class="form-group"><label>Дата регистрации <span class="req">*</span></label><input type="date" id="pRegDate" required></div>
+              <div class="form-group"><label>Цех <span class="req">*</span></label><select id="pWorkshop" required></select></div>
+              <div class="form-group"><label>Участок / подразделение</label><input type="text" id="pSection"></div>
+              <div class="form-group"><label>Тип проблемы <span class="req">*</span></label><select id="pType" required></select></div>
+              <div class="form-group"><label>Этап жизненного цикла <span class="req">*</span></label><select id="pStage" required></select></div>
+              <div class="form-group"><label>Источник выявления <span class="req">*</span></label><select id="pSource" required></select></div>
+              <div class="form-group"><label>Критичность <span class="req">*</span></label><select id="pSeverity" required></select></div>
+              <div class="form-group"><label>Объект учета</label><input type="text" id="pObjectType" placeholder="Изделие, узел, деталь..."></div>
+              <div class="form-group"><label>Изделие / узел / деталь</label><input type="text" id="pProductName"></div>
+              <div class="form-group full"><label>Краткое наименование <span class="req">*</span></label><input type="text" id="pTitle" required></div>
+              <div class="form-group full"><label>Описание проблемы</label><textarea id="pDescription"></textarea></div>
+              <div class="form-group"><label>Проявление дефекта</label><textarea id="pDefect" style="min-height:60px;"></textarea></div>
+              <div class="form-group"><label>Место и условия выявления</label><textarea id="pDetectionLocation" style="min-height:60px;"></textarea></div>
+              <div class="form-group"><label>Кем выявлено</label><input type="text" id="pDetectedBy"></div>
+              <div class="form-group"><label>Признак повторяемости</label><select id="pRecurring"><option value="false">Нет</option><option value="true">Да</option></select></div>
+              <div class="form-group full"><label>Причина возникновения</label><textarea id="pCause"></textarea></div>
+              <div class="form-group full"><label>Корректирующие меры</label><textarea id="pCorrective"></textarea></div>
+              <div class="form-group full"><label>Предупреждающие меры</label><textarea id="pPreventive"></textarea></div>
+              <div class="form-group"><label>Ответственный</label><input type="text" id="pResponsible"></div>
+              <div class="form-group"><label>Срок исполнения</label><input type="date" id="pDueDate"></div>
+              <div class="form-group"><label>Статус <span class="req">*</span></label><select id="pStatus" required></select></div>
+              <div class="form-group"><label>Эксплуатационная проблема</label><select id="pOperational"><option value="false">Нет</option><option value="true">Да</option></select></div>
+              <div class="form-group full"><label>Результат устранения</label><textarea id="pResolution" style="min-height:60px;"></textarea></div>
+              <div class="form-group full"><label>Результат проверки эффективности</label><textarea id="pEffectiveness" style="min-height:60px;"></textarea></div>
               <div class="form-group full" id="relatedSection" style="display:none;">
                 <label>Связанные проблемы</label>
                 <div id="relatedList" style="margin-bottom:8px;"></div>
                 <div style="display:flex;gap:8px;">
-                  <input type="text" id="relatedInput" placeholder="Номер записи связанной проблемы..." style="flex:1;">
+                  <input type="text" id="relatedInput" placeholder="Номер записи..." style="flex:1;">
                   <button type="button" class="btn btn-outline btn-sm" onclick="addRelated()">Добавить связь</button>
                 </div>
               </div>
@@ -452,52 +355,20 @@ textarea { min-height:80px; resize:vertical; }
     <div id="sec-reports" class="section">
       <h2 style="margin-bottom:16px;">Отчёты</h2>
       <div class="filters" style="margin-bottom:16px;">
-        <div class="form-group">
-          <label>Цех</label>
-          <select id="rWorkshop" onchange="runReport()"><option value="">Все цеха</option></select>
-        </div>
-        <div class="form-group">
-          <label>С даты</label>
-          <input type="date" id="rDateFrom" onchange="runReport()">
-        </div>
-        <div class="form-group">
-          <label>По дату</label>
-          <input type="date" id="rDateTo" onchange="runReport()">
-        </div>
+        <div class="form-group"><label>Цех</label><select id="rWorkshop" onchange="runReport()"><option value="">Все цеха</option></select></div>
+        <div class="form-group"><label>С даты</label><input type="date" id="rDateFrom" onchange="runReport()"></div>
+        <div class="form-group"><label>По дату</label><input type="date" id="rDateTo" onchange="runReport()"></div>
       </div>
-
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
-        <div class="panel">
-          <div class="panel-header"><h2>По типам проблем</h2></div>
-          <div class="panel-body" id="repByType"></div>
-        </div>
-        <div class="panel">
-          <div class="panel-header"><h2>По критичности</h2></div>
-          <div class="panel-body" id="repBySeverity"></div>
-        </div>
-        <div class="panel">
-          <div class="panel-header"><h2>По статусам</h2></div>
-          <div class="panel-body" id="repByStatus"></div>
-        </div>
-        <div class="panel">
-          <div class="panel-header"><h2>По этапам жизненного цикла</h2></div>
-          <div class="panel-body" id="repByStage"></div>
-        </div>
-        <div class="panel full" style="grid-column:1/-1;">
-          <div class="panel-header"><h2>Топ-10 причин</h2></div>
-          <div class="panel-body" id="repTopCauses"></div>
-        </div>
+        <div class="panel"><div class="panel-header"><h2>По типам</h2></div><div class="panel-body" id="repByType"></div></div>
+        <div class="panel"><div class="panel-header"><h2>По критичности</h2></div><div class="panel-body" id="repBySeverity"></div></div>
+        <div class="panel"><div class="panel-header"><h2>По статусам</h2></div><div class="panel-body" id="repByStatus"></div></div>
+        <div class="panel"><div class="panel-header"><h2>По этапам ЖЦ</h2></div><div class="panel-body" id="repByStage"></div></div>
+        <div class="panel" style="grid-column:1/-1;"><div class="panel-header"><h2>Топ-10 причин</h2></div><div class="panel-body" id="repTopCauses"></div></div>
       </div>
-
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px;">
-        <div class="panel">
-          <div class="panel-header"><h2>Эксплуатационные проблемы</h2></div>
-          <div class="panel-body" id="repOperational"></div>
-        </div>
-        <div class="panel">
-          <div class="panel-header"><h2>Повторяющиеся дефекты</h2></div>
-          <div class="panel-body" id="repRecurring"></div>
-        </div>
+        <div class="panel"><div class="panel-header"><h2>Эксплуатационные проблемы</h2></div><div class="panel-body" id="repOperational"></div></div>
+        <div class="panel"><div class="panel-header"><h2>Повторяющиеся дефекты</h2></div><div class="panel-body" id="repRecurring"></div></div>
       </div>
     </div>
 
@@ -505,8 +376,7 @@ textarea { min-height:80px; resize:vertical; }
     <div id="sec-refs" class="section">
       <h2 style="margin-bottom:16px;">Справочники</h2>
       <div class="filters" style="margin-bottom:16px;">
-        <div class="form-group">
-          <label>Справочник</label>
+        <div class="form-group"><label>Справочник</label>
           <select id="refSelect" onchange="loadReference()">
             <option value="workshops">Цеха</option>
             <option value="problem_types">Типы проблем</option>
@@ -518,34 +388,20 @@ textarea { min-height:80px; resize:vertical; }
         </div>
       </div>
       <div class="panel">
-        <div class="panel-header">
-          <h2 id="refTitle">Цеха</h2>
-          <button class="btn btn-primary btn-sm" id="btnAddRef" onclick="addRefRow()">+ Добавить</button>
-        </div>
-        <div class="panel-body">
-          <div style="overflow-x:auto;">
-            <table id="refTable">
-              <thead id="refThead"></thead>
-              <tbody id="refTbody"></tbody>
-            </table>
-          </div>
-        </div>
+        <div class="panel-header"><h2 id="refTitle">Цеха</h2><button class="btn btn-primary btn-sm" id="btnAddRef" onclick="addRefRow()">+ Добавить</button></div>
+        <div class="panel-body"><div style="overflow-x:auto;"><table><thead id="refThead"></thead><tbody id="refTbody"></tbody></table></div></div>
       </div>
     </div>
-
   </div>
 </div>
 
 <!-- TOAST -->
 <div class="toast" id="toast"></div>
 
-<!-- MODAL for viewing problem -->
+<!-- VIEW MODAL -->
 <div class="modal-overlay" id="viewModal">
   <div class="modal">
-    <div class="modal-header">
-      <h3 id="viewModalTitle">Карточка проблемы</h3>
-      <button class="modal-close" onclick="closeModal()">&times;</button>
-    </div>
+    <div class="modal-header"><h3 id="viewModalTitle">Карточка проблемы</h3><button class="modal-close" onclick="closeModal()">&times;</button></div>
     <div class="modal-body" id="viewModalBody"></div>
     <div class="modal-footer">
       <button class="btn btn-primary btn-sm" id="viewEditBtn" onclick="editFromModal()">Редактировать</button>
@@ -554,220 +410,233 @@ textarea { min-height:80px; resize:vertical; }
   </div>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/sql-wasm.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script>
 // ============================================================
-// GLOBALS
+// CONFIG & GLOBALS
 // ============================================================
-let db = null;
-let currentUser = { name:'', role:'', workshopId:null };
+let sb = null; // Supabase client
+let currentUser = null; // { id, email, profile: {full_name, role_code, workshop_id} }
 let currentPage = 1;
 const PAGE_SIZE = 20;
 let editingProblemId = null;
 let viewingProblemId = null;
 
-const DB_NAME = 'quality_db';
-const DB_STORE = 'database';
+// Cached reference data
+let REF = { workshops:[], problem_types:[], lifecycle_stages:[], detection_sources:[], severity_levels:[], problem_statuses:[] };
 
 // ============================================================
-// INIT
+// SETUP / CONNECTION
 // ============================================================
-async function initApp() {
-  const SQL = await initSqlJs({ locateFile: file => `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/${file}` });
+function getConfig() {
+  const url = localStorage.getItem('sb_url');
+  const key = localStorage.getItem('sb_key');
+  return (url && key) ? { url, key } : null;
+}
 
-  // Try load from IndexedDB
-  const saved = await loadFromIdb();
-  if (saved) {
-    db = new SQL.Database(new Uint8Array(saved));
-  } else {
-    db = new SQL.Database();
-    initSchema();
+function initSupabase(url, key) {
+  sb = supabase.createClient(url, key);
+}
+
+function saveSetup() {
+  const url = document.getElementById('setupUrl').value.trim().replace(/\/+$/, '');
+  const key = document.getElementById('setupKey').value.trim();
+  if (!url || !key) { showSetupError('Заполните оба поля'); return; }
+  localStorage.setItem('sb_url', url);
+  localStorage.setItem('sb_key', key);
+  initSupabase(url, key);
+  document.getElementById('setupScreen').style.display = 'none';
+  document.getElementById('authScreen').style.display = 'flex';
+  loadWorkshopsForReg();
+}
+
+function showSetupError(msg) {
+  const el = document.getElementById('setupError');
+  el.textContent = msg; el.style.display = 'block';
+}
+
+// ============================================================
+// AUTH
+// ============================================================
+function showAuthTab(tab) {
+  document.querySelectorAll('.auth-tabs a').forEach(a => a.classList.remove('active'));
+  document.querySelector(`.auth-tabs a:${tab==='login'?'first':'last'}-child`).classList.add('active');
+  document.getElementById('authLogin').style.display = tab === 'login' ? 'block' : 'none';
+  document.getElementById('authRegister').style.display = tab === 'register' ? 'block' : 'none';
+  hideAuthError();
+}
+
+function showAuthError(msg) {
+  const el = document.getElementById('authError');
+  el.textContent = msg; el.style.display = 'block';
+}
+function hideAuthError() { document.getElementById('authError').style.display = 'none'; }
+
+async function doLogin() {
+  hideAuthError();
+  const email = document.getElementById('loginEmail').value.trim();
+  const password = document.getElementById('loginPassword').value;
+  if (!email || !password) { showAuthError('Заполните email и пароль'); return; }
+  document.getElementById('btnLogin').disabled = true;
+  const { data, error } = await sb.auth.signInWithPassword({ email, password });
+  document.getElementById('btnLogin').disabled = false;
+  if (error) { showAuthError(error.message); return; }
+  await enterApp(data.user);
+}
+
+async function doRegister() {
+  hideAuthError();
+  const email = document.getElementById('regEmail').value.trim();
+  const password = document.getElementById('regPassword').value;
+  const name = document.getElementById('regName').value.trim();
+  const role = document.getElementById('regRole').value;
+  const wsId = document.getElementById('regWorkshop').value;
+  if (!email || !password || !name) { showAuthError('Заполните обязательные поля'); return; }
+  if (password.length < 6) { showAuthError('Пароль минимум 6 символов'); return; }
+  document.getElementById('btnRegister').disabled = true;
+  const { data, error } = await sb.auth.signUp({
+    email, password,
+    options: { data: { full_name: name, role_code: role } }
+  });
+  document.getElementById('btnRegister').disabled = false;
+  if (error) { showAuthError(error.message); return; }
+
+  // Update profile with workshop
+  if (data.user && wsId) {
+    await sb.from('user_profiles').update({ workshop_id: parseInt(wsId) }).eq('id', data.user.id);
   }
 
-  populateLoginWorkshops();
-
-  // Handle import on login screen
-  document.getElementById('importDbLogin').addEventListener('change', async (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-    const buf = await file.arrayBuffer();
-    db = new SQL.Database(new Uint8Array(buf));
-    await saveToIdb();
-    populateLoginWorkshops();
-    toast('БД импортирована');
-  });
+  if (data.session) {
+    await enterApp(data.user);
+  } else {
+    showAuthError('Регистрация успешна! Проверьте email для подтверждения.');
+    showAuthTab('login');
+  }
 }
 
-function initSchema() {
-  db.run(`PRAGMA foreign_keys = ON;`);
+async function doLogout() {
+  await sb.auth.signOut();
+  currentUser = null;
+  if (realtimeChannel) { sb.removeChannel(realtimeChannel); realtimeChannel = null; }
+  document.getElementById('appShell').style.display = 'none';
+  document.getElementById('authScreen').style.display = 'flex';
+}
 
-  // Roles
-  db.run(`CREATE TABLE IF NOT EXISTS roles (id INTEGER PRIMARY KEY AUTOINCREMENT, code TEXT NOT NULL UNIQUE, name TEXT NOT NULL)`);
-  db.run(`INSERT OR IGNORE INTO roles (code, name) VALUES ('admin','Администратор системы'),('quality_spec','Специалист службы качества цеха'),('manager','Руководитель цеха / руководитель качества'),('viewer','Пользователь с правом просмотра')`);
+async function enterApp(user) {
+  // Load profile
+  const { data: profile } = await sb.from('user_profiles').select('*').eq('id', user.id).single();
+  currentUser = { id: user.id, email: user.email, profile: profile || { full_name: user.email, role_code: 'viewer', workshop_id: null } };
 
-  // Workshop groups
-  db.run(`CREATE TABLE IF NOT EXISTS workshop_groups (id INTEGER PRIMARY KEY AUTOINCREMENT, code TEXT NOT NULL UNIQUE, name TEXT NOT NULL)`);
-  db.run(`INSERT OR IGNORE INTO workshop_groups (code, name) VALUES ('metallurgy','Металлургические цеха'),('forging','Кузнечные цеха'),('thermal','Термообработка, гальваника, спец. покрытия'),('machining','Механическая обработка и смежные операции'),('pipebending','Трубогибочный цех'),('rubber','Изготовление РТИ'),('engine_prod','ПТЦ вертолетных двигателей'),('assembly','Сборочный цех'),('testing','Испытательный цех'),('shipping','Отгрузка')`);
+  document.getElementById('authScreen').style.display = 'none';
+  document.getElementById('appShell').style.display = 'block';
 
-  // Workshops
-  db.run(`CREATE TABLE IF NOT EXISTS workshops (id INTEGER PRIMARY KEY AUTOINCREMENT, code TEXT NOT NULL UNIQUE, name TEXT NOT NULL, group_id INTEGER NOT NULL REFERENCES workshop_groups(id), is_active INTEGER NOT NULL DEFAULT 1)`);
-  const wg = {};
-  db.each(`SELECT id, code FROM workshop_groups`, [], r => { wg[r.code] = r.id; });
-  const ws = [
-    ['1б','Цех 1б','metallurgy'],['ЦТК_АЛ','ЦТК АЛ','metallurgy'],['ЦТК_ТЛ','ЦТК ТЛ','metallurgy'],
-    ['2','Цех 2','forging'],['2а','Цех 2а','forging'],
-    ['4','Цех 4','thermal'],['4а','Цех 4а','thermal'],['9а','Цех 9а','thermal'],
-    ['3а1','Цех 3а1','machining'],['3а2','Цех 3а2','machining'],['3б','Цех 3б','machining'],
-    ['3в1','Цех 3в1','machining'],['3в2','Цех 3в2','machining'],['8','Цех 8','machining'],
-    ['8б','Цех 8б','machining'],['8в','Цех 8в','machining'],['11','Цех 11','machining'],
-    ['13','Цех 13','machining'],['22','Цех 22','machining'],['22а','Цех 22а','machining'],
-    ['ЦСРТК','ЦСРТК','machining'],['39','Цех 39','machining'],['43','Цех 43','machining'],
-    ['44','Цех 44','machining'],['5','Цех 5','pipebending'],['38','Цех 38','rubber'],
-    ['ПТЦ_1','ПТЦ 1','engine_prod'],['ПТЦ_3','ПТЦ 3','engine_prod'],
-    ['6б','Цех 6б','assembly'],['7б','Цех 7б','testing'],['40','Цех 40','shipping']
-  ];
-  ws.forEach(([c,n,g]) => {
-    try { db.run(`INSERT INTO workshops (code,name,group_id) VALUES (?,?,?)`, [c,n,wg[g]]); } catch(e){}
-  });
+  const roleName = { admin:'Админ', quality_spec:'Спец. качества', manager:'Руководитель', viewer:'Просмотр' };
+  document.getElementById('headerUserInfo').textContent = `${currentUser.profile.full_name} (${roleName[currentUser.profile.role_code] || currentUser.profile.role_code})`;
 
-  // Problem types
-  db.run(`CREATE TABLE IF NOT EXISTS problem_types (id INTEGER PRIMARY KEY AUTOINCREMENT, code TEXT NOT NULL UNIQUE, name TEXT NOT NULL, sort_order INTEGER NOT NULL DEFAULT 0)`);
-  const pts = [
-    ['defect','Производственный брак',1],['doc_nonconf','Несоответствие в документации',2],
-    ['tech_problem','Технологическая проблема',3],['design_problem','Конструктивная проблема',4],
-    ['material','Проблема материалов и комплектующих',5],['control_remark','Замечание контроля',6],
-    ['test_problem','Проблема испытаний',7],['operation','Проблема эксплуатации',8],
-    ['recurring','Повторяющийся дефект',9],['organizational','Организационная проблема',10]
-  ];
-  pts.forEach(([c,n,s]) => { try { db.run(`INSERT INTO problem_types (code,name,sort_order) VALUES (?,?,?)`, [c,n,s]); } catch(e){} });
+  if (!canEdit()) {
+    document.getElementById('navNewProblem').style.display = 'none';
+    document.getElementById('btnNewProblem').style.display = 'none';
+  } else {
+    document.getElementById('navNewProblem').style.display = '';
+    document.getElementById('btnNewProblem').style.display = '';
+  }
+  document.getElementById('btnAddRef').style.display = isAdmin() ? '' : 'none';
 
-  // Lifecycle stages
-  db.run(`CREATE TABLE IF NOT EXISTS lifecycle_stages (id INTEGER PRIMARY KEY AUTOINCREMENT, code TEXT NOT NULL UNIQUE, name TEXT NOT NULL, sort_order INTEGER NOT NULL DEFAULT 0)`);
-  [['production','Производство',1],['control','Контроль',2],['testing','Испытания',3],['assembly','Сборка',4],['shipping','Отгрузка',5],['operation_stage','Эксплуатация',6]]
-    .forEach(([c,n,s]) => { try { db.run(`INSERT INTO lifecycle_stages (code,name,sort_order) VALUES (?,?,?)`, [c,n,s]); } catch(e){} });
+  await loadAllRefs();
+  populateFilters();
+  setupRealtime();
+  showSection('dashboard');
+}
 
-  // Detection sources
-  db.run(`CREATE TABLE IF NOT EXISTS detection_sources (id INTEGER PRIMARY KEY AUTOINCREMENT, code TEXT NOT NULL UNIQUE, name TEXT NOT NULL, sort_order INTEGER NOT NULL DEFAULT 0)`);
-  [['self_control','Самоконтроль исполнителя',1],['otk','ОТК / контроль качества',2],['tech_control','Технологический контроль',3],
-   ['testing_lab','Испытательная лаборатория',4],['acceptance_test','Приемо-сдаточные испытания',5],['customer','Рекламация заказчика',6],
-   ['operation_fb','Обратная связь из эксплуатации',7],['audit','Аудит / проверка',8],['incoming_control','Входной контроль',9],['other','Прочее',10]]
-    .forEach(([c,n,s]) => { try { db.run(`INSERT INTO detection_sources (code,name,sort_order) VALUES (?,?,?)`, [c,n,s]); } catch(e){} });
+function canEdit() { return currentUser && ['admin','quality_spec','manager'].includes(currentUser.profile.role_code); }
+function isAdmin() { return currentUser && currentUser.profile.role_code === 'admin'; }
 
-  // Severity levels
-  db.run(`CREATE TABLE IF NOT EXISTS severity_levels (id INTEGER PRIMARY KEY AUTOINCREMENT, code TEXT NOT NULL UNIQUE, name TEXT NOT NULL, sort_order INTEGER NOT NULL DEFAULT 0)`);
-  [['critical','Критическая',1],['major','Значительная',2],['minor','Незначительная',3],['info','Информационная',4]]
-    .forEach(([c,n,s]) => { try { db.run(`INSERT INTO severity_levels (code,name,sort_order) VALUES (?,?,?)`, [c,n,s]); } catch(e){} });
+// ============================================================
+// LOAD REFERENCES
+// ============================================================
+async function loadAllRefs() {
+  const tables = ['workshops','problem_types','lifecycle_stages','detection_sources','severity_levels','problem_statuses'];
+  const results = await Promise.all(tables.map(t => sb.from(t).select('*').order(t==='workshops'?'name':'sort_order')));
+  tables.forEach((t, i) => { REF[t] = results[i].data || []; });
+}
 
-  // Problem statuses
-  db.run(`CREATE TABLE IF NOT EXISTS problem_statuses (id INTEGER PRIMARY KEY AUTOINCREMENT, code TEXT NOT NULL UNIQUE, name TEXT NOT NULL, is_open INTEGER NOT NULL DEFAULT 1, sort_order INTEGER NOT NULL DEFAULT 0)`);
-  [['new','Новая',1,1],['in_analysis','На анализе причин',1,2],['corrective','Корректирующие меры назначены',1,3],
-   ['in_progress','В работе',1,4],['verification','На проверке эффективности',1,5],['closed','Закрыта',0,6],['closed_ineffect','Закрыта — меры неэффективны',0,7]]
-    .forEach(([c,n,o,s]) => { try { db.run(`INSERT INTO problem_statuses (code,name,is_open,sort_order) VALUES (?,?,?,?)`, [c,n,o,s]); } catch(e){} });
+function refById(table, id) { return REF[table].find(r => r.id === id); }
+function refByCode(table, code) { return REF[table].find(r => r.code === code); }
 
-  // Problems
-  db.run(`CREATE TABLE IF NOT EXISTS problems (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    registration_number TEXT NOT NULL UNIQUE,
-    registration_date TEXT NOT NULL,
-    workshop_id INTEGER NOT NULL REFERENCES workshops(id),
-    section TEXT,
-    problem_type_id INTEGER NOT NULL REFERENCES problem_types(id),
-    lifecycle_stage_id INTEGER NOT NULL REFERENCES lifecycle_stages(id),
-    detection_source_id INTEGER NOT NULL REFERENCES detection_sources(id),
-    severity_id INTEGER NOT NULL REFERENCES severity_levels(id),
-    is_recurring INTEGER NOT NULL DEFAULT 0,
-    is_operational INTEGER NOT NULL DEFAULT 0,
-    object_type TEXT,
-    product_name TEXT,
-    title TEXT NOT NULL,
-    description TEXT,
-    defect_manifestation TEXT,
-    detection_location TEXT,
-    detection_conditions TEXT,
-    detected_by TEXT,
-    root_cause TEXT,
-    corrective_actions TEXT,
-    preventive_actions TEXT,
-    responsible_person TEXT,
-    due_date TEXT,
-    status_id INTEGER NOT NULL DEFAULT 1,
-    resolution_result TEXT,
-    effectiveness_result TEXT,
-    created_by TEXT,
-    created_at TEXT NOT NULL DEFAULT (datetime('now')),
-    updated_at TEXT NOT NULL DEFAULT (datetime('now'))
-  )`);
+// ============================================================
+// POPULATE FILTERS / SELECTS
+// ============================================================
+function fillSelect(selId, data, blank) {
+  const sel = document.getElementById(selId);
+  sel.innerHTML = blank ? `<option value="">${blank}</option>` : '';
+  data.forEach(r => { sel.innerHTML += `<option value="${r.id}">${esc(r.name)}</option>`; });
+}
 
-  // Related problems
-  db.run(`CREATE TABLE IF NOT EXISTS related_problems (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    problem_id INTEGER NOT NULL REFERENCES problems(id) ON DELETE CASCADE,
-    related_problem_id INTEGER NOT NULL REFERENCES problems(id) ON DELETE CASCADE,
-    created_at TEXT NOT NULL DEFAULT (datetime('now')),
-    UNIQUE(problem_id, related_problem_id)
-  )`);
+function populateFilters() {
+  fillSelect('fWorkshop', REF.workshops, 'Все');
+  fillSelect('fType', REF.problem_types, 'Все');
+  fillSelect('fSeverity', REF.severity_levels, 'Все');
+  fillSelect('fStatus', REF.problem_statuses, 'Все');
+  fillSelect('pWorkshop', REF.workshops);
+  fillSelect('pType', REF.problem_types);
+  fillSelect('pStage', REF.lifecycle_stages);
+  fillSelect('pSource', REF.detection_sources);
+  fillSelect('pSeverity', REF.severity_levels);
+  fillSelect('pStatus', REF.problem_statuses);
+  fillSelect('rWorkshop', REF.workshops, 'Все цеха');
+}
 
-  // Indexes
-  try {
-    db.run(`CREATE INDEX IF NOT EXISTS idx_p_ws ON problems(workshop_id)`);
-    db.run(`CREATE INDEX IF NOT EXISTS idx_p_type ON problems(problem_type_id)`);
-    db.run(`CREATE INDEX IF NOT EXISTS idx_p_sev ON problems(severity_id)`);
-    db.run(`CREATE INDEX IF NOT EXISTS idx_p_st ON problems(status_id)`);
-    db.run(`CREATE INDEX IF NOT EXISTS idx_p_date ON problems(registration_date)`);
-  } catch(e){}
+function clearFilters() {
+  ['fSearch','fWorkshop','fType','fSeverity','fStatus','fDateFrom','fDateTo'].forEach(id => document.getElementById(id).value = '');
+  loadProblems();
 }
 
 // ============================================================
-// IndexedDB persistence
+// REALTIME
 // ============================================================
-function openIdb() {
-  return new Promise((resolve, reject) => {
-    const req = indexedDB.open(DB_NAME, 1);
-    req.onupgradeneeded = () => { req.result.createObjectStore(DB_STORE); };
-    req.onsuccess = () => resolve(req.result);
-    req.onerror = () => reject(req.error);
-  });
+let realtimeChannel = null;
+
+function setupRealtime() {
+  if (realtimeChannel) sb.removeChannel(realtimeChannel);
+  realtimeChannel = sb.channel('problems-changes')
+    .on('postgres_changes', { event: '*', schema: 'public', table: 'problems' }, (payload) => {
+      // Refresh current view
+      const active = document.querySelector('.section.active');
+      if (active?.id === 'sec-dashboard') loadDashboard();
+      if (active?.id === 'sec-problems') loadProblems();
+      if (active?.id === 'sec-reports') runReport();
+      toast('Данные обновлены (изменение от другого пользователя)');
+    })
+    .subscribe((status) => {
+      const ind = document.getElementById('rtIndicator');
+      ind.style.background = status === 'SUBSCRIBED' ? 'var(--success)' : 'var(--warning)';
+    });
 }
 
-async function saveToIdb() {
-  const idb = await openIdb();
-  const data = db.export();
-  const tx = idb.transaction(DB_STORE, 'readwrite');
-  tx.objectStore(DB_STORE).put(data.buffer, 'db');
-  return new Promise((resolve, reject) => { tx.oncomplete = resolve; tx.onerror = reject; });
+// ============================================================
+// NAVIGATION
+// ============================================================
+function showSection(name) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById('sec-' + name).classList.add('active');
+  document.querySelectorAll('.sidebar a').forEach(a => a.classList.toggle('active', a.dataset.section === name));
+  if (name === 'dashboard') loadDashboard();
+  if (name === 'problems') { currentPage = 1; loadProblems(); }
+  if (name === 'newproblem') initProblemForm();
+  if (name === 'reports') runReport();
+  if (name === 'refs') loadReference();
 }
-
-async function loadFromIdb() {
-  const idb = await openIdb();
-  const tx = idb.transaction(DB_STORE, 'readonly');
-  const req = tx.objectStore(DB_STORE).get('db');
-  return new Promise((resolve) => { req.onsuccess = () => resolve(req.result || null); req.onerror = () => resolve(null); });
-}
-
-function autoSave() { saveToIdb(); }
 
 // ============================================================
 // HELPERS
 // ============================================================
-function query(sql, params=[]) {
-  const stmt = db.prepare(sql);
-  stmt.bind(params);
-  const rows = [];
-  while (stmt.step()) rows.push(stmt.getAsObject());
-  stmt.free();
-  return rows;
-}
+function esc(s) { if (!s) return ''; const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
 
-function run(sql, params=[]) {
-  db.run(sql, params);
-  autoSave();
-}
-
-function toast(msg) {
+function toast(msg, isError) {
   const t = document.getElementById('toast');
   t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 2500);
+  t.className = 'toast show' + (isError ? ' error' : '');
+  setTimeout(() => t.className = 'toast', 3000);
 }
 
 function severityBadge(code, name) {
@@ -782,246 +651,118 @@ function statusBadge(code, name) {
   return `<span class="badge badge-gray">${esc(name)}</span>`;
 }
 
-function esc(s) { if (!s) return ''; const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
-
 function barChart(container, data, colors) {
-  const max = Math.max(...data.map(d=>d.value), 1);
+  if (!data || !data.length) { container.innerHTML = '<div class="empty-state">Нет данных</div>'; return; }
+  const max = Math.max(...data.map(d => d.value), 1);
   let html = '<div class="bar-chart">';
-  data.forEach((d,i) => {
-    const pct = (d.value/max*100).toFixed(1);
+  data.forEach((d, i) => {
+    const pct = (d.value / max * 100).toFixed(1);
     const color = colors ? colors[i % colors.length] : 'var(--primary-light)';
-    html += `<div class="bar-row">
-      <div class="bar-label" title="${esc(d.label)}">${esc(d.label)}</div>
-      <div class="bar-track"><div class="bar-fill" style="width:${pct}%;background:${color};"><span>${d.value}</span></div></div>
-    </div>`;
+    html += `<div class="bar-row"><div class="bar-label" title="${esc(d.label)}">${esc(d.label)}</div>
+      <div class="bar-track"><div class="bar-fill" style="width:${pct}%;background:${color};"><span>${d.value}</span></div></div></div>`;
   });
-  html += '</div>';
-  container.innerHTML = html;
-}
-
-function canEdit() { return currentUser.role !== 'viewer'; }
-function isAdmin() { return currentUser.role === 'admin'; }
-
-// ============================================================
-// LOGIN
-// ============================================================
-function populateLoginWorkshops() {
-  const sel = document.getElementById('loginWorkshop');
-  sel.innerHTML = '<option value="">Все цеха</option>';
-  query(`SELECT id, name FROM workshops ORDER BY name`).forEach(w => {
-    sel.innerHTML += `<option value="${w.id}">${esc(w.name)}</option>`;
-  });
-}
-
-function doLogin() {
-  const role = document.getElementById('loginRole').value;
-  const name = document.getElementById('loginName').value.trim();
-  const wsId = document.getElementById('loginWorkshop').value;
-  if (!name) { toast('Введите ФИО'); return; }
-  currentUser = { name, role, workshopId: wsId ? parseInt(wsId) : null };
-  document.getElementById('loginScreen').style.display = 'none';
-  document.getElementById('appShell').style.display = 'block';
-  document.getElementById('headerUserInfo').textContent = `${name} (${document.getElementById('loginRole').selectedOptions[0].text})`;
-
-  // Role-based UI
-  if (!canEdit()) {
-    document.getElementById('navNewProblem').style.display = 'none';
-    document.getElementById('btnNewProblem').style.display = 'none';
-  }
-  if (!isAdmin()) {
-    document.getElementById('btnAddRef').style.display = 'none';
-  }
-
-  populateFilters();
-  showSection('dashboard');
-}
-
-function doLogout() {
-  document.getElementById('appShell').style.display = 'none';
-  document.getElementById('loginScreen').style.display = 'flex';
-  // Reset UI
-  document.getElementById('navNewProblem').style.display = '';
-  document.getElementById('btnNewProblem').style.display = '';
-  document.getElementById('btnAddRef').style.display = '';
-}
-
-// ============================================================
-// NAVIGATION
-// ============================================================
-function showSection(name) {
-  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-  document.getElementById('sec-' + name).classList.add('active');
-  document.querySelectorAll('.sidebar a').forEach(a => {
-    a.classList.toggle('active', a.dataset.section === name);
-  });
-  if (name === 'dashboard') loadDashboard();
-  if (name === 'problems') { currentPage = 1; loadProblems(); }
-  if (name === 'newproblem') initProblemForm();
-  if (name === 'reports') { populateReportFilters(); runReport(); }
-  if (name === 'refs') loadReference();
-}
-
-// ============================================================
-// POPULATE FILTERS
-// ============================================================
-function populateSelect(selId, sql) {
-  const sel = document.getElementById(selId);
-  const firstOpt = sel.querySelector('option');
-  sel.innerHTML = '';
-  if (firstOpt) sel.appendChild(firstOpt);
-  query(sql).forEach(r => {
-    const opt = document.createElement('option');
-    opt.value = r.id;
-    opt.textContent = r.name;
-    sel.appendChild(opt);
-  });
-}
-
-function populateFilters() {
-  populateSelect('fWorkshop', `SELECT id, name FROM workshops ORDER BY name`);
-  populateSelect('fType', `SELECT id, name FROM problem_types ORDER BY sort_order`);
-  populateSelect('fSeverity', `SELECT id, name FROM severity_levels ORDER BY sort_order`);
-  populateSelect('fStatus', `SELECT id, name FROM problem_statuses ORDER BY sort_order`);
-
-  // Form selects
-  populateSelect('pWorkshop', `SELECT id, name FROM workshops ORDER BY name`);
-  populateSelect('pType', `SELECT id, name FROM problem_types ORDER BY sort_order`);
-  populateSelect('pStage', `SELECT id, name FROM lifecycle_stages ORDER BY sort_order`);
-  populateSelect('pSource', `SELECT id, name FROM detection_sources ORDER BY sort_order`);
-  populateSelect('pSeverity', `SELECT id, name FROM severity_levels ORDER BY sort_order`);
-  populateSelect('pStatus', `SELECT id, name FROM problem_statuses ORDER BY sort_order`);
-}
-
-function clearFilters() {
-  ['fSearch','fWorkshop','fType','fSeverity','fStatus','fDateFrom','fDateTo'].forEach(id => {
-    document.getElementById(id).value = '';
-  });
-  loadProblems();
+  container.innerHTML = html + '</div>';
 }
 
 // ============================================================
 // DASHBOARD
 // ============================================================
-function loadDashboard() {
-  const total = query(`SELECT COUNT(*) as c FROM problems`)[0].c;
-  const open = query(`SELECT COUNT(*) as c FROM problems p JOIN problem_statuses s ON p.status_id=s.id WHERE s.is_open=1`)[0].c;
-  const critical = query(`SELECT COUNT(*) as c FROM problems p JOIN severity_levels sl ON p.severity_id=sl.id JOIN problem_statuses s ON p.status_id=s.id WHERE sl.code='critical' AND s.is_open=1`)[0].c;
-  const overdue = query(`SELECT COUNT(*) as c FROM problems p JOIN problem_statuses s ON p.status_id=s.id WHERE s.is_open=1 AND p.due_date IS NOT NULL AND p.due_date < date('now')`)[0].c;
+async function loadDashboard() {
+  const { data: stats } = await sb.rpc('get_dashboard_stats');
+  if (stats) {
+    document.getElementById('dashStats').innerHTML = `
+      <div class="stat-card"><div class="stat-value">${stats.total}</div><div class="stat-label">Всего проблем</div></div>
+      <div class="stat-card warning"><div class="stat-value">${stats.open}</div><div class="stat-label">Открытых</div></div>
+      <div class="stat-card danger"><div class="stat-value">${stats.critical_open}</div><div class="stat-label">Критических (открытых)</div></div>
+      <div class="stat-card${stats.overdue>0?' danger':''}"><div class="stat-value">${stats.overdue}</div><div class="stat-label">Просроченных</div></div>
+    `;
+  }
 
-  document.getElementById('dashStats').innerHTML = `
-    <div class="stat-card"><div class="stat-value">${total}</div><div class="stat-label">Всего проблем</div></div>
-    <div class="stat-card warning"><div class="stat-value">${open}</div><div class="stat-label">Открытых</div></div>
-    <div class="stat-card danger"><div class="stat-value">${critical}</div><div class="stat-label">Критических (открытых)</div></div>
-    <div class="stat-card${overdue > 0 ? ' danger' : ''}"><div class="stat-value">${overdue}</div><div class="stat-label">Просроченных</div></div>
-  `;
-
-  // By type
-  const byType = query(`SELECT pt.name as label, COUNT(*) as value FROM problems p JOIN problem_types pt ON p.problem_type_id=pt.id GROUP BY pt.id ORDER BY value DESC`);
+  const { data: byType } = await sb.rpc('get_stats_by_type');
   barChart(document.getElementById('dashByType'), byType, ['#2980b9','#3498db','#1abc9c','#27ae60','#f39c12','#e67e22','#e74c3c','#9b59b6','#34495e','#95a5a6']);
 
-  // By workshop top 5
-  const byWs = query(`SELECT w.name as label, COUNT(*) as value FROM problems p JOIN workshops w ON p.workshop_id=w.id GROUP BY w.id ORDER BY value DESC LIMIT 5`);
+  const { data: byWs } = await sb.rpc('get_top_workshops', { lim: 5 });
   barChart(document.getElementById('dashByWorkshop'), byWs, ['#1a5276','#2471a3','#2e86c1','#5dade2','#85c1e9']);
-
-  if (total === 0) {
-    document.getElementById('dashByType').innerHTML = '<div class="empty-state">Нет данных</div>';
-    document.getElementById('dashByWorkshop').innerHTML = '<div class="empty-state">Нет данных</div>';
-  }
 }
 
 // ============================================================
 // PROBLEMS LIST
 // ============================================================
-function loadProblems() {
-  let where = [];
-  let params = [];
+async function loadProblems() {
+  let q = sb.from('problems').select(`
+    id, registration_number, registration_date, title, responsible_person,
+    workshop_id, problem_type_id, severity_id, status_id
+  `, { count: 'exact' });
+
   const search = document.getElementById('fSearch').value.trim();
-  if (search) { where.push(`(p.title LIKE ? OR p.description LIKE ?)`); params.push(`%${search}%`, `%${search}%`); }
+  if (search) q = q.ilike('title', `%${search}%`);
   const ws = document.getElementById('fWorkshop').value;
-  if (ws) { where.push(`p.workshop_id=?`); params.push(ws); }
+  if (ws) q = q.eq('workshop_id', ws);
   const tp = document.getElementById('fType').value;
-  if (tp) { where.push(`p.problem_type_id=?`); params.push(tp); }
+  if (tp) q = q.eq('problem_type_id', tp);
   const sv = document.getElementById('fSeverity').value;
-  if (sv) { where.push(`p.severity_id=?`); params.push(sv); }
+  if (sv) q = q.eq('severity_id', sv);
   const st = document.getElementById('fStatus').value;
-  if (st) { where.push(`p.status_id=?`); params.push(st); }
+  if (st) q = q.eq('status_id', st);
   const df = document.getElementById('fDateFrom').value;
-  if (df) { where.push(`p.registration_date>=?`); params.push(df); }
+  if (df) q = q.gte('registration_date', df);
   const dt = document.getElementById('fDateTo').value;
-  if (dt) { where.push(`p.registration_date<=?`); params.push(dt); }
+  if (dt) q = q.lte('registration_date', dt);
 
-  // If user is bound to a workshop
-  if (currentUser.workshopId && currentUser.role !== 'admin') {
-    where.push(`p.workshop_id=?`); params.push(currentUser.workshopId);
-  }
+  q = q.order('registration_date', { ascending: false }).order('id', { ascending: false });
 
-  const whereStr = where.length ? ' WHERE ' + where.join(' AND ') : '';
-
-  const countSql = `SELECT COUNT(*) as c FROM problems p` + whereStr;
-  const total = query(countSql, params)[0].c;
-
-  const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
-  if (currentPage > totalPages) currentPage = totalPages;
   const offset = (currentPage - 1) * PAGE_SIZE;
+  q = q.range(offset, offset + PAGE_SIZE - 1);
 
-  const sql = `SELECT p.id, p.registration_number, p.registration_date, w.name as workshop,
-    pt.name as problem_type, sl.code as sev_code, sl.name as severity, p.title,
-    ps.code as status_code, ps.name as status, p.responsible_person
-    FROM problems p
-    JOIN workshops w ON p.workshop_id=w.id
-    JOIN problem_types pt ON p.problem_type_id=pt.id
-    JOIN severity_levels sl ON p.severity_id=sl.id
-    JOIN problem_statuses ps ON p.status_id=ps.id
-    ${whereStr}
-    ORDER BY p.registration_date DESC, p.id DESC
-    LIMIT ${PAGE_SIZE} OFFSET ${offset}`;
+  const { data: rows, count, error } = await q;
+  if (error) { toast(error.message, true); return; }
 
-  const rows = query(sql, params);
   const tbody = document.getElementById('problemsTbody');
-
-  if (rows.length === 0) {
-    tbody.innerHTML = `<tr><td colspan="8" style="text-align:center;color:var(--gray);padding:40px;">Проблемы не найдены</td></tr>`;
+  if (!rows || !rows.length) {
+    tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;color:var(--gray);padding:40px;">Проблемы не найдены</td></tr>';
   } else {
-    tbody.innerHTML = rows.map(r => `
-      <tr onclick="viewProblem(${r.id})">
+    tbody.innerHTML = rows.map(r => {
+      const ws = refById('workshops', r.workshop_id);
+      const pt = refById('problem_types', r.problem_type_id);
+      const sl = refById('severity_levels', r.severity_id);
+      const ps = refById('problem_statuses', r.status_id);
+      return `<tr onclick="viewProblem(${r.id})">
         <td><strong>${esc(r.registration_number)}</strong></td>
         <td>${esc(r.registration_date)}</td>
-        <td>${esc(r.workshop)}</td>
-        <td>${esc(r.problem_type)}</td>
-        <td>${severityBadge(r.sev_code, r.severity)}</td>
+        <td>${esc(ws?.name)}</td>
+        <td>${esc(pt?.name)}</td>
+        <td>${severityBadge(sl?.code, sl?.name)}</td>
         <td>${esc(r.title)}</td>
-        <td>${statusBadge(r.status_code, r.status)}</td>
+        <td>${statusBadge(ps?.code, ps?.name)}</td>
         <td>${esc(r.responsible_person||'')}</td>
-      </tr>
-    `).join('');
+      </tr>`;
+    }).join('');
   }
 
   // Pagination
-  const pag = document.getElementById('problemsPagination');
-  let pagHtml = `<span>Показано ${rows.length} из ${total}</span><div class="pages">`;
-  for (let i = 1; i <= totalPages; i++) {
+  const total = count || 0;
+  const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
+  let pagHtml = `<span>Показано ${rows?.length||0} из ${total}</span><div class="pages">`;
+  for (let i = 1; i <= Math.min(totalPages, 10); i++) {
     pagHtml += `<span class="page-btn${i===currentPage?' active':''}" onclick="currentPage=${i};loadProblems()">${i}</span>`;
   }
-  pagHtml += '</div>';
-  pag.innerHTML = pagHtml;
+  document.getElementById('problemsPagination').innerHTML = pagHtml + '</div>';
 }
 
 // ============================================================
-// VIEW PROBLEM (Modal)
+// VIEW PROBLEM
 // ============================================================
-function viewProblem(id) {
+async function viewProblem(id) {
   viewingProblemId = id;
-  const r = query(`SELECT p.*, w.name as workshop, pt.name as problem_type, ls.name as stage,
-    ds.name as source, sl.name as severity, sl.code as sev_code, ps.name as status, ps.code as status_code
-    FROM problems p
-    JOIN workshops w ON p.workshop_id=w.id
-    JOIN problem_types pt ON p.problem_type_id=pt.id
-    JOIN lifecycle_stages ls ON p.lifecycle_stage_id=ls.id
-    JOIN detection_sources ds ON p.detection_source_id=ds.id
-    JOIN severity_levels sl ON p.severity_id=sl.id
-    JOIN problem_statuses ps ON p.status_id=ps.id
-    WHERE p.id=?`, [id])[0];
-  if (!r) return;
+  const { data: r, error } = await sb.from('problems').select('*').eq('id', id).single();
+  if (error || !r) return;
+
+  const ws = refById('workshops', r.workshop_id);
+  const pt = refById('problem_types', r.problem_type_id);
+  const ls = refById('lifecycle_stages', r.lifecycle_stage_id);
+  const ds = refById('detection_sources', r.detection_source_id);
+  const sl = refById('severity_levels', r.severity_id);
+  const ps = refById('problem_statuses', r.status_id);
 
   document.getElementById('viewModalTitle').textContent = `${r.registration_number} — ${r.title}`;
 
@@ -1030,16 +771,16 @@ function viewProblem(id) {
   let html = `<table style="width:100%;border:none;">
     ${field('Номер записи', esc(r.registration_number))}
     ${field('Дата регистрации', esc(r.registration_date))}
-    ${field('Цех', esc(r.workshop))}
+    ${field('Цех', esc(ws?.name))}
     ${field('Участок', esc(r.section))}
-    ${field('Тип проблемы', esc(r.problem_type))}
-    ${field('Этап ЖЦ', esc(r.stage))}
-    ${field('Источник выявления', esc(r.source))}
-    ${field('Критичность', severityBadge(r.sev_code, r.severity))}
+    ${field('Тип проблемы', esc(pt?.name))}
+    ${field('Этап ЖЦ', esc(ls?.name))}
+    ${field('Источник выявления', esc(ds?.name))}
+    ${field('Критичность', severityBadge(sl?.code, sl?.name))}
     ${field('Повторяемость', r.is_recurring ? '<span class="badge badge-warning">Да</span>' : 'Нет')}
     ${field('Эксплуатационная', r.is_operational ? '<span class="badge badge-info">Да</span>' : 'Нет')}
     ${field('Объект учета', esc(r.object_type))}
-    ${field('Изделие / узел / деталь', esc(r.product_name))}
+    ${field('Изделие', esc(r.product_name))}
     ${field('Описание', esc(r.description))}
     ${field('Проявление дефекта', esc(r.defect_manifestation))}
     ${field('Место и условия', esc(r.detection_location))}
@@ -1049,17 +790,21 @@ function viewProblem(id) {
     ${field('Предупреждающие меры', esc(r.preventive_actions))}
     ${field('Ответственный', esc(r.responsible_person))}
     ${field('Срок исполнения', esc(r.due_date))}
-    ${field('Статус', statusBadge(r.status_code, r.status))}
+    ${field('Статус', statusBadge(ps?.code, ps?.name))}
     ${field('Результат устранения', esc(r.resolution_result))}
     ${field('Проверка эффективности', esc(r.effectiveness_result))}
   </table>`;
 
-  // Related problems
-  const related = query(`SELECT p.registration_number, p.title FROM related_problems rp JOIN problems p ON rp.related_problem_id=p.id WHERE rp.problem_id=?`, [id]);
-  if (related.length) {
-    html += `<div style="margin-top:16px;"><strong>Связанные проблемы:</strong><ul style="margin-top:4px;">`;
-    related.forEach(rel => { html += `<li>${esc(rel.registration_number)} — ${esc(rel.title)}</li>`; });
-    html += `</ul></div>`;
+  // Related
+  const { data: related } = await sb.from('related_problems').select('related_problem_id').eq('problem_id', id);
+  if (related && related.length) {
+    const ids = related.map(r => r.related_problem_id);
+    const { data: relProblems } = await sb.from('problems').select('registration_number, title').in('id', ids);
+    if (relProblems?.length) {
+      html += `<div style="margin-top:16px;"><strong>Связанные проблемы:</strong><ul style="margin-top:4px;">`;
+      relProblems.forEach(rp => { html += `<li>${esc(rp.registration_number)} — ${esc(rp.title)}</li>`; });
+      html += `</ul></div>`;
+    }
   }
 
   document.getElementById('viewModalBody').innerHTML = html;
@@ -1067,19 +812,13 @@ function viewProblem(id) {
   document.getElementById('viewModal').classList.add('show');
 }
 
-function editFromModal() {
-  closeModal();
-  editProblem(viewingProblemId);
-}
-
-function closeModal() {
-  document.getElementById('viewModal').classList.remove('show');
-}
+function editFromModal() { closeModal(); editProblem(viewingProblemId); }
+function closeModal() { document.getElementById('viewModal').classList.remove('show'); }
 
 // ============================================================
 // PROBLEM FORM
 // ============================================================
-function initProblemForm(id) {
+async function initProblemForm(id) {
   editingProblemId = id || null;
   document.getElementById('formTitle').textContent = id ? 'Редактирование проблемы' : 'Новая проблема';
   document.getElementById('btnDeleteProblem').style.display = id && isAdmin() ? '' : 'none';
@@ -1087,16 +826,17 @@ function initProblemForm(id) {
   document.getElementById('problemForm').reset();
   document.getElementById('pId').value = '';
   document.getElementById('pRegNum').value = '';
-  document.getElementById('pRegDate').value = new Date().toISOString().slice(0,10);
-  document.getElementById('pStatus').value = query(`SELECT id FROM problem_statuses WHERE code='new'`)[0]?.id || 1;
+  document.getElementById('pRegDate').value = new Date().toISOString().slice(0, 10);
 
-  // Default to user's workshop
-  if (currentUser.workshopId) {
-    document.getElementById('pWorkshop').value = currentUser.workshopId;
+  const newStatus = refByCode('problem_statuses', 'new');
+  if (newStatus) document.getElementById('pStatus').value = newStatus.id;
+
+  if (currentUser.profile.workshop_id) {
+    document.getElementById('pWorkshop').value = currentUser.profile.workshop_id;
   }
 
   if (id) {
-    const r = query(`SELECT * FROM problems WHERE id=?`, [id])[0];
+    const { data: r } = await sb.from('problems').select('*').eq('id', id).single();
     if (!r) return;
     document.getElementById('pId').value = r.id;
     document.getElementById('pRegNum').value = r.registration_number;
@@ -1114,18 +854,16 @@ function initProblemForm(id) {
     document.getElementById('pDefect').value = r.defect_manifestation || '';
     document.getElementById('pDetectionLocation').value = r.detection_location || '';
     document.getElementById('pDetectedBy').value = r.detected_by || '';
-    document.getElementById('pRecurring').value = r.is_recurring;
+    document.getElementById('pRecurring').value = String(r.is_recurring);
     document.getElementById('pCause').value = r.root_cause || '';
     document.getElementById('pCorrective').value = r.corrective_actions || '';
     document.getElementById('pPreventive').value = r.preventive_actions || '';
     document.getElementById('pResponsible').value = r.responsible_person || '';
     document.getElementById('pDueDate').value = r.due_date || '';
     document.getElementById('pStatus').value = r.status_id;
-    document.getElementById('pOperational').value = r.is_operational;
+    document.getElementById('pOperational').value = String(r.is_operational);
     document.getElementById('pResolution').value = r.resolution_result || '';
     document.getElementById('pEffectiveness').value = r.effectiveness_result || '';
-
-    // Load related
     loadRelatedList(id);
   }
 }
@@ -1135,304 +873,256 @@ function editProblem(id) {
   initProblemForm(id);
 }
 
-function generateRegNumber(workshopId) {
-  const ws = query(`SELECT code FROM workshops WHERE id=?`, [workshopId])[0];
-  const year = new Date().getFullYear();
-  const count = query(`SELECT COUNT(*) as c FROM problems WHERE workshop_id=? AND registration_date LIKE ?`, [workshopId, `${year}%`])[0].c;
-  return `${ws.code}-${year}-${String(count + 1).padStart(4, '0')}`;
-}
-
-function saveProblem(e) {
+async function saveProblem(e) {
   e.preventDefault();
-  if (!canEdit()) { toast('Нет прав на редактирование'); return; }
+  if (!canEdit()) { toast('Нет прав на редактирование', true); return; }
 
   const id = document.getElementById('pId').value;
-  const workshopId = document.getElementById('pWorkshop').value;
+  const workshopId = parseInt(document.getElementById('pWorkshop').value);
+
   const data = {
     registration_date: document.getElementById('pRegDate').value,
-    workshop_id: parseInt(workshopId),
-    section: document.getElementById('pSection').value,
+    workshop_id: workshopId,
+    section: document.getElementById('pSection').value || null,
     problem_type_id: parseInt(document.getElementById('pType').value),
     lifecycle_stage_id: parseInt(document.getElementById('pStage').value),
     detection_source_id: parseInt(document.getElementById('pSource').value),
     severity_id: parseInt(document.getElementById('pSeverity').value),
-    is_recurring: parseInt(document.getElementById('pRecurring').value),
-    is_operational: parseInt(document.getElementById('pOperational').value),
-    object_type: document.getElementById('pObjectType').value,
-    product_name: document.getElementById('pProductName').value,
+    is_recurring: document.getElementById('pRecurring').value === 'true',
+    is_operational: document.getElementById('pOperational').value === 'true',
+    object_type: document.getElementById('pObjectType').value || null,
+    product_name: document.getElementById('pProductName').value || null,
     title: document.getElementById('pTitle').value,
-    description: document.getElementById('pDescription').value,
-    defect_manifestation: document.getElementById('pDefect').value,
-    detection_location: document.getElementById('pDetectionLocation').value,
-    detected_by: document.getElementById('pDetectedBy').value,
-    root_cause: document.getElementById('pCause').value,
-    corrective_actions: document.getElementById('pCorrective').value,
-    preventive_actions: document.getElementById('pPreventive').value,
-    responsible_person: document.getElementById('pResponsible').value,
+    description: document.getElementById('pDescription').value || null,
+    defect_manifestation: document.getElementById('pDefect').value || null,
+    detection_location: document.getElementById('pDetectionLocation').value || null,
+    detected_by: document.getElementById('pDetectedBy').value || null,
+    root_cause: document.getElementById('pCause').value || null,
+    corrective_actions: document.getElementById('pCorrective').value || null,
+    preventive_actions: document.getElementById('pPreventive').value || null,
+    responsible_person: document.getElementById('pResponsible').value || null,
     due_date: document.getElementById('pDueDate').value || null,
     status_id: parseInt(document.getElementById('pStatus').value),
-    resolution_result: document.getElementById('pResolution').value,
-    effectiveness_result: document.getElementById('pEffectiveness').value,
+    resolution_result: document.getElementById('pResolution').value || null,
+    effectiveness_result: document.getElementById('pEffectiveness').value || null,
+    updated_at: new Date().toISOString(),
   };
 
   if (id) {
-    // Update
-    run(`UPDATE problems SET registration_date=?, workshop_id=?, section=?, problem_type_id=?,
-      lifecycle_stage_id=?, detection_source_id=?, severity_id=?, is_recurring=?, is_operational=?,
-      object_type=?, product_name=?, title=?, description=?, defect_manifestation=?,
-      detection_location=?, detected_by=?, root_cause=?, corrective_actions=?, preventive_actions=?,
-      responsible_person=?, due_date=?, status_id=?, resolution_result=?, effectiveness_result=?,
-      updated_at=datetime('now') WHERE id=?`,
-      [data.registration_date, data.workshop_id, data.section, data.problem_type_id,
-       data.lifecycle_stage_id, data.detection_source_id, data.severity_id, data.is_recurring, data.is_operational,
-       data.object_type, data.product_name, data.title, data.description, data.defect_manifestation,
-       data.detection_location, data.detected_by, data.root_cause, data.corrective_actions, data.preventive_actions,
-       data.responsible_person, data.due_date, data.status_id, data.resolution_result, data.effectiveness_result,
-       parseInt(id)]);
+    const { error } = await sb.from('problems').update(data).eq('id', parseInt(id));
+    if (error) { toast('Ошибка: ' + error.message, true); return; }
     toast('Проблема обновлена');
   } else {
-    // Insert
-    const regNum = generateRegNumber(data.workshop_id);
-    run(`INSERT INTO problems (registration_number, registration_date, workshop_id, section,
-      problem_type_id, lifecycle_stage_id, detection_source_id, severity_id, is_recurring, is_operational,
-      object_type, product_name, title, description, defect_manifestation,
-      detection_location, detected_by, root_cause, corrective_actions, preventive_actions,
-      responsible_person, due_date, status_id, resolution_result, effectiveness_result, created_by)
-      VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
-      [regNum, data.registration_date, data.workshop_id, data.section,
-       data.problem_type_id, data.lifecycle_stage_id, data.detection_source_id, data.severity_id, data.is_recurring, data.is_operational,
-       data.object_type, data.product_name, data.title, data.description, data.defect_manifestation,
-       data.detection_location, data.detected_by, data.root_cause, data.corrective_actions, data.preventive_actions,
-       data.responsible_person, data.due_date, data.status_id, data.resolution_result, data.effectiveness_result, currentUser.name]);
+    // Generate registration number via RPC
+    const { data: regNum, error: rpcErr } = await sb.rpc('generate_reg_number', { ws_id: workshopId });
+    if (rpcErr) { toast('Ошибка генерации номера: ' + rpcErr.message, true); return; }
+    data.registration_number = regNum;
+    data.created_by = currentUser.id;
+    const { error } = await sb.from('problems').insert(data);
+    if (error) { toast('Ошибка: ' + error.message, true); return; }
     toast('Проблема зарегистрирована: ' + regNum);
   }
 
   showSection('problems');
 }
 
-function deleteProblem() {
+async function deleteProblem() {
   if (!editingProblemId) return;
   if (!confirm('Удалить эту проблему? Действие необратимо.')) return;
-  run(`DELETE FROM related_problems WHERE problem_id=? OR related_problem_id=?`, [editingProblemId, editingProblemId]);
-  run(`DELETE FROM problems WHERE id=?`, [editingProblemId]);
+  await sb.from('related_problems').delete().or(`problem_id.eq.${editingProblemId},related_problem_id.eq.${editingProblemId}`);
+  const { error } = await sb.from('problems').delete().eq('id', editingProblemId);
+  if (error) { toast('Ошибка: ' + error.message, true); return; }
   toast('Проблема удалена');
   showSection('problems');
 }
 
 // Related problems
-function loadRelatedList(problemId) {
+async function loadRelatedList(problemId) {
   const el = document.getElementById('relatedList');
-  const related = query(`SELECT rp.id as rpid, p.registration_number, p.title FROM related_problems rp JOIN problems p ON rp.related_problem_id=p.id WHERE rp.problem_id=?`, [problemId]);
-  if (!related.length) { el.innerHTML = '<span style="color:var(--gray);font-size:13px;">Нет связей</span>'; return; }
-  el.innerHTML = related.map(r => `<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
-    <span>${esc(r.registration_number)} — ${esc(r.title)}</span>
-    ${canEdit() ? `<button type="button" class="btn btn-sm btn-outline" onclick="removeRelated(${r.rpid})" style="padding:2px 6px;">✕</button>` : ''}
-  </div>`).join('');
+  const { data: related } = await sb.from('related_problems').select('id, related_problem_id').eq('problem_id', problemId);
+  if (!related || !related.length) { el.innerHTML = '<span style="color:var(--gray);font-size:13px;">Нет связей</span>'; return; }
+  const ids = related.map(r => r.related_problem_id);
+  const { data: problems } = await sb.from('problems').select('id, registration_number, title').in('id', ids);
+  const pMap = {};
+  problems?.forEach(p => { pMap[p.id] = p; });
+  el.innerHTML = related.map(r => {
+    const p = pMap[r.related_problem_id];
+    return `<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+      <span>${esc(p?.registration_number)} — ${esc(p?.title)}</span>
+      ${canEdit() ? `<button type="button" class="btn btn-sm btn-outline" onclick="removeRelated(${r.id})" style="padding:2px 6px;">✕</button>` : ''}
+    </div>`;
+  }).join('');
 }
 
-function addRelated() {
+async function addRelated() {
   if (!editingProblemId) return;
   const num = document.getElementById('relatedInput').value.trim();
   if (!num) return;
-  const target = query(`SELECT id FROM problems WHERE registration_number=?`, [num])[0];
-  if (!target) { toast('Проблема с таким номером не найдена'); return; }
-  if (target.id === editingProblemId) { toast('Нельзя связать проблему саму с собой'); return; }
-  try {
-    run(`INSERT INTO related_problems (problem_id, related_problem_id) VALUES (?,?)`, [editingProblemId, target.id]);
-    run(`INSERT OR IGNORE INTO related_problems (problem_id, related_problem_id) VALUES (?,?)`, [target.id, editingProblemId]);
-  } catch(e) { toast('Связь уже существует'); return; }
+  const { data: target } = await sb.from('problems').select('id').eq('registration_number', num).single();
+  if (!target) { toast('Проблема с таким номером не найдена', true); return; }
+  if (target.id === editingProblemId) { toast('Нельзя связать с самой собой', true); return; }
+  const { error } = await sb.from('related_problems').insert([
+    { problem_id: editingProblemId, related_problem_id: target.id },
+    { problem_id: target.id, related_problem_id: editingProblemId }
+  ]);
+  if (error) { toast('Связь уже существует', true); return; }
   document.getElementById('relatedInput').value = '';
   loadRelatedList(editingProblemId);
   toast('Связь добавлена');
 }
 
-function removeRelated(rpId) {
-  run(`DELETE FROM related_problems WHERE id=?`, [rpId]);
+async function removeRelated(rpId) {
+  await sb.from('related_problems').delete().eq('id', rpId);
   loadRelatedList(editingProblemId);
 }
 
 // ============================================================
 // REPORTS
 // ============================================================
-function populateReportFilters() {
-  const sel = document.getElementById('rWorkshop');
-  sel.innerHTML = '<option value="">Все цеха</option>';
-  query(`SELECT id, name FROM workshops ORDER BY name`).forEach(w => {
-    sel.innerHTML += `<option value="${w.id}">${esc(w.name)}</option>`;
-  });
-}
-
-function runReport() {
-  const ws = document.getElementById('rWorkshop').value;
-  const df = document.getElementById('rDateFrom').value;
-  const dt = document.getElementById('rDateTo').value;
-
-  let where = [];
-  let params = [];
-  if (ws) { where.push(`p.workshop_id=?`); params.push(ws); }
-  if (df) { where.push(`p.registration_date>=?`); params.push(df); }
-  if (dt) { where.push(`p.registration_date<=?`); params.push(dt); }
-  const w = where.length ? ' WHERE ' + where.join(' AND ') : '';
+async function runReport() {
+  const ws = document.getElementById('rWorkshop').value || null;
+  const df = document.getElementById('rDateFrom').value || null;
+  const dt = document.getElementById('rDateTo').value || null;
+  const params = { ws_id: ws ? parseInt(ws) : null, d_from: df, d_to: dt };
 
   const colors = ['#2980b9','#e74c3c','#f39c12','#27ae60','#9b59b6','#1abc9c','#e67e22','#34495e','#3498db','#95a5a6'];
 
-  // By type
-  const byType = query(`SELECT pt.name as label, COUNT(*) as value FROM problems p JOIN problem_types pt ON p.problem_type_id=pt.id ${w} GROUP BY pt.id ORDER BY value DESC`, params);
-  barChart(document.getElementById('repByType'), byType, colors);
+  const [byType, bySev, bySt, byStage, topCauses] = await Promise.all([
+    sb.rpc('get_stats_by_type', params),
+    sb.rpc('get_stats_by_severity', params),
+    sb.rpc('get_stats_by_status', params),
+    sb.rpc('get_stats_by_stage', params),
+    sb.rpc('get_top_causes', { ...params, lim: 10 }),
+  ]);
 
-  // By severity
-  const bySev = query(`SELECT sl.name as label, COUNT(*) as value FROM problems p JOIN severity_levels sl ON p.severity_id=sl.id ${w} GROUP BY sl.id ORDER BY sl.sort_order`, params);
-  barChart(document.getElementById('repBySeverity'), bySev, ['#c0392b','#e67e22','#2980b9','#95a5a6']);
+  barChart(document.getElementById('repByType'), byType.data, colors);
+  barChart(document.getElementById('repBySeverity'), bySev.data, ['#c0392b','#e67e22','#2980b9','#95a5a6']);
+  barChart(document.getElementById('repByStatus'), bySt.data, colors);
+  barChart(document.getElementById('repByStage'), byStage.data, colors);
+  barChart(document.getElementById('repTopCauses'), topCauses.data, ['#1a5276']);
 
-  // By status
-  const byStatus = query(`SELECT ps.name as label, COUNT(*) as value FROM problems p JOIN problem_statuses ps ON p.status_id=ps.id ${w} GROUP BY ps.id ORDER BY ps.sort_order`, params);
-  barChart(document.getElementById('repByStatus'), byStatus, colors);
-
-  // By stage
-  const byStage = query(`SELECT ls.name as label, COUNT(*) as value FROM problems p JOIN lifecycle_stages ls ON p.lifecycle_stage_id=ls.id ${w} GROUP BY ls.id ORDER BY ls.sort_order`, params);
-  barChart(document.getElementById('repByStage'), byStage, colors);
-
-  // Top causes
-  const causes = query(`SELECT root_cause as label, COUNT(*) as value FROM problems p ${w} ${w ? 'AND' : 'WHERE'} root_cause IS NOT NULL AND root_cause != '' GROUP BY root_cause ORDER BY value DESC LIMIT 10`, params);
-  if (causes.length) {
-    barChart(document.getElementById('repTopCauses'), causes, ['#1a5276']);
-  } else {
-    document.getElementById('repTopCauses').innerHTML = '<div class="empty-state">Нет данных о причинах</div>';
-  }
-
-  // Operational
-  const ops = query(`SELECT p.registration_number, p.title, w.name as workshop FROM problems p JOIN workshops w ON p.workshop_id=w.id ${w} ${w ? 'AND' : 'WHERE'} p.is_operational=1 ORDER BY p.registration_date DESC LIMIT 20`, params);
-  if (ops.length) {
+  // Operational problems
+  let qOp = sb.from('problems').select('id, registration_number, title, workshop_id').eq('is_operational', true).order('registration_date', { ascending: false }).limit(20);
+  if (ws) qOp = qOp.eq('workshop_id', ws);
+  if (df) qOp = qOp.gte('registration_date', df);
+  if (dt) qOp = qOp.lte('registration_date', dt);
+  const { data: ops } = await qOp;
+  if (ops?.length) {
     document.getElementById('repOperational').innerHTML = `<table><tr><th>Номер</th><th>Цех</th><th>Наименование</th></tr>
-      ${ops.map(r => `<tr onclick="viewProblem(${query(`SELECT id FROM problems WHERE registration_number=?`,[r.registration_number])[0]?.id})"><td>${esc(r.registration_number)}</td><td>${esc(r.workshop)}</td><td>${esc(r.title)}</td></tr>`).join('')}</table>`;
+      ${ops.map(r => `<tr onclick="viewProblem(${r.id})"><td>${esc(r.registration_number)}</td><td>${esc(refById('workshops',r.workshop_id)?.name)}</td><td>${esc(r.title)}</td></tr>`).join('')}</table>`;
   } else {
     document.getElementById('repOperational').innerHTML = '<div class="empty-state">Нет данных</div>';
   }
 
-  // Recurring
-  const recs = query(`SELECT p.registration_number, p.title, w.name as workshop FROM problems p JOIN workshops w ON p.workshop_id=w.id ${w} ${w ? 'AND' : 'WHERE'} p.is_recurring=1 ORDER BY p.registration_date DESC LIMIT 20`, params);
-  if (recs.length) {
+  // Recurring problems
+  let qRec = sb.from('problems').select('id, registration_number, title, workshop_id').eq('is_recurring', true).order('registration_date', { ascending: false }).limit(20);
+  if (ws) qRec = qRec.eq('workshop_id', ws);
+  if (df) qRec = qRec.gte('registration_date', df);
+  if (dt) qRec = qRec.lte('registration_date', dt);
+  const { data: recs } = await qRec;
+  if (recs?.length) {
     document.getElementById('repRecurring').innerHTML = `<table><tr><th>Номер</th><th>Цех</th><th>Наименование</th></tr>
-      ${recs.map(r => `<tr onclick="viewProblem(${query(`SELECT id FROM problems WHERE registration_number=?`,[r.registration_number])[0]?.id})"><td>${esc(r.registration_number)}</td><td>${esc(r.workshop)}</td><td>${esc(r.title)}</td></tr>`).join('')}</table>`;
+      ${recs.map(r => `<tr onclick="viewProblem(${r.id})"><td>${esc(r.registration_number)}</td><td>${esc(refById('workshops',r.workshop_id)?.name)}</td><td>${esc(r.title)}</td></tr>`).join('')}</table>`;
   } else {
     document.getElementById('repRecurring').innerHTML = '<div class="empty-state">Нет данных</div>';
   }
-
-  // Empty state for charts
-  [byType, bySev, byStatus, byStage].forEach((data, i) => {
-    if (!data.length) {
-      ['repByType','repBySeverity','repByStatus','repByStage'][i];
-      document.getElementById(['repByType','repBySeverity','repByStatus','repByStage'][i]).innerHTML = '<div class="empty-state">Нет данных</div>';
-    }
-  });
 }
 
 // ============================================================
 // REFERENCES
 // ============================================================
-function loadReference() {
+async function loadReference() {
   const table = document.getElementById('refSelect').value;
-  const titles = {
-    workshops: 'Цеха',
-    problem_types: 'Типы проблем',
-    lifecycle_stages: 'Этапы жизненного цикла',
-    detection_sources: 'Источники выявления',
-    severity_levels: 'Критичность',
-    problem_statuses: 'Статусы'
-  };
+  const titles = { workshops:'Цеха', problem_types:'Типы проблем', lifecycle_stages:'Этапы ЖЦ', detection_sources:'Источники выявления', severity_levels:'Критичность', problem_statuses:'Статусы' };
   document.getElementById('refTitle').textContent = titles[table] || table;
 
-  let cols, rows;
+  const { data: rows } = await sb.from(table).select('*').order(table === 'workshops' ? 'name' : 'sort_order');
+  if (!rows) return;
+
   if (table === 'workshops') {
-    cols = ['ID', 'Код', 'Наименование', 'Группа'];
-    rows = query(`SELECT w.id, w.code, w.name, wg.name as gname FROM workshops w JOIN workshop_groups wg ON w.group_id=wg.id ORDER BY w.name`);
-    document.getElementById('refThead').innerHTML = `<tr>${cols.map(c=>`<th>${c}</th>`).join('')}</tr>`;
-    document.getElementById('refTbody').innerHTML = rows.map(r => `<tr><td>${r.id}</td><td>${esc(r.code)}</td><td>${esc(r.name)}</td><td>${esc(r.gname)}</td></tr>`).join('');
+    document.getElementById('refThead').innerHTML = '<tr><th>ID</th><th>Код</th><th>Наименование</th></tr>';
+    document.getElementById('refTbody').innerHTML = rows.map(r => `<tr><td>${r.id}</td><td>${esc(r.code)}</td><td>${esc(r.name)}</td></tr>`).join('');
   } else {
-    cols = ['ID', 'Код', 'Наименование'];
-    if (table === 'problem_statuses') cols.push('Открытый');
-    rows = query(`SELECT * FROM ${table} ORDER BY sort_order, id`);
-    document.getElementById('refThead').innerHTML = `<tr>${cols.map(c=>`<th>${c}</th>`).join('')}</tr>`;
+    const hasCols = table === 'problem_statuses';
+    document.getElementById('refThead').innerHTML = `<tr><th>ID</th><th>Код</th><th>Наименование</th>${hasCols?'<th>Открытый</th>':''}</tr>`;
     document.getElementById('refTbody').innerHTML = rows.map(r => {
       let html = `<tr><td>${r.id}</td><td>${esc(r.code)}</td><td>${esc(r.name)}</td>`;
-      if (table === 'problem_statuses') html += `<td>${r.is_open ? 'Да' : 'Нет'}</td>`;
-      html += '</tr>';
-      return html;
+      if (hasCols) html += `<td>${r.is_open ? 'Да' : 'Нет'}</td>`;
+      return html + '</tr>';
     }).join('');
   }
 }
 
-function addRefRow() {
-  if (!isAdmin()) { toast('Только администратор может добавлять записи'); return; }
+async function addRefRow() {
+  if (!isAdmin()) { toast('Только администратор', true); return; }
   const table = document.getElementById('refSelect').value;
+  const code = prompt('Код:');
+  if (!code) return;
+  const name = prompt('Наименование:');
+  if (!name) return;
+
+  let row = { code, name };
   if (table === 'workshops') {
-    const code = prompt('Код цеха:');
-    if (!code) return;
-    const name = prompt('Наименование:');
-    if (!name) return;
-    const groups = query(`SELECT id, name FROM workshop_groups ORDER BY name`);
-    const groupStr = groups.map(g => `${g.id}: ${g.name}`).join('\n');
-    const gid = prompt(`ID группы:\n${groupStr}`);
+    const gid = prompt('ID группы (1-10):');
     if (!gid) return;
-    try { run(`INSERT INTO workshops (code,name,group_id) VALUES (?,?,?)`, [code, name, parseInt(gid)]); }
-    catch(e) { toast('Ошибка: ' + e.message); return; }
+    row.group_id = parseInt(gid);
+  } else if (table === 'problem_statuses') {
+    row.is_open = confirm('Это открытый статус?');
+    row.sort_order = parseInt(prompt('Порядок сортировки:', '0')) || 0;
   } else {
-    const code = prompt('Код:');
-    if (!code) return;
-    const name = prompt('Наименование:');
-    if (!name) return;
-    const order = prompt('Порядок сортировки:', '0');
-    try {
-      if (table === 'problem_statuses') {
-        const isOpen = confirm('Это открытый статус?') ? 1 : 0;
-        run(`INSERT INTO ${table} (code,name,is_open,sort_order) VALUES (?,?,?,?)`, [code, name, isOpen, parseInt(order)||0]);
-      } else {
-        run(`INSERT INTO ${table} (code,name,sort_order) VALUES (?,?,?)`, [code, name, parseInt(order)||0]);
-      }
-    } catch(e) { toast('Ошибка: ' + e.message); return; }
+    row.sort_order = parseInt(prompt('Порядок сортировки:', '0')) || 0;
   }
+
+  const { error } = await sb.from(table).insert(row);
+  if (error) { toast('Ошибка: ' + error.message, true); return; }
+  await loadAllRefs();
   populateFilters();
   loadReference();
   toast('Запись добавлена');
 }
 
 // ============================================================
-// EXPORT / IMPORT
+// WORKSHOPS FOR REGISTRATION
 // ============================================================
-function exportDb() {
-  const data = db.export();
-  const blob = new Blob([data], { type: 'application/x-sqlite3' });
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = `quality_db_${new Date().toISOString().slice(0,10)}.sqlite`;
-  a.click();
-  URL.revokeObjectURL(a.href);
-  toast('БД экспортирована');
-}
-
-async function importDb(e) {
-  const file = e.target.files[0];
-  if (!file) return;
-  if (!confirm('Импорт заменит текущую базу данных. Продолжить?')) { e.target.value = ''; return; }
-  const buf = await file.arrayBuffer();
-  const SQL = await initSqlJs({ locateFile: file => `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/${file}` });
-  db = new SQL.Database(new Uint8Array(buf));
-  await saveToIdb();
-  populateFilters();
-  showSection('dashboard');
-  toast('БД импортирована');
-  e.target.value = '';
+async function loadWorkshopsForReg() {
+  const { data } = await sb.from('workshops').select('id, name').order('name');
+  if (!data) return;
+  const sel = document.getElementById('regWorkshop');
+  sel.innerHTML = '<option value="">Все цеха</option>';
+  data.forEach(w => { sel.innerHTML += `<option value="${w.id}">${esc(w.name)}</option>`; });
 }
 
 // ============================================================
-// START
+// INIT
 // ============================================================
-initApp().catch(err => {
-  document.body.innerHTML = `<div style="padding:40px;text-align:center;color:#c0392b;">
-    <h2>Ошибка загрузки</h2><p>${err.message}</p>
-    <p>Убедитесь, что есть подключение к интернету (для загрузки sql.js)</p>
-  </div>`;
-});
+async function init() {
+  const config = getConfig();
+  if (!config) {
+    document.getElementById('authScreen').style.display = 'none';
+    document.getElementById('setupScreen').style.display = 'flex';
+    return;
+  }
+
+  initSupabase(config.url, config.key);
+
+  // Check existing session
+  const { data: { session } } = await sb.auth.getSession();
+  if (session) {
+    await enterApp(session.user);
+  } else {
+    loadWorkshopsForReg();
+  }
+
+  // Listen for auth changes
+  sb.auth.onAuthStateChange(async (event, session) => {
+    if (event === 'SIGNED_OUT') {
+      document.getElementById('appShell').style.display = 'none';
+      document.getElementById('authScreen').style.display = 'flex';
+    }
+  });
+}
+
+init();
 </script>
 </body>
 </html>
