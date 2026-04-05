@@ -204,24 +204,7 @@ textarea { min-height:80px; resize:vertical; }
   </div>
 </div>
 
-<!-- ========== SETUP SCREEN (first time — enter Supabase credentials) ========== -->
-<div id="setupScreen" class="auth-screen" style="display:none;">
-  <div class="auth-box">
-    <h2>Настройка подключения</h2>
-    <p>Введите данные вашего Supabase проекта</p>
-    <div class="auth-error" id="setupError"></div>
-    <div class="form-group">
-      <label>Supabase URL</label>
-      <input type="text" id="setupUrl" placeholder="https://xxxxx.supabase.co">
-    </div>
-    <div class="form-group">
-      <label>Anon Key</label>
-      <input type="text" id="setupKey" placeholder="eyJhbGci...">
-    </div>
-    <button class="btn btn-primary" onclick="saveSetup()" style="width:100%;justify-content:center;">Подключиться</button>
-    <p style="margin-top:12px;font-size:11px;color:var(--gray);">Эти данные сохраняются в localStorage вашего браузера</p>
-  </div>
-</div>
+<!-- Setup screen removed — credentials hardcoded -->
 
 <!-- ========== APP SHELL ========== -->
 <div id="appShell" style="display:none;">
@@ -426,33 +409,17 @@ let viewingProblemId = null;
 let REF = { workshops:[], problem_types:[], lifecycle_stages:[], detection_sources:[], severity_levels:[], problem_statuses:[] };
 
 // ============================================================
-// SETUP / CONNECTION
+// SETUP / CONNECTION (захардкожено)
 // ============================================================
+const SUPABASE_URL = 'https://xwzrmddufscnuhqlhcyf.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_s3Krn653bfX-t-sHhDSEUQ_gYhf4TWu';
+
 function getConfig() {
-  const url = localStorage.getItem('sb_url');
-  const key = localStorage.getItem('sb_key');
-  return (url && key) ? { url, key } : null;
+  return { url: SUPABASE_URL, key: SUPABASE_KEY };
 }
 
 function initSupabase(url, key) {
   sb = supabase.createClient(url, key);
-}
-
-function saveSetup() {
-  const url = document.getElementById('setupUrl').value.trim().replace(/\/+$/, '');
-  const key = document.getElementById('setupKey').value.trim();
-  if (!url || !key) { showSetupError('Заполните оба поля'); return; }
-  localStorage.setItem('sb_url', url);
-  localStorage.setItem('sb_key', key);
-  initSupabase(url, key);
-  document.getElementById('setupScreen').style.display = 'none';
-  document.getElementById('authScreen').style.display = 'flex';
-  loadWorkshopsForReg();
-}
-
-function showSetupError(msg) {
-  const el = document.getElementById('setupError');
-  el.textContent = msg; el.style.display = 'block';
 }
 
 // ============================================================
@@ -1097,12 +1064,6 @@ async function loadWorkshopsForReg() {
 // ============================================================
 async function init() {
   const config = getConfig();
-  if (!config) {
-    document.getElementById('authScreen').style.display = 'none';
-    document.getElementById('setupScreen').style.display = 'flex';
-    return;
-  }
-
   initSupabase(config.url, config.key);
 
   // Check existing session
