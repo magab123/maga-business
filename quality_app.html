@@ -138,12 +138,83 @@ textarea { min-height:80px; resize:vertical; }
 .realtime-indicator { display:inline-block; width:8px; height:8px; border-radius:50%; background:var(--success); margin-right:6px; animation:pulse 2s infinite; }
 @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:.4;} }
 
+/* ===== MOBILE BOTTOM NAV ===== */
+.mobile-nav { display:none; position:fixed; bottom:0; left:0; right:0; background:var(--white); border-top:1px solid var(--border); z-index:100; padding:4px 0; padding-bottom:env(safe-area-inset-bottom); }
+.mobile-nav .nav-items { display:flex; justify-content:space-around; }
+.mobile-nav a { display:flex; flex-direction:column; align-items:center; padding:6px 4px; font-size:10px; color:var(--gray); text-decoration:none; cursor:pointer; min-width:0; flex:1; }
+.mobile-nav a .icon { font-size:18px; margin-bottom:2px; }
+.mobile-nav a.active { color:var(--primary); font-weight:600; }
+.mobile-nav a:active { background:var(--primary-bg); }
+
 @media (max-width: 768px) {
-  .sidebar { display:none; }
-  .main { margin-left:0; }
-  .form-grid { grid-template-columns:1fr; }
-  .stats-grid { grid-template-columns:1fr 1fr; }
-  .filters { flex-direction:column; }
+  /* Hide sidebar, show bottom nav */
+  .sidebar { display:none !important; }
+  .mobile-nav { display:block; }
+  .main { margin-left:0; padding:16px 12px; padding-bottom:80px; }
+
+  /* Header compact */
+  .app-header { padding:0 12px; height:48px; }
+  .app-header h1 { font-size:14px; }
+  .app-header .user-info { display:none; }
+  .app-header .toolbar { gap:4px; }
+  .app-header .btn-sm { padding:4px 8px; font-size:11px; }
+
+  /* Stats cards */
+  .stats-grid { grid-template-columns:1fr 1fr; gap:8px; margin-bottom:16px; }
+  .stat-card { padding:12px; }
+  .stat-card .stat-value { font-size:24px; }
+  .stat-card .stat-label { font-size:11px; }
+
+  /* Dashboard charts stack */
+  #sec-dashboard > div[style*="grid-template-columns"] { grid-template-columns:1fr !important; }
+
+  /* Panels */
+  .panel { margin-bottom:12px; }
+  .panel-header { padding:12px; flex-wrap:wrap; gap:8px; }
+  .panel-header h2 { font-size:14px; }
+  .panel-body { padding:12px; }
+
+  /* Forms */
+  .form-grid { grid-template-columns:1fr; gap:8px; }
+  .form-group { margin-bottom:8px; }
+  input[type="text"], input[type="date"], input[type="email"], input[type="password"], select, textarea { font-size:16px; padding:10px 12px; }
+
+  /* Filters */
+  .filters { flex-direction:column; gap:8px; }
+  .filters .form-group { min-width:100%; }
+
+  /* Tables — card layout on mobile */
+  table, thead, tbody, th, td, tr { display:block; }
+  thead { display:none; }
+  tr { margin-bottom:12px; border:1px solid var(--gray-light); border-radius:var(--radius); padding:12px; background:var(--white); }
+  td { padding:4px 0; border:none; font-size:13px; display:flex; justify-content:space-between; }
+  td:before { content:attr(data-label); font-weight:600; color:var(--gray); margin-right:8px; flex-shrink:0; }
+  td:first-child { font-size:14px; }
+
+  /* Bar charts */
+  .bar-label { width:100px; font-size:11px; }
+
+  /* Pagination */
+  .pagination { flex-direction:column; gap:8px; align-items:center; }
+
+  /* Modal fullscreen on mobile */
+  .modal { width:100%; max-width:100%; max-height:100vh; height:100vh; border-radius:0; }
+  .modal-body { padding:12px; }
+  .modal-body table td { padding:4px 0; }
+  .modal-body table td:first-child { font-weight:600; width:auto !important; }
+
+  /* Reports stack */
+  #sec-reports > div[style*="grid-template-columns"] { grid-template-columns:1fr !important; }
+
+  /* Auth */
+  .auth-box { padding:24px 16px; width:100%; max-width:100%; }
+
+  /* Toast */
+  .toast { left:12px; right:12px; bottom:70px; text-align:center; }
+
+  /* Buttons */
+  .btn { padding:10px 16px; }
+  .btn + .btn { margin-left:4px; }
 }
 </style>
 </head>
@@ -376,6 +447,17 @@ textarea { min-height:80px; resize:vertical; }
       </div>
     </div>
   </div>
+
+  <!-- MOBILE BOTTOM NAV -->
+  <nav class="mobile-nav" id="mobileNav">
+    <div class="nav-items">
+      <a data-section="dashboard" class="active" onclick="showSection('dashboard')"><span class="icon">&#9632;</span>Главная</a>
+      <a data-section="problems" onclick="showSection('problems')"><span class="icon">&#9888;</span>Проблемы</a>
+      <a data-section="newproblem" onclick="showSection('newproblem')" id="mNavNew"><span class="icon">&#10010;</span>Новая</a>
+      <a data-section="reports" onclick="showSection('reports')"><span class="icon">&#9776;</span>Отчёты</a>
+      <a data-section="refs" onclick="showSection('refs')" id="mNavRefs"><span class="icon">&#9881;</span>Справ.</a>
+    </div>
+  </nav>
 </div>
 
 <!-- TOAST -->
@@ -503,9 +585,11 @@ async function enterApp(user) {
   if (!canEdit()) {
     document.getElementById('navNewProblem').style.display = 'none';
     document.getElementById('btnNewProblem').style.display = 'none';
+    document.getElementById('mNavNew').style.display = 'none';
   } else {
     document.getElementById('navNewProblem').style.display = '';
     document.getElementById('btnNewProblem').style.display = '';
+    document.getElementById('mNavNew').style.display = '';
   }
   document.getElementById('btnAddRef').style.display = isAdmin() ? '' : 'none';
 
@@ -586,7 +670,7 @@ function setupRealtime() {
 function showSection(name) {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.getElementById('sec-' + name).classList.add('active');
-  document.querySelectorAll('.sidebar a').forEach(a => a.classList.toggle('active', a.dataset.section === name));
+  document.querySelectorAll('.sidebar a, .mobile-nav a').forEach(a => a.classList.toggle('active', a.dataset.section === name));
   if (name === 'dashboard') loadDashboard();
   if (name === 'problems') { currentPage = 1; loadProblems(); }
   if (name === 'newproblem') initProblemForm();
@@ -694,14 +778,14 @@ async function loadProblems() {
       const sl = refById('severity_levels', r.severity_id);
       const ps = refById('problem_statuses', r.status_id);
       return `<tr onclick="viewProblem(${r.id})">
-        <td><strong>${esc(r.registration_number)}</strong></td>
-        <td>${esc(r.registration_date)}</td>
-        <td>${esc(ws?.name)}</td>
-        <td>${esc(pt?.name)}</td>
-        <td>${severityBadge(sl?.code, sl?.name)}</td>
-        <td>${esc(r.title)}</td>
-        <td>${statusBadge(ps?.code, ps?.name)}</td>
-        <td>${esc(r.responsible_person||'')}</td>
+        <td data-label="Номер"><strong>${esc(r.registration_number)}</strong></td>
+        <td data-label="Дата">${esc(r.registration_date)}</td>
+        <td data-label="Цех">${esc(ws?.name)}</td>
+        <td data-label="Тип">${esc(pt?.name)}</td>
+        <td data-label="Критичность">${severityBadge(sl?.code, sl?.name)}</td>
+        <td data-label="Наименование">${esc(r.title)}</td>
+        <td data-label="Статус">${statusBadge(ps?.code, ps?.name)}</td>
+        <td data-label="Ответственный">${esc(r.responsible_person||'')}</td>
       </tr>`;
     }).join('');
   }
